@@ -2,6 +2,7 @@ CREATE TABLE estoque(
     id_estoque int(11) NOT NULL primary key AUTO_INCREMENT,
     id_produto int(11),
     quantidade int(11),
+    lote VARCHAR(120),
     data_atualizar TIMESTAMP
 ) ;
 

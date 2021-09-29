@@ -49,7 +49,7 @@ CREATE TABLE nivel(
     vendedor varchar(1),
     estoquista varchar(1),
     gerente varchar(1),
-    administrador varchar(1)
+    administrador varchar(1),
     data_atualizar TIMESTAMP
 );
 

@@ -1,13 +1,15 @@
 <?php
-include_once '../model/busca.php';
-include_once '../model/inserir.php';
+/*include_once '../model/busca.php';
+include_once '../model/inserir.php';*/
 
-$metodo = $_GET['action'];
+//$metodo = $_GET['action'];
 
 class produto{
 	public static function lista(){
-		 $produto = buscaTudo('*','produto');
-		 return $produto;
+		
+			echo "Lista";
+		/* $produto = buscaTudo('*','produto');
+		 return $produto;*/
 	}
 	
 	public static function inserir(){
@@ -40,6 +42,6 @@ class produto{
 		 return $produto;*/
 	}
 }
-if($metodo <> null){
-	produto::$metodo();
+if(method_exists(produto::class,$_POST['METODO'])){
+	produto::$_POST['METODO']();
 }

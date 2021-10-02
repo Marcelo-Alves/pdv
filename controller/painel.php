@@ -1,7 +1,7 @@
 <?php
 class painel {
-    public static function Home(){
-        return "Painel";
+    public static function lista(){
+        echo  "Painel";
     }
     
 }

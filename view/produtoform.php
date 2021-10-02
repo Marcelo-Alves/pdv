@@ -5,7 +5,7 @@ require 'padrao/topo.php';
 
 <p class="h1">CADASTRO DE PRODUTO</p>
 <hr>
-	<form action='controller/produto.php?action=inserir' method='POST'>
+	<form action='./inserir' method='POST'>
 		<div class="form-group">
 			<label for="nome" > Nome </label>
 			<input type='text' name='nome' id='nome' class="form-control">	
@@ -19,6 +19,7 @@ require 'padrao/topo.php';
 			<br>
 			<label for="validade_dias" >Validade em dias </label>			
 			<input type='text' name='validade_dias' id='validade_dias' class="form-control">
+			
 		</div>
 		<br>
 		<div class="card text-center">

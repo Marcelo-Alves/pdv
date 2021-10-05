@@ -24,10 +24,18 @@ $listas = produto::lista();
 	?>
 		<td scope="row"><?php echo $lista->id_produto ;?></th>
 		<td scope="row"><?php echo $lista->nome ;?></td>
-		<td scope="row"><?php echo $lista->validade ;?></td>
+		<td scope="row"><?php echo ($lista->validade==0?"Não":"Dias");?></td>
 		<td scope="row"><?php echo $lista->validade_dias ;?></td>
-		<td scope="row">Editar <?php echo $lista->id_produto ;?></td>
-		<td scope="row">Deletar <?php echo $lista->id_produto ;?></td>
+		<td scope="row">
+			<a href="./produto/editar/<?php echo $lista->id_produto ;?>">
+				<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/editar.png" width='30px' > 
+			</a>
+		</td>
+		<td scope="row">
+			<a href="./produto/deletar/<?php echo $lista->id_produto ;?>">
+				<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/lixeira.jpg" width='30px' >  
+			</a>
+		</td>
 	</tbody>
 	<?php
 		endforeach;

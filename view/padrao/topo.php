@@ -7,7 +7,7 @@
 		<title><?php echo titulo; ?></title>	
 
 		<!-- Principal CSS do Bootstrap -->
-		<link href="../biblioteca/css/bootstrap.css" rel="stylesheet">        
+		<link href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/css/bootstrap.css" rel="stylesheet">        
     </head>
     <body>
     <div class="container">

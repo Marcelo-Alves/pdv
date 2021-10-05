@@ -13,6 +13,8 @@ $listas = produto::lista();
 			<th scope="col">Nome</th>
 			<th scope="col">Validade</th>
 			<th scope="col">Validade Dias</th>
+			<th scope="col">Editar</th>
+			<th scope="col">Deletar</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -24,6 +26,8 @@ $listas = produto::lista();
 		<td scope="row"><?php echo $lista->nome ;?></td>
 		<td scope="row"><?php echo $lista->validade ;?></td>
 		<td scope="row"><?php echo $lista->validade_dias ;?></td>
+		<td scope="row">Editar <?php echo $lista->id_produto ;?></td>
+		<td scope="row">Deletar <?php echo $lista->id_produto ;?></td>
 	</tbody>
 	<?php
 		endforeach;

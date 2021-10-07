@@ -8,14 +8,23 @@ CREATE TABLE estoque(
 
 CREATE TABLE produto(  
     id_produto int(11) NOT NULL primary key AUTO_INCREMENT,
+	id_categoria int(11),
     nome varchar(100),
-    id_ean int(11),
+    id_ean int(11),	
     validade int(1),
     validade_dias int(5),    
     qtde int(11),    
     data_criar TIMESTAMP,
     data_atualizar TIMESTAMP
 ) ; 
+
+CREATE TABLE categoria(  
+    id_categoria int(11) NOT NULL primary key AUTO_INCREMENT,
+    nome varchar(100) unique,
+	ativo int(1) default 1,
+    data_criar TIMESTAMP,
+    data_atualizar TIMESTAMP
+) ;
 
 CREATE TABLE log(  
     id_log int(11) NOT NULL primary key AUTO_INCREMENT,

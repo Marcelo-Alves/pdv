@@ -12,7 +12,6 @@ CREATE TABLE produto(
     id_produto int(11) NOT NULL primary key AUTO_INCREMENT,
 	id_categoria int(11),
     nome varchar(100),
-    id_ean int(11),	
     validade int(1),
     validade_dias int(5),    
     qtde int(11),    
@@ -43,6 +42,7 @@ CREATE TABLE log(
 drop table if exists ean;
 CREATE TABLE ean(  
     id_ean int(11) NOT NULL primary key AUTO_INCREMENT,
+	id_produto int(11),
     ean varchar(100) unique,
     data_atualizar TIMESTAMP
 ) ; 

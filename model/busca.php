@@ -27,7 +27,7 @@ class busca  {
     public static function buscaWhere($campo,$tabela,$where,$ordem =null) {
         try {
             $sql= "SELECT $campo FROM $tabela WHERE 1=1 $where $ordem;";
-            $rs = mysql::conexao()->prepare($sql);  
+			$rs = mysql::conexao()->prepare($sql);  
             $rs->execute();
             $dados=$rs->fetchAll(PDO::FETCH_OBJ);
             return $dados;

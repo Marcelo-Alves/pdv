@@ -8,6 +8,7 @@ ini_set("display_errors", 1); */
 include_once './model/busca.php';
 include_once './model/inserir.php';
 include_once './model/alterar.php';
+include_once './model/deletar.php';
 
 class ean{
 	public static function lista(){
@@ -19,10 +20,10 @@ class ean{
         $url = $_SERVER['REQUEST_URI'];
 		$u = explode('/',$url);
 		$id = $u[2];
-
-       // echo $url; /*
-
-		$ean = busca::buscaWhere('*','ean as e','and e.id_produto ='.$id);
+		
+		$ean = busca::buscaWhere('p.nome,p.id_produto,e.id_ean,e.ean','ean as e right join produto as p on e.id_produto=p.id_produto','and p.id_produto ='.$id);
+		//print_r($ean);
+		
 		return $ean; //*/
    	}
 
@@ -56,7 +57,7 @@ class ean{
 		$u = explode('/',$url);
         $id_produto =$u[3];
 		$id = $u[4];		
-		$where=" and id_ean = ".$id;			
+		$where="id_ean = ".$id;			
 		deletar::deletarBanco('ean',$where) ;	
 		header("Location: /ean/".$id_produto);
 		die();

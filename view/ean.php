@@ -3,6 +3,11 @@ define('titulo', "Painel de Lista de Código do Produto");
 require 'padrao/topo.php';
 
 $listas = ean::buscaean();
+/*
+echo "<pre>";
+
+print_r($listas);
+echo "</pre>"; */
 
 $produto_nome =$listas[0]->nome;
 $produto_id = $listas[0]->id_produto;

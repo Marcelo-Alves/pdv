@@ -1,9 +1,9 @@
 <?php
 include_once 'mysql.php';
 class busca  {   
-    public static function Retorno($campo,$tabela) {
+    public static function Retorno($campo,$tabela,$ordem =null) {
         try {
-            $sql= "SELECT $campo FROM $tabela;";
+            $sql= "SELECT $campo FROM $tabela $ordem ;";
             $rs = mysql::conexao()->prepare($sql);  
             $rs->execute();
             $dados=$rs->fetchAll(PDO::FETCH_OBJ);
@@ -13,9 +13,9 @@ class busca  {
         }        
     }
     
-    public static function buscaTudo($campo,$tabela) {
+    public static function buscaTudo($campo,$tabela,$ordem =null) {
         try {
-            $sql= "SELECT $campo FROM $tabela;";
+            $sql= "SELECT $campo FROM $tabela $ordem ;";
             $rs = mysql::conexao()->prepare($sql);  
             $rs->execute();
             $dados=$rs->fetchAll(PDO::FETCH_OBJ);
@@ -24,9 +24,9 @@ class busca  {
             echo $ex->getMessage();
         }        
     }
-    public static function buscaWhere($campo,$tabela,$where) {
+    public static function buscaWhere($campo,$tabela,$where,$ordem =null) {
         try {
-            $sql= "SELECT $campo FROM $tabela where 1=1 $where;";
+            $sql= "SELECT $campo FROM $tabela WHERE 1=1 $where $ordem;";
             $rs = mysql::conexao()->prepare($sql);  
             $rs->execute();
             $dados=$rs->fetchAll(PDO::FETCH_OBJ);

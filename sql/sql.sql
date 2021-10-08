@@ -1,3 +1,4 @@
+drop table if exists estoque ;
 CREATE TABLE estoque(  
     id_estoque int(11) NOT NULL primary key AUTO_INCREMENT,
     id_produto int(11),
@@ -6,6 +7,7 @@ CREATE TABLE estoque(
     data_atualizar TIMESTAMP
 ) ;
 
+drop table if exists produto;
 CREATE TABLE produto(  
     id_produto int(11) NOT NULL primary key AUTO_INCREMENT,
 	id_categoria int(11),
@@ -18,6 +20,7 @@ CREATE TABLE produto(
     data_atualizar TIMESTAMP
 ) ; 
 
+drop table if exists categoria;
 CREATE TABLE categoria(  
     id_categoria int(11) NOT NULL primary key AUTO_INCREMENT,
     nome varchar(100) unique,
@@ -26,6 +29,7 @@ CREATE TABLE categoria(
     data_atualizar TIMESTAMP
 ) ;
 
+drop table if exists log;
 CREATE TABLE log(  
     id_log int(11) NOT NULL primary key AUTO_INCREMENT,
     id_usuario int(11),
@@ -36,12 +40,14 @@ CREATE TABLE log(
     data_atualizar TIMESTAMP
 ) ; 
 
+drop table if exists ean;
 CREATE TABLE ean(  
     id_ean int(11) NOT NULL primary key AUTO_INCREMENT,
     ean varchar(100) unique,
     data_atualizar TIMESTAMP
 ) ; 
 
+drop table if exists usuario;
 CREATE TABLE usuario(  
     id_usuario int(11) NOT NULL primary key AUTO_INCREMENT,
     nome varchar(120),
@@ -52,6 +58,7 @@ CREATE TABLE usuario(
     data_atualizar TIMESTAMP
 ); 
 
+drop table if exists nivel;
 CREATE TABLE nivel(  
     id_nivel int(11) NOT NULL primary key AUTO_INCREMENT,
     nome varchar(120) unique,
@@ -61,12 +68,3 @@ CREATE TABLE nivel(
     administrador varchar(1),
     data_atualizar TIMESTAMP
 );
-
-
-
-
-
-
-
-
-

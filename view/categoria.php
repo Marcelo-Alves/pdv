@@ -23,7 +23,7 @@ $listas = categoria::lista();
 	?>
 		<td scope="row"><?php echo $lista->id_categoria ;?></th>
 		<td scope="row"><?php echo $lista->nome ;?></td>
-		<td scope="row"><?php echo ($lista->ativo==0?"Não":"Dias");?></td>
+		<td scope="row"><?php echo ($lista->ativo==0?"Não":"Sim");?></td>
 		<td scope="row">
 			<a href="./categoria/editar/<?php echo $lista->id_categoria ;?>">
 				<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/editar.png" width='30px' > 

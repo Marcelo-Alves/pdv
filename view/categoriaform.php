@@ -9,8 +9,8 @@ require 'padrao/topo.php';
 			<label for="nome" > Nome </label>
 			<input type='text' name='nome' id='nome' class="form-control">	
 			<br>
-			<label for="validade" > Ativo </label>		
-			<select name='validade' class="form-control">
+			<label for="ativo" > Ativo </label>		
+			<select name='ativo' class="form-control">
 				<option selected>Escolher...</option>
 				<option value='0'>Não</option>
 				<option value='1'>Sim</option>

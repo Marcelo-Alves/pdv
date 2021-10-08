@@ -4,10 +4,15 @@ require 'padrao/topo.php';
 $produtos = produto::editar();
 foreach($produtos as $produto):
 	$id_produto = $produto->id_produto;
+	$id_categoria_prod = $produto->id_categoria;
 	$nome = $produto->nome;
 	$validade = $produto->validade;
 	$validade_dias = $produto->validade_dias;
 endforeach;
+
+include_once 'controller/categoria.php';
+$categorias = categoria::lista();
+
 ?>
 
 <p class="h1">ALTERAR PRODUTO</p>
@@ -17,6 +22,20 @@ endforeach;
 			<input type="hidden" name="id_produto" id="id_produto" value="<?php echo $id_produto; ?>">
 			<label for="nome" > Nome </label>
 			<input type='text' name='nome' id='nome' class="form-control" value="<?php echo $nome ?>">	
+			<br>
+			<label for="categoria" > Categoria </label>		
+			<select name='id_categoria' class="form-control">
+				<option selected>Escolher...</option>
+				<?php
+					foreach($categorias as $categoria):
+				?>
+				<option value='<?php echo $categoria->id_categoria?>' <?php echo ($categoria->id_categoria == $id_categoria_prod?"selected":"");?> >
+				<?php echo $categoria->nome ?>
+				</option>
+				<?php
+					endforeach;
+				?>
+			<select/>
 			<br>
 			<label for="validade" > Validade </label>		
 			<select name='validade' class="form-control">

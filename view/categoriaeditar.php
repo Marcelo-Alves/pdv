@@ -1,32 +1,28 @@
 <?php
-define('titulo', "Painel de Cadastro de Produto");    
+define('titulo', "Painel de Alterar de Categoria");    
 require 'padrao/topo.php';
-$produtos = produto::editar();
-foreach($produtos as $produto):
-	$id_produto = $produto->id_produto;
-	$nome = $produto->nome;
-	$validade = $produto->validade;
-	$validade_dias = $produto->validade_dias;
+$categorias = categoria::editar();
+foreach($categorias as $categoria):
+	$id_categoria = $categoria->id_categoria;
+	$nome = $categoria->nome;
+	$ativo = $categoria->ativo;
 endforeach;
 ?>
 
-<p class="h1">ALTERAR PRODUTO</p>
+<p class="h1">ALTERAR CATEGORIA</p>
 <hr>
 	<form action='../alterar' method='POST'>
 		<div class="form-group">
-			<input type="hidden" name="id_produto" id="id_produto" value="<?php echo $id_produto; ?>">
+			<input type="hidden" name="id_categoria" id="id_categoria" value="<?php echo $id_categoria; ?>">
 			<label for="nome" > Nome </label>
 			<input type='text' name='nome' id='nome' class="form-control" value="<?php echo $nome ?>">	
 			<br>
-			<label for="validade" > Validade </label>		
-			<select name='validade' class="form-control">
+			<label for="ativo" > Ativo </label>		
+			<select name='ativo' class="form-control">
 				<option selected>Escolher...</option>
-				<option value='0' <?php echo ($validade == 0?"selected":"");?> >Não</option>
-				<option value='1' <?php echo ($validade == 1?"selected":"");?> >Sim</option>
+				<option value='0' <?php echo ($ativo == 0?"selected":"");?> >Não</option>
+				<option value='1' <?php echo ($ativo == 1?"selected":"");?> >Sim</option>
 			<select/>
-			<br>
-			<label for="validade_dias" >Validade em dias </label>			
-			<input type='text' name='validade_dias' id='validade_dias' class="form-control" value="<?php echo $validade_dias ?>">
 		</div>
 		<br>
 		<div class="card text-center">

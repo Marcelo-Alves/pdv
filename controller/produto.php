@@ -9,18 +9,22 @@ include_once './model/busca.php';
 include_once './model/inserir.php';
 include_once './model/alterar.php';
 
-//$acao = $_GET['acao'];
-
 class produto{
 	public static function lista(){
-		 $produto = busca::buscaTudo('*','produto');
+		 $produto = busca::buscaTudo('*','produto',"order by id_categoria");
 		 return $produto;
 	}
-	
+
+	public static function buscacategorias(){
+		$produto = busca::buscaWhere('id_categoria,nome','categoria','and ativo = 1');
+		return $produto;
+   	}
+
 	public static function inserir(){
 		$campos_inserir = array(
 			'nome'         	  => $_POST['nome'],
 			'validade'        => $_POST['validade'],
+			'id_categoria'    => $_POST['id_categoria'],
 			'validade_dias'   => $_POST['validade_dias'],
 			'data_criar'      => date('Y-m-d H:i:s')
 		);
@@ -57,6 +61,7 @@ class produto{
 			'nome="'          .$_POST['nome'].'" ,'.
 			'validade="'      . $_POST['validade'].'" ,'.
 			'validade_dias="' . $_POST['validade_dias'].'" ,'.
+			'id_categoria="'  .$_POST['id_categoria'].'",'.
 			'data_atualizar="'. date('Y-m-d H:i:s').'"';
 			
 		$where ='id_produto="'.$_POST['id_produto'].'"';
@@ -65,7 +70,3 @@ class produto{
 		die();
 	}
 }
-/*
-if($acao != null){
-	produto::$acao();	
-}*/

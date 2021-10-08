@@ -1,6 +1,8 @@
 <?php
 define('titulo', "Painel de Cadastro de Produto");    
 require 'padrao/topo.php';
+include_once 'controller/categoria.php';
+$categorias = categoria::lista();
 ?>
 
 <p class="h1">CADASTRO DE PRODUTO</p>
@@ -9,6 +11,18 @@ require 'padrao/topo.php';
 		<div class="form-group">
 			<label for="nome" > Nome </label>
 			<input type='text' name='nome' id='nome' class="form-control">	
+			<br>
+			<label for="categori" > Categoria </label>		
+			<select name='categoria' class="form-control">
+				<option selected>Escolher...</option>
+				<?php
+					foreach($categorias as $categoria):
+				?>
+				<option value='<?php echo ($categoria->id_categoria);?>' ><?php echo $categoria->nome ?></option>
+				<?php
+					endforeach;
+				?>
+			<select/>
 			<br>
 			<label for="validade" > Validade </label>		
 			<select name='validade' class="form-control">

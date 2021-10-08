@@ -7,7 +7,7 @@ ini_set("display_errors", 1); //*/
 include_once './model/busca.php';
 include_once './model/inserir.php';
 include_once './model/alterar.php';
-
+include_once './model/deletar.php';
 
 class categoria{
 	public static function lista(){
@@ -50,12 +50,22 @@ class categoria{
 	
 	public static function alterar(){
 		$campos_alterar =
-			'nome="'          .$_POST['nome'].'" ,'.
-			'ativo="'      . $_POST['ativo'].'" ,'.
-			'data_atualizar="'. date('Y-m-d H:i:s').'"';
+			'nome="'       		.$_POST['nome'].'" ,'.
+			'ativo="'      		. $_POST['ativo'].'" ,'.
+			'data_atualizar="'	. date('Y-m-d H:i:s').'"';
 			
 		$where ='id_categoria="'.$_POST['id_categoria'].'"';
 		alterar::alterarBanco($campos_alterar,"categoria",$where);
+		header("Location: /categoria");
+		die();
+	}
+	public static function deletar(){
+		$url = $_SERVER['REQUEST_URI'];
+		$u = explode('/',$url);
+		$id = $u[3];
+
+		$where ='id_categoria="'.$id.'"';
+		deletar::deletarBanco("categoria",$where);
 		header("Location: /categoria");
 		die();
 	}

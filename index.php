@@ -6,6 +6,8 @@ ini_set("display_errors", 1);
 
 $url = ($_SERVER['REQUEST_URI']=="/"?"/index":$_SERVER['REQUEST_URI']);
 $u = explode('/',$url);
+
+//print_r ($u);
 $classe  = $u[1];
 $metodo = (empty($u[2])?"lista":$u[2]);
 

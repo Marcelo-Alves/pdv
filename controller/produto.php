@@ -11,8 +11,17 @@ include_once './model/alterar.php';
 
 class produto{
 	public static function lista(){
+
 		 $produto = busca::buscaTudo('*','produto',"order by id_categoria");
 		 return $produto;
+	}
+
+	public static function categoria(){
+		$url = ($_SERVER['REQUEST_URI']=="/"?"/index":$_SERVER['REQUEST_URI']);
+		$u = explode('/',$url);
+		$id = $u[3];
+		$produto = busca::buscaWhere('*','produto',"and id_categoria = $id","") ;
+		return $produto;
 	}
 
 	public static function buscacategorias(){

@@ -7,7 +7,7 @@ class inserir  {
             $sql= "INSERT INTO $tabela ($campos) values ($valores);";
             $rs = mysql::conexao()->prepare($sql);  			
             $rs->execute();
-			//echo $sql;
+			echo $sql;
             
         } catch (Exception $ex) {
             echo $ex->getMessage();

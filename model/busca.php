@@ -19,6 +19,7 @@ class busca  {
             $rs = mysql::conexao()->prepare($sql);  
             $rs->execute();
             $dados=$rs->fetchAll(PDO::FETCH_OBJ);
+            //echo $sql;
             return $dados;
         } catch (Exception $ex) {
             echo $ex->getMessage();

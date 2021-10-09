@@ -35,9 +35,18 @@ class produto{
 		$nome = $u[3];		
 		$where=" and nome like '%".$nome."%'";			
 		$listas = busca::buscaWhere("*","produto",$where);		
-		/*
-		print_r($listas);
-		/*/
+		
+		if(count($listas) == 0){
+			echo '<table class="table table-striped table-hover">';
+			echo '<tr>';
+			echo '<th scope="col" style="font-size: 30px;text-align:center;vertical-align:middle">';
+			echo 'Não existe dados com o produto digitado';
+			echo '</th>';
+			echo '</tr>';
+			echo '</table>';
+			return;
+
+		}
 		
 		echo '<table class="table table-striped table-hover">';
 		echo '<thead>';
@@ -79,17 +88,11 @@ class produto{
 				
 	}
 
-
-
-
-
-
-
 	public static function inserir(){
 		$campos_inserir = array(
 			'nome'         	  => $_POST['nome'],
 			'validade'        => $_POST['validade'],
-			'id_categoria'    => $_POST['id_categoria'],
+			'id_categoria'    => $_POST['categoria'],
 			'validade_dias'   => $_POST['validade_dias'],
 			'data_criar'      => date('Y-m-d H:i:s')
 		);

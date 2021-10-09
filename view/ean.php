@@ -13,6 +13,7 @@ $produto_nome =$listas[0]->nome;
 $produto_id = $listas[0]->id_produto;
 
 ?>
+
 <p class="h1">CÓDIGOS DE PRODUTO</p>
 <p class="h3"><?php echo $produto_nome; ?></p>
 <hr>

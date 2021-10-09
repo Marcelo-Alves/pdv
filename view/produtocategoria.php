@@ -20,12 +20,6 @@ $categorias = produto::buscacategorias();
 	}
 
 </script>
-
-
-
-
-
-
 <p class="h1">LISTA DE PRODUTO</p>
 <hr>
 <table class="table table-striped table-hover">

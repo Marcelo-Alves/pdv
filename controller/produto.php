@@ -29,6 +29,62 @@ class produto{
 		return $produto;
    	}
 
+	public static function buscafetch(){
+		$url = $_SERVER['REQUEST_URI'];
+		$u = explode('/',$url);
+		$nome = $u[3];		
+		$where=" and nome like '%".$nome."%'";			
+		$listas = busca::buscaWhere("*","produto",$where);		
+		/*
+		print_r($listas);
+		/*/
+		
+		echo '<table class="table table-striped table-hover">';
+		echo '<thead>';
+		echo '<tr>';
+		echo '<th scope="col">id</th>';
+		echo '<th scope="col">Nome</th>';
+		echo '<th scope="col">Validade</th>';
+		echo '<th scope="col">Validade Dias</th>';
+		echo '<th scope="col">Código Produto</th>';
+		echo '<th scope="col">Editar</th>';
+		echo '<th scope="col">Deletar</th>';
+		echo '</tr>';
+		echo '</thead>';
+		echo '<tbody>';
+		foreach($listas as $lista):
+
+			echo '<td scope="row">'.$lista->id_produto .'</th>';
+			echo '<td scope="row">'.$lista->nome .'</td>';
+			echo '<td scope="row">'.($lista->validade==0?"Não":"Dias").'</td>';
+			echo '<td scope="row">'.$lista->validade_dias.'</td>';
+			echo '<td scope="row">';
+			echo '<a href="./ean/.$lista->id_produto ">';
+			echo '<img src="http://'. $_SERVER['HTTP_HOST'].'/biblioteca/img/ean.png" width="45px" > ';
+			echo '</a>';
+			echo '</td>';
+			echo '<td scope="row">';
+			echo '<a href="./produto/editar/<?php echo $lista->id_produto ;?>">';
+			echo '<img src="http://'. $_SERVER['HTTP_HOST'].'/biblioteca/img/editar.png" width="30px" > ';
+			echo '</a>';
+			echo '</td>';
+			echo '<td scope="row">';
+			echo '<a href="./produto/deletar/<?php echo $lista->id_produto ;?>">';
+			echo '<img src="http://'. $_SERVER['HTTP_HOST'].'/biblioteca/img/lixeira.png" width="30px" > '; 
+			echo '</a>';
+			echo '</td>';
+			echo '</tbody>';
+		endforeach;
+		echo '</table>'; 
+				
+	}
+
+
+
+
+
+
+
 	public static function inserir(){
 		$campos_inserir = array(
 			'nome'         	  => $_POST['nome'],

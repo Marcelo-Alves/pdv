@@ -4,20 +4,22 @@ require 'padrao/topo.php';
 
 $listas = produto::categoria();
 $categorias = produto::buscacategorias();
+//print_r ($listas);
 ?>
 <p class="h1">LISTA DE PRODUTO</p>
 <hr>
 <table class="table table-striped table-hover">
 	<thead> 
 		<tr> 
-			<th scope="col">Categoria</th>
+			<th scope="col" >Categoria</th>
+			<th scope="col" >Produto</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 			<td scope="row">
-				<select id="categoria" name="categoria" onchange="document.location.href=this.value">
-					<option>Escolha uma Categoria</option>
+				<select id="categoria" name="categoria"  class="form-control" onchange="document.location.href=this.value">
+					<option value="/produto">Escolha uma Categoria</option>
 					<?php
 						foreach($categorias as $categoria):
 					?>
@@ -27,8 +29,11 @@ $categorias = produto::buscacategorias();
 					?>
 				</select>
 			</td>
+			<td scope="row">
+				<input type="text" name="autocomplete" id="autocomplete" class="form-control" >
+			</td>
 		</tr>
-	</table>
+	</tbody>
 </table>
 <table class="table table-striped table-hover">
 	<thead> 

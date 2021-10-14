@@ -38,14 +38,14 @@ $categorias = categoria::lista();
 			<select/>
 			<br>
 			<label for="validade" > Validade </label>		
-			<select name='validade' class="form-control">
+			<select name='validade' id='validade' class="form-control"  onchange="desabilita()">>
 				<option selected>Escolher...</option>
 				<option value='0' <?php echo ($validade == 0?"selected":"");?> >Não</option>
 				<option value='1' <?php echo ($validade == 1?"selected":"");?> >Sim</option>
 			<select/>
 			<br>
 			<label for="validade_dias" >Validade em dias </label>			
-			<input type='text' name='validade_dias' id='validade_dias' class="form-control" value="<?php echo $validade_dias ?>">
+			<input type='number' <?php echo  ($validade_dias == 0?"disabled":""); ?>  name='validade_dias' id='validade_dias' class="form-control" value="<?php echo $validade_dias ?>">
 		</div>
 		<br>
 		<div class="card text-center">
@@ -53,7 +53,19 @@ $categorias = categoria::lista();
 		</div>
 	</form>
 
-
+	<script>
+	function desabilita(){
+		var validade = document.getElementById("validade").value;
+		
+		if(validade == 0){
+			document.getElementById("validade_dias").disabled = true;
+			document.getElementById("validade_dias").value = 0;
+		}else{
+			document.getElementById("validade_dias").disabled = false;
+			
+		}
+	}
+</script>
 <?php
 require 'padrao/rodape.php';
 ?>

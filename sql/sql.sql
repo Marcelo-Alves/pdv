@@ -10,6 +10,7 @@ CREATE TABLE estoque(
 drop table if exists produto;
 CREATE TABLE produto(  
     id_produto int(11) NOT NULL primary key AUTO_INCREMENT,
+	id_fornecedor int(11),
 	id_categoria int(11),
     nome varchar(100),
     validade int(1),
@@ -36,6 +37,7 @@ CREATE TABLE log(
     tipo varchar(12),
     antigo varchar(100),
     atual varchar(100),
+	data_criar TIMESTAMP,
     data_atualizar TIMESTAMP
 ) ; 
 
@@ -44,6 +46,7 @@ CREATE TABLE ean(
     id_ean int(11) NOT NULL primary key AUTO_INCREMENT,
 	id_produto int(11),
     ean varchar(100) unique,
+	data_criar TIMESTAMP,
     data_atualizar TIMESTAMP
 ) ; 
 
@@ -55,6 +58,7 @@ CREATE TABLE usuario(
     senha varchar(80),
     id_nivel int(11),
     ativo int(1),
+	data_criar TIMESTAMP,
     data_atualizar TIMESTAMP
 ); 
 
@@ -66,5 +70,20 @@ CREATE TABLE nivel(
     estoquista varchar(1),
     gerente varchar(1),
     administrador varchar(1),
+	data_criar TIMESTAMP,
     data_atualizar TIMESTAMP
 );
+
+drop table if exists fornecedor;
+CREATE TABLE fornecedor(  
+    id_fornecedor int(11) NOT NULL primary key AUTO_INCREMENT,
+    nome varchar(120),
+    cnpj varchar(22) unique,
+	data_criar TIMESTAMP,
+    data_atualizar TIMESTAMP
+);
+insert into fornecedor values (null,'PADRÃO','00.000.000/0000-00',NOW(),null);
+
+
+
+

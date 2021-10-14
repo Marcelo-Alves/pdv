@@ -4,6 +4,7 @@ require 'padrao/topo.php';
 $produtos = produto::editar();
 foreach($produtos as $produto):
 	$id_produto = $produto->id_produto;
+	$id_fornecedor_prod = $produto->id_fornecedor;
 	$id_categoria_prod = $produto->id_categoria;
 	$nome = $produto->nome;
 	$validade = $produto->validade;
@@ -11,7 +12,9 @@ foreach($produtos as $produto):
 endforeach;
 
 include_once 'controller/categoria.php';
+include_once 'controller/fornecedor.php';
 $categorias = categoria::lista();
+$fornecedores = fornecedor::lista();
 
 ?>
 
@@ -19,6 +22,17 @@ $categorias = categoria::lista();
 <hr>
 	<form action='../alterar' method='POST'>
 		<div class="form-group">
+			<label for="fornecedor" > Fornecedor </label>
+			<select name='id_fornecedor' id='id_fornecedor' class="form-control">
+				<?php
+					foreach($fornecedores as $fornecedor):
+				?>
+				<option value='<?php echo $fornecedor->id_fornecedor ?>' <?php echo ($fornecedor->id_fornecedor == $id_fornecedor_prod?"selected":"");?> ><?php echo $fornecedor->nome ?></option>
+				<?php
+					endforeach;
+				?>
+			<select/>
+			<br>
 			<input type="hidden" name="id_produto" id="id_produto" value="<?php echo $id_produto; ?>">
 			<label for="nome" > Nome </label>
 			<input type='text' name='nome' id='nome' class="form-control" value="<?php echo $nome ?>">	

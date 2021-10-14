@@ -2,10 +2,10 @@
 define('titulo', "Painel de Lista de Produto");    
 require 'padrao/topo.php';
 
-$listas = produto::categoria();
+$listas = produto::fornecedor();
 $categorias = produto::buscacategorias();
 $fornecedores = produto::buscafornecedores();
-//print_r ($listas);
+//print_r($listas);
 ?>
 <style>
 	#produto{
@@ -21,6 +21,9 @@ $fornecedores = produto::buscafornecedores();
 	}
 
 </script>
+
+
+
 <p class="h1">LISTA DE PRODUTO</p>
 <hr>
 <table class="table table-striped table-hover">
@@ -81,25 +84,27 @@ $fornecedores = produto::buscafornecedores();
 		<?php 
 			foreach($listas as $lista):
 		?>
-			<td scope="row"><?php echo $lista->id_produto ;?></th>
-			<td scope="row"><?php echo $lista->nome ;?></td>
-			<td scope="row"><?php echo ($lista->validade==0?"Não":"Dias");?></td>
-			<td scope="row"><?php echo $lista->validade_dias ;?></td>
-			<td scope="row">
-				<a href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/ean/<?php echo $lista->id_produto ;?>">
-					<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/ean.png" width='45px' > 
-				</a>
-			</td>
-			<td scope="row">
-				<a href="./produto/editar/<?php echo $lista->id_produto ;?>">
-					<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/editar.png" width='30px' > 
-				</a>
-			</td>
-			<td scope="row">
-				<a href="./produto/deletar/<?php echo $lista->id_produto ;?>">
-					<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/lixeira.png" width='30px' >  
-				</a>
-			</td>
+			<tr>
+				<td scope="row"><?php echo $lista->id_produto ;?></td>
+				<td scope="row"><?php echo $lista->nome ;?></td>
+				<td scope="row"><?php echo ($lista->validade==0?"Não":"Dias");?></td>
+				<td scope="row"><?php echo $lista->validade_dias ;?></td>
+				<td scope="row">
+					<a href="./ean/<?php echo $lista->id_produto ;?>">
+						<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/ean.png" width='45px' > 
+					</a>
+				</td>
+				<td scope="row">
+					<a href="./produto/editar/<?php echo $lista->id_produto ;?>">
+						<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/editar.png" width='30px' > 
+					</a>
+				</td>
+				<td scope="row">
+					<a href="./produto/deletar/<?php echo $lista->id_produto ;?>">
+						<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/lixeira.png" width='30px' >  
+					</a>
+				</td>
+			</tr>
 		</tbody>
 		<?php
 			endforeach;

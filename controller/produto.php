@@ -11,7 +11,6 @@ include_once './model/alterar.php';
 
 class produto{
 	public static function lista(){
-
 		 $produto = busca::buscaTudo('*','produto',"order by id_categoria");
 		 return $produto;
 	}
@@ -23,12 +22,29 @@ class produto{
 		$produto = busca::buscaWhere('*','produto',"and id_categoria = $id","") ;
 		return $produto;
 	}
+	
+	public static function fornecedor(){
+		$url = ($_SERVER['REQUEST_URI']=="/"?"/index":$_SERVER['REQUEST_URI']);
+		$u = explode('/',$url);
+		$id = $u[3];
+		$produto = busca::buscaWhere('*','produto',"and id_fornecedor = $id","") ;
+		//print_r($produto);
+		return $produto;
+	}
 
 	public static function buscacategorias(){
 		$produto = busca::buscaWhere('id_categoria,nome','categoria','and ativo = 1');
 		return $produto;
+   	}	
+	
+	
+	
+	public static function buscafornecedores(){
+		$produto = busca::buscaWhere('id_fornecedor,nome','fornecedor','');
+		
+		return $produto;
    	}
-
+	
 	public static function buscafetch(){
 		$url = $_SERVER['REQUEST_URI'];
 		$u = explode('/',$url);
@@ -90,7 +106,8 @@ class produto{
 
 	public static function inserir(){
 		$campos_inserir = array(
-			'nome'         	  => $_POST['nome'],
+			'nome'         	  => strtoupper($_POST['nome']),
+			'id_fornecedor'    => $_POST['id_fornecedor'],
 			'validade'        => $_POST['validade'],
 			'id_categoria'    => $_POST['categoria'],
 			'validade_dias'   => $_POST['validade_dias'],
@@ -109,7 +126,6 @@ class produto{
 		$model_valores  = substr($model_valores,0,-1);
 		
 		inserir::inserirBanco('produto',$model_campos,$model_valores) ;
-		//echo "iNSERIR";
 		
 		header("Location: /produto");
 		die();
@@ -126,10 +142,11 @@ class produto{
 	
 	public static function alterar(){
 		$campos_alterar =
-			'nome="'          .$_POST['nome'].'" ,'.
+			'nome="'          .strtoupper($_POST['nome']).'" ,'.
 			'validade="'      . $_POST['validade'].'" ,'.
 			'validade_dias="' . $_POST['validade_dias'].'" ,'.
 			'id_categoria="'  .$_POST['id_categoria'].'",'.
+			'id_fornecedor="'  .$_POST['id_fornecedor'].'",'.
 			'data_atualizar="'. date('Y-m-d H:i:s').'"';
 			
 		$where ='id_produto="'.$_POST['id_produto'].'"';

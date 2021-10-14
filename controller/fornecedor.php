@@ -9,17 +9,18 @@ include_once './model/inserir.php';
 include_once './model/alterar.php';
 include_once './model/deletar.php';
 
-class categoria{
+class fornecedor{
 	public static function lista(){
-		 $categoria = busca::buscaTudo('*','categoria');
-		 return $categoria;
+		 $fornecedor = busca::buscaTudo('*','fornecedor');
+		 //print_r($fornecedor);
+		 return $fornecedor;
 	}
 	
 	public static function inserir(){
 		$campos_inserir = array(
-			'nome'         	  => strtoupper($_POST['nome']),
-			'ativo'        => $_POST['ativo'],
-			'data_criar'      => date('Y-m-d H:i:s')
+			'nome'         	=> strtoupper($_POST['nome']),
+			'cnpj'			=> $_POST['cnpj'],
+			'data_criar'    => date('Y-m-d H:i:s')
 		);
 		
 		$model_campos="";
@@ -33,9 +34,9 @@ class categoria{
 		$model_campos = substr($model_campos,0,-1);
 		$model_valores  = substr($model_valores,0,-1);
 		
-		inserir::inserirBanco('categoria',$model_campos,$model_valores) ;
+		inserir::inserirBanco('fornecedor',$model_campos,$model_valores) ;
 		
-		header("Location: /categoria");
+		header("Location: /fornecedor");
 		die();
 	}
 	
@@ -43,20 +44,21 @@ class categoria{
 		$url = $_SERVER['REQUEST_URI'];
 		$u = explode('/',$url);
 		$id = $u[3];		
-		$where=" and id_categoria = ".$id;			
-		$categoria = busca::buscaWhere("*","categoria",$where);		
-		return $categoria ;	
+		$where=" and id_fornecedor = ".$id;			
+		$fornecedor = busca::buscaWhere("*","fornecedor",$where);		
+		return $fornecedor ;
+		
 	}
 	
 	public static function alterar(){
 		$campos_alterar =
 			'nome="'       		.strtoupper($_POST['nome']).'" ,'.
-			'ativo="'      		. $_POST['ativo'].'" ,'.
+			'cnpj="'      		. $_POST['cnpj'].'" ,'.
 			'data_atualizar="'	. date('Y-m-d H:i:s').'"';
 			
-		$where ='id_categoria="'.$_POST['id_categoria'].'"';
-		alterar::alterarBanco($campos_alterar,"categoria",$where);
-		header("Location: /categoria");
+		$where ='id_fornecedor="'.$_POST['id_fornecedor'].'"';
+		alterar::alterarBanco($campos_alterar,"fornecedor",$where);
+		header("Location: /fornecedor");
 		die();
 	}
 	public static function deletar(){
@@ -64,9 +66,9 @@ class categoria{
 		$u = explode('/',$url);
 		$id = $u[3];
 
-		$where ='id_categoria="'.$id.'"';
-		deletar::deletarBanco("categoria",$where);
-		header("Location: /categoria");
+		$where ='id_fornecedor="'.$id.'"';
+		deletar::deletarBanco("fornecedor",$where);
+		header("Location: /fornecedor");
 		die();
 	}
 }

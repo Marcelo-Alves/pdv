@@ -2,13 +2,26 @@
 define('titulo', "Painel de Cadastro de Produto");    
 require 'padrao/topo.php';
 include_once 'controller/categoria.php';
+include_once 'controller/fornecedor.php';
 $categorias = categoria::lista();
+$fornecedores = fornecedor::lista();
 ?>
 
 <p class="h1">CADASTRO DE PRODUTO</p>
 <hr>
 	<form action='./inserir' method='POST'>
 		<div class="form-group">
+			<label for="fornecedor" > Fornecedor </label>
+			<select name='id_fornecedor' id='id_fornecedor' class="form-control">
+				<?php
+					foreach($fornecedores as $fornecedor):
+				?>
+				<option value='<?php echo ($fornecedor->id_fornecedor);?>' ><?php echo $fornecedor->nome ?></option>
+				<?php
+					endforeach;
+				?>
+			<select/>
+			<br>
 			<label for="nome" > Nome </label>
 			<input type='text' name='nome' id='nome' class="form-control">	
 			<br>
@@ -43,7 +56,6 @@ $categorias = categoria::lista();
 <script>
 	function desabilita(){
 		var validade = document.getElementById("validade").value;
-		alert(validade);
 		if(validade == 0){
 			document.getElementById("validade_dias").disabled = true;
 		}else{

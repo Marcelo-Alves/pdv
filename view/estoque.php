@@ -29,26 +29,12 @@ $fornecedores = produto::buscafornecedores();
 <table class="table table-striped table-hover">
 	<thead> 
 		<tr> 
-			<th scope="col" >Fornecedor</th>
 			<th scope="col" >Categoria</th>
 			<th scope="col" >Produto</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td scope="row">
-				<select id="id_fornecedor" name="id_fornecedor"  class="form-control" onchange="document.location.href=this.value">
-					<option value="/produto">Escolha uma Fornecedor</option>
-					<?php
-						foreach($fornecedores as $fornecedor):
-					?>
-							<option value="/produto/fornecedor/<?php echo $fornecedor->id_fornecedor;?>"><?php echo $fornecedor->nome; ?></option>
-					<?php	
-						endforeach;
-					?>
-				</select>
-			</td>
-				
 			<td scope="row">
 				<select id="categoria" name="categoria"  class="form-control" onchange="document.location.href=this.value">
 					<option value="/produto">Escolha uma Categoria</option>
@@ -71,13 +57,8 @@ $fornecedores = produto::buscafornecedores();
 	<table class="table table-striped table-hover">
 		<thead> 
 			<tr> 
-				<th scope="col">id</th>
 				<th scope="col">Nome</th>
-				<th scope="col">Validade</th>
-				<th scope="col">Validade Dias</th>
-				<th scope="col">Código Produto</th>
-				<th scope="col">Editar</th>
-				<th scope="col">Deletar</th>
+				
 			</tr>
 		</thead>
 		<tbody>

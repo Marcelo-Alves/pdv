@@ -2,9 +2,9 @@
 define('titulo', "Painel de Lista de Produto");    
 require 'padrao/topo.php';
 
-$listas = produto::lista();
-$categorias = produto::buscacategorias();
-$fornecedores = produto::buscafornecedores();
+$listas = estoque::lista();
+$categorias = estoque::buscacategorias();
+$fornecedores = estoque::buscafornecedores();
 //print_r($listas);
 ?>
 <style>
@@ -57,8 +57,16 @@ $fornecedores = produto::buscafornecedores();
 	<table class="table table-striped table-hover">
 		<thead> 
 			<tr> 
+				<th scope="col">Fornecedor</th>
 				<th scope="col">Nome</th>
-				
+				<th scope="col">Categoria</th>
+				<th scope="col">Lote</th>				
+				<th scope="col">Quantidade</th>
+				<th scope="col">Valor Compra</th>
+				<th scope="col">Valor Venda</th>
+				<th scope="col">Data Validade</th>
+				<th scope="col">Data Fabricação</th>
+				<th scope="col">Editar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -66,25 +74,22 @@ $fornecedores = produto::buscafornecedores();
 			foreach($listas as $lista):
 		?>
 			<tr>
-				<td scope="row"><?php echo $lista->id_produto ;?></td>
+				<td scope="row"><?php echo $lista->fornecedor ;?></td>
 				<td scope="row"><?php echo $lista->nome ;?></td>
+				<td scope="row"><?php echo $lista->categoria ;?></td>
+				<td scope="row"><?php echo $lista->lote ;?></td>
+				<td scope="row"><?php echo $lista->quantidade ;?></td>
+				<td scope="row"><?php echo $lista->valor_compra ;?></td>
+				<td scope="row"><?php echo $lista->valor_venda ;?></td>
 				<td scope="row"><?php echo ($lista->validade==0?"Não":"Dias");?></td>
 				<td scope="row"><?php echo $lista->validade_dias ;?></td>
-				<td scope="row">
-					<a href="./ean/<?php echo $lista->id_produto ;?>">
-						<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/ean.png" width='45px' > 
-					</a>
-				</td>
+				
 				<td scope="row">
 					<a href="./produto/editar/<?php echo $lista->id_produto ;?>">
 						<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/editar.png" width='30px' > 
 					</a>
 				</td>
-				<td scope="row">
-					<a href="./produto/deletar/<?php echo $lista->id_produto ;?>">
-						<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/lixeira.png" width='30px' >  
-					</a>
-				</td>
+				
 			</tr>
 		</tbody>
 		<?php

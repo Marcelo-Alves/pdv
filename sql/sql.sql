@@ -3,7 +3,11 @@ CREATE TABLE estoque(
     id_estoque int(11) NOT NULL primary key AUTO_INCREMENT,
     id_produto int(11),
     quantidade int(11),
+	valor_compra decimal(10,2) default 0.00,
+	valor_venda decimal(10,2) default 0.00,
     lote VARCHAR(120),
+	validade TIMESTAMP,
+	fabricacao TIMESTAMP,
     data_atualizar TIMESTAMP
 ) ;
 
@@ -82,6 +86,21 @@ CREATE TABLE fornecedor(
 	data_criar TIMESTAMP,
     data_atualizar TIMESTAMP
 );
+
+drop view if exists visao_estoque;
+CREATE VIEW  visao_estoque
+AS
+SELECT 
+f.nome as fornecedor,e.id_estoque ,p.id_produto,p.nome as nome, P.id_categoria, C.nome as categoria, e.lote, e.valor_compra,e.valor_venda,p.validade, p.validade_dias,e.quantidade 
+FROM 
+estoque E INNER JOIN  produto P ON E.id_produto=P.id_produto INNER JOIN fornecedor F on P.id_fornecedor=F.id_fornecedor
+INNER JOIN categoria C on P.id_categoria=C.id_categoria;
+
+drop trigger if exists TR_ESTOQUE;
+CREATE DEFINER =`root`@`localhost` 
+TRIGGER TR_ESTOQUE AFTER INSERT ON produto FOR EACH ROW
+insert into estoque(id_produto,quantidade,valor_compra,	valor_venda) value (NEW.id_produto, 0, 0.00, 0.00);
+
 insert into fornecedor values (null,'PADRÃO','00.000.000/0000-00',NOW(),null);
 
 

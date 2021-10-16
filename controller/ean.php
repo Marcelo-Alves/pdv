@@ -30,10 +30,13 @@ class ean{
 	public static function inserir(){
 		$campos_inserir = array(
 			'ean'         	  => $_POST['ean'],
-			'id_produto'        => $_POST['id_produto'],
-			'data_atualizar'      => date('Y-m-d H:i:s')
+			'id_produto'      => $_POST['id_produto'],
+			'data_atualizar'  => date('Y-m-d H:i:s')
 		);
-
+		echo "<pre>";
+		print_r ($campos_inserir);
+		echo "</pre>";
+		
 		if(count(busca::buscaWhere('*','ean','and ean ="'.$campos_inserir['ean'].'" and id_produto='.$campos_inserir['id_produto'])) > 0){
 
 			header("Location: /validar/".$campos_inserir['id_produto']);
@@ -52,8 +55,7 @@ class ean{
 		$model_valores  = substr($model_valores,0,-1);
 		
 		inserir::inserirBanco('ean',$model_campos,$model_valores) ;
-		//echo "iNSERIR";
-		
+		echo "iNSERIR";
 		header("Location: /ean/".$campos_inserir['id_produto']);
 		die();
 	}

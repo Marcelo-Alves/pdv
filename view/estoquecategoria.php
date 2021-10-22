@@ -2,12 +2,9 @@
 define('titulo', "Painel de Lista de Produto");    
 require 'padrao/topo.php';
 
-$listas = estoque::lista();
+$listas = estoque::categoria();
 $categorias = estoque::buscacategorias();
-$fornecedores = estoque::buscafornecedores();
-echo "<pre>";
-print_r($listas);
-echo "</pre>";
+//print_r ($listas);
 ?>
 <style>
 	#produto{
@@ -17,15 +14,12 @@ echo "</pre>";
 <script>
 	function autocompletar(){
 		var nome = document.getElementById('autocomplete').value;
-		fetch('./estoque/buscafetch/'+nome)
+		fetch('../buscafetch/'+nome)
 		.then(response => response.text())
 		.then(texto => document.getElementById('produto').innerHTML = texto)
 	}
 
 </script>
-
-
-
 <p class="h1">LISTA DE PRODUTO</p>
 <hr>
 <table class="table table-striped table-hover">
@@ -37,9 +31,10 @@ echo "</pre>";
 	</thead>
 	<tbody>
 		<tr>
+			
 			<td scope="row">
 				<select id="categoria" name="categoria"  class="form-control" onchange="document.location.href=this.value">
-					<option value="/produto">Escolha uma Categoria</option>
+					<option value="/estoque">Escolha uma Categoria</option>
 					<?php
 						foreach($categorias as $categoria):
 					?>
@@ -56,7 +51,7 @@ echo "</pre>";
 	</tbody>
 </table>
 <div id="produto" name="produto">
-	<table class="table table-striped table-hover">
+<table class="table table-striped table-hover">
 		<thead> 
 			<tr> 
 				<th scope="col">Fornecedor</th>
@@ -74,14 +69,14 @@ echo "</pre>";
 			foreach($listas as $lista):
 		?>
 			<tr>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_produto?>"><?php echo $lista->fornecedor ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_produto?>"><?php echo $lista->nome ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_produto?>"><?php echo $lista->categoria ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_produto?>"><?php echo $lista->lote ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_produto?>"><?php echo $lista->quantidade ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_produto?>"><?php echo $lista->valor_compra ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_produto?>"><?php echo $lista->valor_venda ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_produto?>"><?php echo $lista->validade ;?></a></td>
+				<td scope="row"><a href="../editar/<?php echo $lista->id_produto?>"><?php echo $lista->fornecedor ;?></a></td>
+				<td scope="row"><a href="../editar/<?php echo $lista->id_produto?>"><?php echo $lista->nome ;?></a></td>
+				<td scope="row"><a href="../editar/<?php echo $lista->id_produto?>"><?php echo $lista->categoria ;?></a></td>
+				<td scope="row"><a href="../editar/<?php echo $lista->id_produto?>"><?php echo $lista->lote ;?></a></td>
+				<td scope="row"><a href="../editar/<?php echo $lista->id_produto?>"><?php echo $lista->quantidade ;?></a></td>
+				<td scope="row"><a href="../editar/<?php echo $lista->id_produto?>"><?php echo $lista->valor_compra ;?></a></td>
+				<td scope="row"><a href="../editar/<?php echo $lista->id_produto?>"><?php echo $lista->valor_venda ;?></a></td>
+				<td scope="row"><a href="../editar/<?php echo $lista->id_produto?>"><?php echo $lista->validade ;?></a></td>
 				
 				
 			</tr>

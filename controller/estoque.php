@@ -11,7 +11,9 @@ include_once './model/alterar.php';
 
 class estoque{
 	public static function lista(){
-		 $produto = busca::buscaTudo('*','visao_estoque',"order by id_categoria");
+		 $produto = busca::buscaTudo('f.nome as fornecedor,c.nome as categoria,p.*','pdv.produto as p inner join pdv.fornecedor as f  
+		 on p.id_fornecedor = f.id_fornecedor 
+		 inner join pdv.categoria as c on p.id_categoria = c.id_categoria',"order by id_categoria");
 		 return $produto;
 	}
 
@@ -19,7 +21,9 @@ class estoque{
 		$url = ($_SERVER['REQUEST_URI']=="/"?"/index":$_SERVER['REQUEST_URI']);
 		$u = explode('/',$url);
 		$id = $u[3];
-		$produto = busca::buscaWhere('*','estoque',"and id_categoria = $id","") ;
+		$produto = busca::buscaWhere('f.nome as fornecedor,c.nome as categoria,p.*','pdv.produto as p inner join pdv.fornecedor as f  
+		on p.id_fornecedor = f.id_fornecedor 
+		inner join pdv.categoria as c on p.id_categoria = c.id_categoria',"and p.id_categoria = $id","") ;
 		return $produto;
 	}
 	
@@ -27,7 +31,7 @@ class estoque{
 		$url = ($_SERVER['REQUEST_URI']=="/"?"/index":$_SERVER['REQUEST_URI']);
 		$u = explode('/',$url);
 		$id = $u[3];
-		$produto = busca::buscaWhere('*','estoque',"and id_fornecedor = $id","") ;
+		$produto = busca::buscaWhere('*','produto',"and id_fornecedor = $id","") ;
 		//print_r($produto);
 		return $produto;
 	}
@@ -105,15 +109,17 @@ class estoque{
 	}
 
 	public static function inserir(){
+		$data = date_create($_POST['validade']);
+		
 		$campos_inserir = array(
-			'nome'         	  => strtoupper($_POST['nome']),
-			'id_fornecedor'    => $_POST['id_fornecedor'],
-			'validade'        => $_POST['validade'],
-			'id_categoria'    => $_POST['categoria'],
-			'validade_dias'   => $_POST['validade_dias'],
-			'data_criar'      => date('Y-m-d H:i:s')
+			'id_produto'  => $_POST['id_produto'],
+			'quantidade'  => $_POST['quantidade'],
+			'validade'    => date_format($data, 'Y-m-d H:i:s'),
+			'lote'        => $_POST['lote'],
+			'data_atualizar'  => date('Y-m-d H:i:s')
 		);
 		
+		print_r($campos_inserir);
 		$model_campos="";
 		$model_valores="";
 		
@@ -125,10 +131,13 @@ class estoque{
 		$model_campos = substr($model_campos,0,-1);
 		$model_valores  = substr($model_valores,0,-1);
 		
-		inserir::inserirBanco('produto',$model_campos,$model_valores) ;
-		
-		header("Location: /produto");
-		die();
+		inserir::inserirBanco('estoque',$model_campos,$model_valores) ;
+
+		$where=" and id_produto = ".$_POST['id_produto'];			
+		$produto = busca::buscaWhere("*","visao_estoque",$where);	
+		/*
+		header("Location: /estoque");
+		die();*/
 	}
 	
 	public static function editar(){
@@ -136,7 +145,7 @@ class estoque{
 		$u = explode('/',$url);
 		$id = $u[3];		
 		$where=" and id_produto = ".$id;			
-		$produto = busca::buscaWhere("*","produto",$where);		
+		$produto = busca::buscaWhere("*","visao_estoque",$where);		
 		return $produto ;	
 	}
 	

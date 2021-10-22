@@ -91,7 +91,7 @@ drop view if exists visao_estoque;
 CREATE VIEW  visao_estoque
 AS
 SELECT 
-f.nome as fornecedor,e.id_estoque ,p.id_produto,p.nome as nome, P.id_categoria, C.nome as categoria, e.lote, e.valor_compra,e.valor_venda,p.validade, p.validade_dias,e.quantidade 
+F.nome as fornecedor,E.id_estoque ,P.id_produto,P.nome as nome, P.id_categoria, C.nome as categoria, E.lote, E.valor_compra,E.valor_venda,P.validade, P.validade_dias,E.quantidade 
 FROM 
 estoque E INNER JOIN  produto P ON E.id_produto=P.id_produto INNER JOIN fornecedor F on P.id_fornecedor=F.id_fornecedor
 INNER JOIN categoria C on P.id_categoria=C.id_categoria;

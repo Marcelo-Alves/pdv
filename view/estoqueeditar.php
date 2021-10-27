@@ -3,6 +3,7 @@ define('titulo', "Painel de Cadastro de Produto");
 require 'padrao/topo.php';
 $produtos = estoque::editar();
 foreach($produtos as $produto):
+	$id_estoque = $produto->id_estoque;
 	$id_produto = $produto->id_produto;
 	$fornecedor_prod = $produto->fornecedor;
 	$categoria_prod = $produto->categoria;
@@ -22,6 +23,7 @@ include_once 'controller/fornecedor.php';
 			<label for="fornecedor" > Fornecedor </label>
 			<label class="form-control" ><?php echo $fornecedor_prod ?></label>
 			<br>
+			<input type="hidden" name="id_estoque" id="id_estoque" value="<?php echo $id_estoque; ?>">
 			<input type="hidden" name="id_produto" id="id_produto" value="<?php echo $id_produto; ?>">
 			<label for="nome" > Nome </label>
 			<label class="form-control" ><?php echo $nome ?></label>	

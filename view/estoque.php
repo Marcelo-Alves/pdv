@@ -5,9 +5,9 @@ require 'padrao/topo.php';
 $listas = estoque::lista();
 $categorias = estoque::buscacategorias();
 $fornecedores = estoque::buscafornecedores();
-echo "<pre>";
+/*echo "<pre>";
 print_r($listas);
-echo "</pre>";
+echo "</pre>";*/
 ?>
 <style>
 	#produto{
@@ -59,7 +59,6 @@ echo "</pre>";
 	<table class="table table-striped table-hover">
 		<thead> 
 			<tr> 
-				<th scope="col">Fornecedor</th>
 				<th scope="col">Nome</th>
 				<th scope="col">Categoria</th>
 				<th scope="col">Lote</th>				
@@ -74,14 +73,13 @@ echo "</pre>";
 			foreach($listas as $lista):
 		?>
 			<tr>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_produto?>"><?php echo $lista->fornecedor ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_produto?>"><?php echo $lista->nome ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_produto?>"><?php echo $lista->categoria ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_produto?>"><?php echo $lista->lote ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_produto?>"><?php echo $lista->quantidade ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_produto?>"><?php echo $lista->valor_compra ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_produto?>"><?php echo $lista->valor_venda ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_produto?>"><?php echo $lista->validade ;?></a></td>
+				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->produto ;?></a></td>
+				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->categoria ;?></a></td>
+				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->lote ;?></a></td>
+				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->quantidade ;?></a></td>
+				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->valor_compra ;?></a></td>
+				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->valor_venda ;?></a></td>
+				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->validade ;?></a></td>
 				
 				
 			</tr>

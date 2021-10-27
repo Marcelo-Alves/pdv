@@ -54,7 +54,6 @@ $categorias = estoque::buscacategorias();
 <table class="table table-striped table-hover">
 		<thead> 
 			<tr> 
-				<th scope="col">Fornecedor</th>
 				<th scope="col">Nome</th>
 				<th scope="col">Categoria</th>
 				<th scope="col">Lote</th>				
@@ -69,8 +68,7 @@ $categorias = estoque::buscacategorias();
 			foreach($listas as $lista):
 		?>
 			<tr>
-				<td scope="row"><a href="../editar/<?php echo $lista->id_produto?>"><?php echo $lista->fornecedor ;?></a></td>
-				<td scope="row"><a href="../editar/<?php echo $lista->id_produto?>"><?php echo $lista->nome ;?></a></td>
+				<td scope="row"><a href="../editar/<?php echo $lista->id_produto?>"><?php echo $lista->produto ;?></a></td>
 				<td scope="row"><a href="../editar/<?php echo $lista->id_produto?>"><?php echo $lista->categoria ;?></a></td>
 				<td scope="row"><a href="../editar/<?php echo $lista->id_produto?>"><?php echo $lista->lote ;?></a></td>
 				<td scope="row"><a href="../editar/<?php echo $lista->id_produto?>"><?php echo $lista->quantidade ;?></a></td>

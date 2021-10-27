@@ -11,9 +11,11 @@ include_once './model/alterar.php';
 
 class estoque{
 	public static function lista(){
-		 $produto = busca::buscaTudo('f.nome as fornecedor,c.nome as categoria,p.*','pdv.produto as p inner join pdv.fornecedor as f  
-		 on p.id_fornecedor = f.id_fornecedor 
-		 inner join pdv.categoria as c on p.id_categoria = c.id_categoria',"order by id_categoria");
+		 $produto = busca::buscaTudo('p.nome as produto,p.id_produto,SUM( e.quantidade) as quantidade ,e.valor_compra as valor_compra ,
+		 e.valor_venda as valor_venda ,e.lote as lote ,DATE_FORMAT(e.validade,"%d/%m/%Y") as validade,c.nome as categoria,e.id_estoque',
+		 'estoque e inner join produto p on e.id_produto = p.id_produto
+		 inner JOIN categoria c on p.id_categoria = c.id_categoria ',
+		 "GROUP by p.nome, p.id_produto,e.lote ,e.id_estoque,c.nome,e.validade,e.valor_compra,e.valor_venda  order by p.nome");
 		 return $produto;
 	}
 
@@ -21,9 +23,17 @@ class estoque{
 		$url = ($_SERVER['REQUEST_URI']=="/"?"/index":$_SERVER['REQUEST_URI']);
 		$u = explode('/',$url);
 		$id = $u[3];
-		$produto = busca::buscaWhere('f.nome as fornecedor,c.nome as categoria,p.*','pdv.produto as p inner join pdv.fornecedor as f  
+		$produto = busca::buscaWhere
+		('p.nome as produto,p.id_produto,SUM( e.quantidade) as quantidade ,e.valor_compra as valor_compra ,
+		 e.valor_venda as valor_venda ,e.lote as lote ,DATE_FORMAT(e.validade,"%d/%m/%Y") as validade,c.nome as categoria',
+		 'estoque e inner join produto p on e.id_produto = p.id_produto 
+		 inner JOIN categoria c on p.id_categoria = c.id_categoria ',
+		 "and p.id_categoria = $id",
+		 "GROUP by p.nome, p.id_produto,e.lote ,c.nome,e.validade,e.valor_compra,e.valor_venda  order by p.nome");
+		/*
+		('f.nome as fornecedor,c.nome as categoria,p.*','pdv.produto as p inner join pdv.fornecedor as f  
 		on p.id_fornecedor = f.id_fornecedor 
-		inner join pdv.categoria as c on p.id_categoria = c.id_categoria',"and p.id_categoria = $id","") ;
+		inner join pdv.categoria as c on p.id_categoria = c.id_categoria',"and p.id_categoria = $id","") ;*/
 		return $produto;
 	}
 	
@@ -113,13 +123,20 @@ class estoque{
 		
 		$campos_inserir = array(
 			'id_produto'  => $_POST['id_produto'],
+			'id_estoque'  => $_POST['id_estoque'],
 			'quantidade'  => $_POST['quantidade'],
+			'valor_compra'  => $_POST['valor_compra'],
+			'valor_venda'  => $_POST['valor_venda'],
 			'validade'    => date_format($data, 'Y-m-d H:i:s'),
 			'lote'        => $_POST['lote'],
 			'data_atualizar'  => date('Y-m-d H:i:s')
 		);
-		
-		print_r($campos_inserir);
+		$where=" and id_estoque = " .$_POST['id_estoque'] ." and lote = " .$_POST['lote'] ;			
+		$listas = busca::buscaWhere("*","visao_estoque",$where);	
+
+
+
+		//print_r($campos_inserir);
 		$model_campos="";
 		$model_valores="";
 		
@@ -135,32 +152,36 @@ class estoque{
 
 		$where=" and id_produto = ".$_POST['id_produto'];			
 		$produto = busca::buscaWhere("*","visao_estoque",$where);	
-		/*
+		
 		header("Location: /estoque");
-		die();*/
+		die();
 	}
 	
 	public static function editar(){
 		$url = $_SERVER['REQUEST_URI'];
 		$u = explode('/',$url);
 		$id = $u[3];		
-		$where=" and id_produto = ".$id;			
+		$where=" and id_estoque = ".$id;			
 		$produto = busca::buscaWhere("*","visao_estoque",$where);		
 		return $produto ;	
 	}
 	
 	public static function alterar(){
+
+		$data = date_create($_POST['validade']);
+		
+
 		$campos_alterar =
-			'nome="'          .strtoupper($_POST['nome']).'" ,'.
-			'validade="'      . $_POST['validade'].'" ,'.
-			'validade_dias="' . $_POST['validade_dias'].'" ,'.
-			'id_categoria="'  .$_POST['id_categoria'].'",'.
-			'id_fornecedor="'  .$_POST['id_fornecedor'].'",'.
-			'data_atualizar="'. date('Y-m-d H:i:s').'"';
+			'quantidade="' . $_POST['quantidade'].'" ,'.
+			'valor_compra="' . $_POST['valor_compra'].'" ,'.
+			'valor_venda="' .  $_POST['valor_venda'].'" ,'.
+			'validade="' . date_format($data, 'Y-m-d H:i:s').'" ,'.
+			'lote="' . $_POST['lote'].'" ,'.
+			'data_atualizar="' . date('Y-m-d H:i:s').'" ';
 			
-		$where ='id_produto="'.$_POST['id_produto'].'"';
-		alterar::alterarBanco($campos_alterar,"produto",$where);
-		header("Location: /produto");
+		$where ='id_estoque="'.$_POST['id_estoque'].'"';
+		alterar::alterarBanco($campos_alterar,"estoque",$where);
+		header("Location: /estoque");
 		die();
 	}
 }

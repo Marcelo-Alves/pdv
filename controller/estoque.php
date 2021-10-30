@@ -26,10 +26,10 @@ class estoque{
 		$produto = busca::buscaWhere
 		('p.nome as produto,p.id_produto,SUM( e.quantidade) as quantidade ,
 		e.lote as lote ,DATE_FORMAT(e.validade,"%d/%m/%Y") as validade,c.nome as categoria',
-		 'estoque e inner join produto p on e.id_produto = p.id_produto 
-		 inner JOIN categoria c on p.id_categoria = c.id_categoria ',
+		'estoque e inner join produto p on e.id_produto = p.id_produto
+		inner JOIN categoria c on p.id_categoria = c.id_categoria  ',
 		 "and p.id_categoria = $id",
-		 "GROUP by p.nome, p.id_produto,e.lote ,c.nome,e.validade  order by p.nome");
+		 "GROUP by p.nome, p.id_produto,e.lote,c.nome,DATE_FORMAT(e.validade,'%d/%m/%Y') order by p.nome");
 		/*
 		('f.nome as fornecedor,c.nome as categoria,p.*','pdv.produto as p inner join pdv.fornecedor as f  
 		on p.id_fornecedor = f.id_fornecedor 

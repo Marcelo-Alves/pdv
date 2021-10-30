@@ -11,11 +11,11 @@ include_once './model/alterar.php';
 
 class estoque{
 	public static function lista(){
-		 $produto = busca::buscaTudo('p.nome as produto,p.id_produto,SUM( e.quantidade) as quantidade ,e.valor_compra as valor_compra ,
-		 e.valor_venda as valor_venda ,e.lote as lote ,DATE_FORMAT(e.validade,"%d/%m/%Y") as validade,c.nome as categoria,e.id_estoque',
+		 $produto = busca::buscaTudo('p.nome as produto,p.id_produto,SUM( e.quantidade) as quantidade ,
+		 e.lote as lote ,DATE_FORMAT(e.validade,"%d/%m/%Y") as validade,c.nome as categoria',
 		 'estoque e inner join produto p on e.id_produto = p.id_produto
 		 inner JOIN categoria c on p.id_categoria = c.id_categoria ',
-		 "GROUP by p.nome, p.id_produto,e.lote ,e.id_estoque,c.nome,e.validade,e.valor_compra,e.valor_venda  order by p.nome");
+		 "GROUP by p.nome, p.id_produto,e.lote,c.nome,DATE_FORMAT(e.validade,'%d/%m/%Y') order by p.nome");
 		 return $produto;
 	}
 
@@ -24,12 +24,12 @@ class estoque{
 		$u = explode('/',$url);
 		$id = $u[3];
 		$produto = busca::buscaWhere
-		('p.nome as produto,p.id_produto,SUM( e.quantidade) as quantidade ,e.valor_compra as valor_compra ,
-		 e.valor_venda as valor_venda ,e.lote as lote ,DATE_FORMAT(e.validade,"%d/%m/%Y") as validade,c.nome as categoria',
+		('p.nome as produto,p.id_produto,SUM( e.quantidade) as quantidade ,
+		e.lote as lote ,DATE_FORMAT(e.validade,"%d/%m/%Y") as validade,c.nome as categoria',
 		 'estoque e inner join produto p on e.id_produto = p.id_produto 
 		 inner JOIN categoria c on p.id_categoria = c.id_categoria ',
 		 "and p.id_categoria = $id",
-		 "GROUP by p.nome, p.id_produto,e.lote ,c.nome,e.validade,e.valor_compra,e.valor_venda  order by p.nome");
+		 "GROUP by p.nome, p.id_produto,e.lote ,c.nome,e.validade  order by p.nome");
 		/*
 		('f.nome as fornecedor,c.nome as categoria,p.*','pdv.produto as p inner join pdv.fornecedor as f  
 		on p.id_fornecedor = f.id_fornecedor 
@@ -125,8 +125,8 @@ class estoque{
 			'id_produto'  => $_POST['id_produto'],
 			'id_estoque'  => $_POST['id_estoque'],
 			'quantidade'  => $_POST['quantidade'],
-			'valor_compra'  => $_POST['valor_compra'],
-			'valor_venda'  => $_POST['valor_venda'],
+			/*'valor_compra'  => $_POST['valor_compra'],
+			'valor_venda'  => $_POST['valor_venda'],*/
 			'validade'    => date_format($data, 'Y-m-d H:i:s'),
 			'lote'        => $_POST['lote'],
 			'data_atualizar'  => date('Y-m-d H:i:s')

@@ -63,8 +63,6 @@ echo "</pre>";*/
 				<th scope="col">Categoria</th>
 				<th scope="col">Lote</th>				
 				<th scope="col">Quantidade</th>
-				<th scope="col">Valor Compra</th>
-				<th scope="col">Valor Venda</th>
 				<th scope="col">Data de Validade</th>
 			</tr>
 		</thead>
@@ -77,8 +75,6 @@ echo "</pre>";*/
 				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->categoria ;?></a></td>
 				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->lote ;?></a></td>
 				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->quantidade ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->valor_compra ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->valor_venda ;?></a></td>
 				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->validade ;?></a></td>
 				
 				

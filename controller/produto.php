@@ -50,22 +50,28 @@ class produto{
 		$u = explode('/',$url);
 		$nome = $u[3];
 		
-		$produtos = busca::buscaWhere('p.id_produto,p.nome,e.ean, es.quantidade',
-        'produto p inner join pdv.ean e on p.id_produto = e.id_produto inner join estoque es on p.id_produto = es.id_produto',
-        'and p.nome like "%'.$nome.'%" or e.ean like "%'.$nome.'%" and es.quantidade > 0');
+			$produtos = busca::buscaWhere('p.id_produto,p.nome,e.ean, es.quantidade,es.valor_venda',
+			'produto p inner join pdv.ean e on p.id_produto = e.id_produto inner join estoque es on p.id_produto = es.id_produto',
+			'and p.nome like "%'.$nome.'%" or e.ean like "%'.$nome.'%" and es.quantidade > 0');
+			
+			if(count($produtos) > 0):
+				$retorno ="<div style='z-index:1;position:absolute;' class='card card-body mb-1'>
+				<ul class='list-group'>";
+				foreach($produtos as $produto):
+					$retorno .='<i class="fas fa-history mr-3"></i>
+					<span onclick="PegaTexto('.trim($produto->id_produto).')">'.$produto->ean ." - ".$produto->nome.'</span></li> 
+					<input type="hidden" name="texto'.$produto->id_produto.'" id="texto'.$produto->id_produto.'" value="'.$produto->id_produto."-".$produto->ean ."-".$produto->nome."-".$produto->valor_venda.'" />';
+				endforeach;
+				$retorno .="<ul> </div>";
+				echo $retorno;
+			else:
+				$retorno ='<div style="z-index:1;position:absolute;" class="card card-body mb-1"><ul class="list-group">
+							<i class="fas fa-history mr-3"></i><span> Não existe produto com este código</span></li>		
+							<ul> </div>';
+				echo $retorno;
+			endif;
+        }
 		
-		$retorno ="<ul  class='list-group'>";
-        foreach($produtos as $produto):
-            $retorno .='<i class="fas fa-history mr-3"></i><span onclick="get_text(this)">'.$produto->ean ." - ".$produto->nome.'</span></li>';
-        endforeach;
-        $retorno .="<ul>";
-        echo $retorno;
-
-        
-   	}
-
-
-
 
 	public static function buscafetch(){
 		$url = $_SERVER['REQUEST_URI'];

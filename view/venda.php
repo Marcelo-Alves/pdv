@@ -1,5 +1,6 @@
 <?php
 define('titulo', "Tela de Venda");  
+$idvenda = date('ymd').rand(1,1000);
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -28,7 +29,11 @@ define('titulo', "Tela de Venda");
 				.then(texto => document.getElementById('popup').innerHTML = texto)
 			}
 		}
-
+		function PegaTexto(texto){
+			var frmtexto = document.getElementById('texto'+texto).value;
+			document.getElementById('nome_prod').value = frmtexto
+			document.getElementById('popup').innerHTML = '';
+		}
 		function Dinheiro(){ 		
 			if(document.getElementById('seltipo').value == 'dinheiro'){
 				document.getElementById('dintotal').disabled=false;
@@ -66,7 +71,19 @@ define('titulo', "Tela de Venda");
 	<body>
 		 <div class="container">
 				<div id='principal' class="row">
-					<p class="h1">VENDA</p>
+					
+						<div class="form-inline">
+							<div class="form-group mb-2">
+								<label class='h1'>
+									VENDA N°<?php echo $idvenda;?>
+								</label>
+							</div>
+							<div class="form-group mx-sm-3 mb-2">
+								<input type='hidden' id='idvenda' name='idvenda' value='<?php echo $idvenda;?>' />
+								<input type='text' id='buscavenda' name='buscavenda' class='form-control mx-sm-3 mb-2' style='width:200px;' />
+								<button type='button'>Buscar</button>
+							</div>
+						</div>
 					<div class="col-9">
 						<div id='pesquisa'>
 							<label> Produto </label>

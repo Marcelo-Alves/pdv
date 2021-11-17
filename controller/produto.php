@@ -45,6 +45,28 @@ class produto{
 		return $produto;
    	}
 	
+	public static function buscaproduto(){
+        $url = $_SERVER['REQUEST_URI'];
+		$u = explode('/',$url);
+		$nome = $u[3];
+		
+		$produtos = busca::buscaWhere('p.id_produto,p.nome,e.ean, es.quantidade',
+        'produto p inner join pdv.ean e on p.id_produto = e.id_produto inner join estoque es on p.id_produto = es.id_produto',
+        'and p.nome like "%'.$nome.'%" or e.ean like "%'.$nome.'%" and es.quantidade > 0');
+		
+		$retorno ="<ul  class='list-group'>";
+        foreach($produtos as $produto):
+            $retorno .='<i class="fas fa-history mr-3"></i><span onclick="get_text(this)">'.$produto->ean ." - ".$produto->nome.'</span></li>';
+        endforeach;
+        $retorno .="<ul>";
+        echo $retorno;
+
+        
+   	}
+
+
+
+
 	public static function buscafetch(){
 		$url = $_SERVER['REQUEST_URI'];
 		$u = explode('/',$url);

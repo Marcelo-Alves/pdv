@@ -1,8 +1,6 @@
 <?php
-define('titulo', "Tela de Venda");    
-
+define('titulo', "Tela de Venda");  
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -17,11 +15,20 @@ define('titulo', "Tela de Venda");
       #pesquisa{border:1px solid #000000;padding:10px;}
 	  #itens,#total,#principal{border:1px solid #000000;padding:5px;}
 	  #vertotal{border:1px solid #000000;padding:5px;}
-	  .vertotallabel{padding-bottom:5px;}
-	  
+	  .vertotallabel{padding-bottom:5px;}	  
+	  #quant{width: 80px;}
+	  #nome_prod{width: 500px;}
 	</style>
 	<script>
-		
+		function autocompletar(){
+			var nome = document.getElementById('nome_prod').value;
+			if(nome != ""){
+				fetch('./produto/buscaproduto/'+nome)
+				.then(response => response.text())
+				.then(texto => document.getElementById('popup').innerHTML = texto)
+			}
+		}
+
 		function Dinheiro(){ 		
 			if(document.getElementById('seltipo').value == 'dinheiro'){
 				document.getElementById('dintotal').disabled=false;
@@ -63,10 +70,14 @@ define('titulo', "Tela de Venda");
 					<div class="col-9">
 						<div id='pesquisa'>
 							<label> Produto </label>
-							<input type='text' name='nome_prod' id='nome_prod' />
+							<input type='text' name='nome_prod' id='nome_prod' onkeyup='autocompletar()'/>
+							
 							<label> Quantidade </label>
-							<input type='number' name='quant' id='quant' />
-							<button > INCLUIR </button>
+							<input type='number' name='quant' id='quant'  />
+							<button type="button"> INCLUIR </button>
+						</div>
+						<div class="dropdown">
+							<span id="popup"></span>
 						</div>
 						<div id='itens'>
 								<table  class="table table-striped table-hover">
@@ -74,10 +85,10 @@ define('titulo', "Tela de Venda");
 										<tr > <th  scope="col">Produto</th> <th scope="col"> Quantidade</th>  <th scope="col"> Valor Unitário</th>  <th scope="col"> Valor</th> <tr>
 									</thead>
 									<tbody>
-										<tr > <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> <tr>
-										<tr > <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> <tr>
-										<tr > <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> <tr>
-										<tr > <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> <tr>
+										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> </tr>
+										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> </tr>
+										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> </tr>
+										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> </tr>
 									</tbody>
 								</table>
 						</div>
@@ -112,5 +123,6 @@ define('titulo', "Tela de Venda");
 				</div>
 			</div>
 		</div>
+		<div id='produto'></div>
 	</body>
 </html>

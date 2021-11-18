@@ -63,7 +63,6 @@ $fornecedores = fornecedor::lista();
 		}
 	}
 </script>
-
 <?php
 require 'padrao/rodape.php';
 ?>

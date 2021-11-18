@@ -29,11 +29,38 @@
           
         </div>
       </nav>
+	
 
     <div class="container">
+			
+			
+			<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                   
+                    <li>
+                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
+                        <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+						
+                            <li class="w-100">
+                                <a href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/produto">Lista</a> 
+                            </li>
+                            <li>
+                                <a href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/produto/form">Novo</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+			
+			
+				
+		
       <div class="row">
         <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
           <ul class="nav nav-pills flex-column">
+		  
+		  
+		  
             <li class="nav-item">
               <a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/produto">Produtos</a>
             </li>
@@ -43,7 +70,12 @@
             <li class="nav-item">
               <a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/categoria">Categoria</a>
             </li>
-           
+           <li class="nav-item">
+              <a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/cliente">Cliente</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/funcionario">Funcionário</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="">Sair</a>
               </li>  
@@ -69,21 +101,3 @@
 
 
 
-
-
-<!--
-
-<html lang="pt-BR">
-    <head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="Controle de estoque">
-		<meta name="author" content="Marcelo Alves">   
-		<title><?php echo titulo; ?></title>	
-
-		<!-- Principal CSS do Bootstrap -- >
-		<link href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/css/bootstrap.css" rel="stylesheet">        
-    </head>
-    <body>
-    <div class="container">
-	-->

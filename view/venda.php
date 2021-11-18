@@ -18,7 +18,7 @@ $idvenda = date('ymd').rand(1,1000);
 	  #vertotal{border:1px solid #000000;padding:5px;}
 	  .vertotallabel{padding-bottom:5px;}	  
 	  #quant{width: 80px;}
-	  #nome_prod{width: 500px;}
+	  #nome_prod{width: 480px;}
 	</style>
 	<script>
 		function autocompletar(){
@@ -78,17 +78,16 @@ $idvenda = date('ymd').rand(1,1000);
 									VENDA N°<?php echo $idvenda;?>
 								</label>
 							</div>
-							<div class="form-group mx-sm-3 mb-2">
+							<!--<div class="form-group mx-sm-3 mb-2">-->
 								<input type='hidden' id='idvenda' name='idvenda' value='<?php echo $idvenda;?>' />
-								<input type='text' id='buscavenda' name='buscavenda' class='form-control mx-sm-3 mb-2' style='width:200px;' />
+								<!--<input type='text' id='buscavenda' name='buscavenda' class='form-control mx-sm-3 mb-2' style='width:200px;' />
 								<button type='button'>Buscar</button>
-							</div>
+							</div>-->
 						</div>
 					<div class="col-9">
 						<div id='pesquisa'>
 							<label> Produto </label>
-							<input type='text' name='nome_prod' id='nome_prod' onkeyup='autocompletar()'/>
-							
+							<input type='text' name='nome_prod' id='nome_prod' onkeyup='autocompletar()'/>							
 							<label> Quantidade </label>
 							<input type='number' name='quant' id='quant'  />
 							<button type="button"> INCLUIR </button>

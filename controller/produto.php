@@ -134,13 +134,18 @@ class produto{
 
 	public static function inserir(){
 		$campos_inserir = array(
-			'nome'         	  => strtoupper($_POST['nome']),
-			'id_fornecedor'    => $_POST['id_fornecedor'],
-			'validade'        => $_POST['validade'],
-			'id_categoria'    => $_POST['categoria'],
-			'validade_dias'   => $_POST['validade_dias'],
-			'data_criar'      => date('Y-m-d H:i:s')
+			'nome'         	=> strtoupper($_POST['nome']),
+			'id_fornecedor' => $_POST['id_fornecedor'],
+			'validade'      => $_POST['validade'],
+			'id_categoria'  => $_POST['categoria'],
+			'validade_dias' => $_POST['validade_dias'],
+			'data_criar'    => date('Y-m-d H:i:s')
 		);
+		
+		echo "<pre>";
+		print_r($campos_inserir);
+		echo "</pre>";
+		
 		
 		$model_campos="";
 		$model_valores="";
@@ -153,10 +158,11 @@ class produto{
 		$model_campos = substr($model_campos,0,-1);
 		$model_valores  = substr($model_valores,0,-1);
 		
-		inserir::inserirBanco('produto',$model_campos,$model_valores) ;
+		
+		/*inserir::inserirBanco('produto',$model_campos,$model_valores) ;
 		
 		header("Location: /produto");
-		die();
+		die();*/
 	}
 	
 	public static function editar(){

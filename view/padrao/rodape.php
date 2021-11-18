@@ -1,8 +1,4 @@
 </div>
       </nav>
-
-    
-
-      
   </body>
 </html>

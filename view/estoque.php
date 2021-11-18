@@ -83,3 +83,6 @@ echo "</pre>";*/
 		?>
 	</table>
 </div>
+<?php
+require 'padrao/rodape.php';
+?>

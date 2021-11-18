@@ -83,6 +83,9 @@ $idvenda = date('ymd').rand(1,1000);
 								<!--<input type='text' id='buscavenda' name='buscavenda' class='form-control mx-sm-3 mb-2' style='width:200px;' />
 								<button type='button'>Buscar</button>
 							</div>-->
+							<select id="id_cliente" name="id_cliente">
+								<op
+							</select>
 						</div>
 					<div class="col-9">
 						<div id='pesquisa'>

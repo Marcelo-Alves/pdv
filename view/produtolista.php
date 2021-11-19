@@ -111,6 +111,3 @@ $fornecedores = produto::buscafornecedores();
 		?>
 	</table>
 </div>
-<?php
-require 'padrao/rodape.php';
-?>

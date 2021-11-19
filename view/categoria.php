@@ -39,6 +39,3 @@ $listas = categoria::lista();
 		endforeach;
 	?>
 </table>
-<?php
-require 'padrao/rodape.php';
-?>

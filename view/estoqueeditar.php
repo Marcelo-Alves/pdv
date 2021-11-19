@@ -1,8 +1,7 @@
 <?php
-define('titulo', "Painel de Alterar Estoque");    
+define('titulo', "Painel de Cadastro de Produto");    
 require 'padrao/topo.php';
 $produtos = estoque::editar();
-print_r($produtos);
 foreach($produtos as $produto):
 	$id_estoque = $produto->id_estoque;
 	$id_produto = $produto->id_produto;
@@ -17,7 +16,7 @@ include_once 'controller/fornecedor.php';
 
 ?>
 
-<p class="h1">ALTERAR ESTOQUE</p>
+<p class="h1">ALTERAR PRODUTO</p>
 <hr>
 	<form action='../inserir' method='POST'>
 		<div class="form-group">

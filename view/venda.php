@@ -72,20 +72,25 @@ $idvenda = date('ymd').rand(1,1000);
 		 <div class="container">
 				<div id='principal' class="row">
 					
-						<div class="form-inline">
-							<div class="form-group mb-2">
-								<label class='h1'>
-									VENDA N°<?php echo $idvenda;?>
+						<div class="row">
+							<div class="col-7">
+								<label class='h2'>
+									VENDA N° <?php echo $idvenda;?>
 								</label>
 							</div>
-							<!--<div class="form-group mx-sm-3 mb-2">-->
-								<input type='hidden' id='idvenda' name='idvenda' value='<?php echo $idvenda;?>' />
-								<!--<input type='text' id='buscavenda' name='buscavenda' class='form-control mx-sm-3 mb-2' style='width:200px;' />
-								<button type='button'>Buscar</button>
-							</div>-->
-							<select id="id_cliente" name="id_cliente">
-								<op
-							</select>
+							<div class="col-5">
+									<label for="buscvenda">Busca venda:</label>
+									<input type='hidden' id='idvenda' name='idvenda' value='<?php echo $idvenda;?>' />
+									<input type='text' id='buscavenda' name='buscavenda' style='width:200px;' />
+									<button type='button'>Buscar</button>
+									<label ></label>
+									<label for="cliente">Cliente:</label>
+									<select id="id_cliente" name="id_cliente">
+										<option value="0">Padrão</option>
+									</select>
+							
+							</div>
+							
 						</div>
 					<div class="col-9">
 						<div id='pesquisa'>

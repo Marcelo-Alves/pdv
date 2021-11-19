@@ -15,6 +15,12 @@
           min-height: 400px;
       }
   </style>
+  <script>
+    function esconde(campo){
+      var div = document.getElementById(campo);
+      div.style.display = (div.style.display === 'block'?'none':'block');
+    }
+  </script>
 
   </head>
 
@@ -41,25 +47,42 @@
             
       
         <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
-        <button data-bs-toggle="collapse" data-bs-target="#produtodiv">
-              Produto
-          </button>
-          <div class="collapse" id="produtodiv">           
-              <a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/produto">lista</a>
-              <a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/produto/form">Novo</a>
-             
-          </div>
+        
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/produto">Produtos</a>
+              <a class="nav-link" href="#" onclick="esconde('liproduto')" >Produtos</a>
+              <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="liproduto">
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/produto">lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/produto/form">Novo</a></li>
+              </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/estoque">Estoque</a>
+              <a class="nav-link" href="#" onclick="esconde('liestoque')" >Estoque</a>
+              <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="liestoque">
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/estoque">lista</a></li>
+              </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/categoria">Categoria</a>
+              <a class="nav-link" href="#" onclick="esconde('licategoria')" >Categoria</a>
+              <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="licategoria">
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/categoria">lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/categoria/form">Novo</a></li>
+              </ul>
             </li>
-           
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="esconde('licliente')" >Cliente</a>
+              <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="licliente">
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/cliente">lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/cliente/form">Novo</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="esconde('lifuncionario')" >Funcionário</a>
+              <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="lifuncionario">
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/funcionario">lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/funcionario/form">Novo</a></li>
+              </ul>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="">Sair</a>
               </li>  

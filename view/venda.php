@@ -1,6 +1,6 @@
 <?php
 define('titulo', "Tela de Venda");  
-$idvenda = date('ymd').rand(1,1000);
+$idvenda = date('ymdHis').rand(100,999);
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -14,11 +14,13 @@ $idvenda = date('ymd').rand(1,1000);
 	<link href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/css/dashboard.css" rel="stylesheet">     
     <style>
       #pesquisa{border:1px solid #000000;padding:10px;}
-	  #itens,#total,#principal{border:1px solid #000000;padding:5px;}
+	  #itens,#total{border:1px solid #000000;padding:5px;}
 	  #vertotal{border:1px solid #000000;padding:5px;}
 	  .vertotallabel{padding-bottom:5px;}	  
 	  #quant{width: 80px;}
 	  #nome_prod{width: 480px;}
+	  #principal{border:1px solid #000000;padding:5px;height: 100%;}
+
 	</style>
 	<script>
 		function autocompletar(){
@@ -70,28 +72,28 @@ $idvenda = date('ymd').rand(1,1000);
   </head>
 	<body>
 		 <div class="container">
-				<div id='principal' class="row">
+				<div id='principal' class="row"  style="height: 100%;">
 					
-						<div class="row">
-							<div class="col-7">
-								<label class='h2'>
-									VENDA N° <?php echo $idvenda;?>
-								</label>
-							</div>
-							<div class="col-5">
-									<label for="buscvenda">Busca venda:</label>
-									<input type='hidden' id='idvenda' name='idvenda' value='<?php echo $idvenda;?>' />
-									<input type='text' id='buscavenda' name='buscavenda' style='width:200px;' />
-									<button type='button'>Buscar</button>
-									<label ></label>
-									<label for="cliente">Cliente:</label>
-									<select id="id_cliente" name="id_cliente">
-										<option value="0">Padrão</option>
-									</select>
-							
-							</div>
-							
+					<div class="row">
+						<div class="col-7">
+							<label class='h2'>
+								VENDA N° <?php echo $idvenda;?>
+							</label>
 						</div>
+						<div class="col-5">
+								<label for="buscvenda">Busca venda:</label>
+								<input type='hidden' id='idvenda' name='idvenda' value='<?php echo $idvenda;?>' />
+								<input type='text' id='buscavenda' name='buscavenda' style='width:200px;' />
+								<button type='button'>Buscar</button>
+								<label ></label>
+								<label for="cliente">Cliente:</label>
+								<select id="id_cliente" name="id_cliente">
+									<option value="0">Padrão</option>
+								</select>
+						
+						</div>
+						
+					</div>
 					<div class="col-9">
 						<div id='pesquisa'>
 							<label> Produto </label>
@@ -145,8 +147,6 @@ $idvenda = date('ymd').rand(1,1000);
 							</div>							
 						</div>					
 				</div>
-			</div>
-		</div>
-		<div id='produto'></div>
+			</div>		
 	</body>
 </html>

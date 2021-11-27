@@ -70,27 +70,31 @@ $idvenda = date('ymdHis').rand(100,999);
 		}
 	</script>
   </head>
-	<body>
+	<body  class="pt-0">
 		 <div class="container">
-				<div id='principal' class="row"  style="height: 100%;">
+				<h1 class="display-1 text-center">CAIXA</h1>
+				<div id='principal' class="row">
 					
-					<div class="row">
-						<div class="col-7">
 							<label class='h2'>
 								VENDA N° <?php echo $idvenda;?>
 							</label>
+						
+					<div class="row">
+						<div class="col-6 mb-2">
+							<label for="buscvenda">Pedido:</label>
+								<input type='hidden' id='idpedido' name='idpedido' value='<?php echo $idvenda;?>' />
+								<input type='text' id='buscapedido' name='buscapedido' style='width:200px;' />
+								<button type='button'>Buscar</button>
 						</div>
-						<div class="col-5">
+						<div class="col-6 mb-2">
 								<label for="buscvenda">Busca venda:</label>
 								<input type='hidden' id='idvenda' name='idvenda' value='<?php echo $idvenda;?>' />
 								<input type='text' id='buscavenda' name='buscavenda' style='width:200px;' />
 								<button type='button'>Buscar</button>
-								<label ></label>
 								<label for="cliente">Cliente:</label>
 								<select id="id_cliente" name="id_cliente">
 									<option value="0">Padrão</option>
 								</select>
-						
 						</div>
 						
 					</div>
@@ -108,13 +112,13 @@ $idvenda = date('ymdHis').rand(100,999);
 						<div id='itens'>
 								<table  class="table table-striped table-hover">
 									<thead>
-										<tr > <th  scope="col">Produto</th> <th scope="col"> Quantidade</th>  <th scope="col"> Valor Unitário</th>  <th scope="col"> Valor</th> <tr>
+										<tr > <th  scope="col">Produto</th> <th scope="col"> Quantidade</th>  <th scope="col"> Valor Unitário</th>  <th scope="col"> Valor</th>  <th scope="col"> Vendedor</th><tr>
 									</thead>
 									<tbody>
-										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> </tr>
-										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> </tr>
-										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> </tr>
-										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> </tr>
+										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> <td scope="col">Clemente</td> </tr>
+										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> <td scope="col">Clemente</td></tr>
+										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td><td scope="col">Clemente</td> </tr>
+										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> <td scope="col">Clemente</td></tr>
 									</tbody>
 								</table>
 						</div>

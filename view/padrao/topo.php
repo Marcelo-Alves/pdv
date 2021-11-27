@@ -52,35 +52,52 @@
             <li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('liproduto')" >Produtos</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="liproduto">
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/produto">lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/produto">Lista</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/produto/form">Novo</a></li>
               </ul>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('liestoque')" >Estoque</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="liestoque">
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/estoque">lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/estoque">Lista</a></li>
               </ul>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('licategoria')" >Categoria</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="licategoria">
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/categoria">lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/categoria">Lista</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/categoria/form">Novo</a></li>
               </ul>
             </li>
+			<li class="nav-item">
+              <a class="nav-link" href="#" onclick="esconde('livendas')" >Venda</a>
+              <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="livendas">
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/vendas">Relatórios</a></li>
+              </ul>
+            </li>
+			
+			
+			
+			
             <li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('licliente')" >Cliente</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="licliente">
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/cliente">lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/cliente">Lista</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/cliente/form">Novo</a></li>
               </ul>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('lifuncionario')" >Funcionário</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="lifuncionario">
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/funcionario">lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/funcionario">Lista</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/funcionario/form">Novo</a></li>
+              </ul>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="#" onclick="esconde('linivel')" >Nível</a>
+              <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="linivel">
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/nivel">Lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/nivel/form">Novo</a></li>
               </ul>
             </li>
             <li class="nav-item">

@@ -63,10 +63,12 @@ drop table if exists nivel;
 CREATE TABLE nivel(  
     id_nivel int(11) NOT NULL primary key AUTO_INCREMENT,
     nome varchar(120) unique,
-    vendedor varchar(1),
-    estoquista varchar(1),
-    gerente varchar(1),
-    administrador varchar(1),
+    venda varchar(1),
+    estoque varchar(1),
+    produto varchar(1),
+    usuario varchar(1),
+    fornecedor varchar(1),
+    empresa varchar(1),
 	data_criar TIMESTAMP,
     data_atualizar TIMESTAMP NULL DEFAULT NULL
 );

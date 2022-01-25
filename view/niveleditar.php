@@ -22,52 +22,59 @@ endforeach;
 <hr>
 	<form action='../alterar' method='POST'>
 		<div class="form-group">
-			<input type="hidden" name="id_nivel" id="id_nivel" value="<?php echo $id_categoria; ?>">
+			<input type="hidden" name="id_nivel" id="id_nivel" value="<?php echo $id_nivel; ?>">
 			<label for="nome" > Nome </label>
 			<input type='text' name='nome' id='nome' class="form-control" value="<?php echo $nome ?>">	
 			<br>
-			<div>
-				<label for="">Tela de Venda</label>
-				<input type="checkbox" name="venda" id="venda" 
-				<?php
-					echo $venda == '1'?'checked':'';
-				?>>
-			</div>
-			<div>
-				<label for="">Tela de Estoque</label>
-				<input type="checkbox" name="estoque" id="estoque" 
-				<?php
-					echo $estoque == '1'?'checked':'';
-				?>>
-			</div>
-			<div>
-				<label for="">Tela Cadastro de Produto</label>
-				<input type="checkbox" name="produto" id="produto"
-				<?php
-					echo $produto == '1'?'checked':'';
-				?>>
-			</div>
-			<div>
-				<label for="">Tela de Usuário</label>
-				<input type="checkbox" name="usuario" id="usuario"
-				<?php
-					echo $usuario == '1'?'checked':'';
-				?>>
-			</div>
-			<div>
-				<label for="">Tela de Fornecedor</label>
-				<input type="checkbox" name="fornecedor" id="fornecedor"
-				<?php
-					echo $fornecedor == '1'?'checked':'';
-				?>>
-			</div>
-			<div>
-				<label for="">Empresa</label>
-				<input type="checkbox" name="empresa" id="empresa"
-				<?php
-					echo $empresa == '1'?'checked':'';
-				?>>
-			</div>
+			<table>
+				<tr>
+					<td>
+						<label for="">Tela de Venda</label>
+						<input type="checkbox" name="venda" id="venda" 
+						<?php
+							echo $venda == '1'?'checked':'';
+						?>>
+					</td>
+					<td>
+						<label for="">Tela de Estoque</label>
+						<input type="checkbox" name="estoque" id="estoque" 
+						<?php
+							echo $estoque == '1'?'checked':'';
+						?>>
+					</td>
+					<td>
+						<label for="">Tela Cadastro de Produto</label>
+						<input type="checkbox" name="produto" id="produto"
+						<?php
+							echo $produto == '1'?'checked':'';
+						?>>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="">Tela de Usuário</label>
+						<input type="checkbox" name="usuario" id="usuario"
+						<?php
+							echo $usuario == '1'?'checked':'';
+							?>>						
+					</td>
+					<td>
+						<label for="">Tela de Fornecedor</label>
+						<input type="checkbox" name="fornecedor" id="fornecedor"
+						<?php
+							echo $fornecedor == '1'?'checked':'';
+						?>>
+					</td>
+					<td>
+						<label for="">Tela Empresa</label>
+						<input type="checkbox" name="empresa" id="empresa"
+						<?php
+							echo $empresa == '1'?'checked':'';
+						?>>
+
+					</td>
+				</tr>
+			</table>
 			
 		</div>
 		<br>
@@ -80,3 +87,4 @@ endforeach;
 <?php
 require 'padrao/rodape.php';
 ?>
+

@@ -19,6 +19,7 @@ class Nivel{
 		
 		$campos_inserir = array(
 			'nome'       => strtoupper($_POST['nome']),
+			'caixa' 	 => isset($_POST['caixa'])      ? '1' : '0' ,
 			'venda' 	 => isset($_POST['venda'])      ? '1' : '0' ,
 			'estoque'    => isset($_POST['estoque'])    ? '1' : '0' ,
 			'produto'    => isset($_POST['produto'])    ? '1' : '0' ,
@@ -63,6 +64,7 @@ class Nivel{
 	
 	public static function alterar(){
 		$campos_alterar ='nome="' . strtoupper($_POST['nome']).'" ,'.
+		'caixa  	 ="' . (isset($_POST['caixa'])? 1 : 0).'" ,'.
 		'venda  	 ="' . (isset($_POST['venda'])? 1 : 0).'" ,'.		
 		'estoque     ="' . (isset($_POST['estoque'])? 1 : 0).'" ,'.
 		'produto     ="' . (isset($_POST['produto'])? 1 : 0) .'" ,'.
@@ -88,9 +90,9 @@ class Nivel{
 		$u = explode('/',$url);
 		$id = $u[3];
 
-		$where ='id_categoria="'.$id.'"';
-		deletar::deletarBanco("categoria",$where);
-		header("Location: /categoria");
+		$where ='id_nivel="'.$id.'"';
+		deletar::deletarBanco("nivel",$where);
+		header("Location: /nivel");
 		die();
 	}
 }

@@ -11,7 +11,7 @@ include_once './model/alterar.php';
 
 class estoque{
 	public static function lista(){
-		 $produto = busca::buscaTudo('p.nome as produto,p.id_produto,SUM( e.quantidade) as quantidade ,
+		 $produto = busca::buscaTudo('e.id_estoque as id_estoque,p.nome as produto,p.id_produto,SUM( e.quantidade) as quantidade ,
 		 e.lote as lote ,DATE_FORMAT(e.validade,"%d/%m/%Y") as validade,c.nome as categoria',
 		 'estoque e inner join produto p on e.id_produto = p.id_produto
 		 inner JOIN categoria c on p.id_categoria = c.id_categoria ',

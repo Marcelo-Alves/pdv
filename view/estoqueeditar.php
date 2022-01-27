@@ -8,7 +8,6 @@ foreach($produtos as $produto):
 	$fornecedor_prod = $produto->fornecedor;
 	$categoria_prod = $produto->categoria;
 	$nome = $produto->nome;
-	$validade_dias = $produto->validade_dias;
 endforeach;
 //print_r($produtos);
 include_once 'controller/categoria.php';
@@ -42,10 +41,7 @@ include_once 'controller/fornecedor.php';
 			<br>
 			<label for="categoria" > Quantidade </label>	
 			<input type='number' name='quantidade' id='quantidade' class="form-control" value="0" required>
-			<br>
-
-			<label for="validade_dias" >Data de Validade </label>			
-			<input type='date' name='validade' id='validade' class="form-control">
+			
 		</div>
 		<br>
 		<div class="card text-center">

@@ -16,46 +16,84 @@ require 'padrao/topo.php';
 				<tr>
 					<td>
 						<label for="">Tela de Caixa</label>
+					</td>
+					<td>
 						<input type="checkbox" name="caixa" id="caixa">
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<label for="">Tela de Venda</label>
+					</td>
+					<td>
 						<input type="checkbox" name="venda" id="venda" >
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<label for="">Tela de Estoque</label>
+					</td>
+					<td>
 						<input type="checkbox" name="estoque" id="estoque" >
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<label for="">Tela Cadastro de Produto</label>
+					</td>
+					<td>
 						<input type="checkbox" name="produto" id="produto">
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<label for="">Tela de Usuário</label>
+					</td>
+					<td>
 						<input type="checkbox" name="usuario" id="usuario">						
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<label for="">Tela de Fornecedor</label>
+					</td>
+					<td>
 						<input type="checkbox" name="fornecedor" id="fornecedor">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label for="">Tela Empresa</label>
+						<label for="">Tela de Empresa</label>
+					</td>
+					<td>
 						<input type="checkbox" name="empresa" id="empresa" >
-
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<label for="">Tela de Relatório</label>
+					</td>
+					<td>
+						<input type="checkbox" name="relatorio" id="relatorio" >
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="">Sangria</label>
+					</td>
+					<td>
+						<input type="checkbox" name="sangria" id="sangria" >
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="">Excluir Item</label>
+					</td>
+					<td>
+						<input type="checkbox" name="excluir_item" id="empresa" >
+					</td>
+				</tr>
+				
 			</table>
 			
 		</div>

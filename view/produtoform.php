@@ -36,16 +36,7 @@ $fornecedores = fornecedor::lista();
 					endforeach;
 				?>
 			<select/>
-			<br>
-			<label for="validades" > Validade </label>		
-			<select name='validade' id='validade' class="form-control" onchange="desabilita()">
-				<option selected>Escolher...</option>
-				<option value='0'>Não</option>
-				<option value='1'>Sim</option>
-			<select/>
-			<br>
-			<label for="validade_dias" >Validade em dias </label>			
-			<input type='number' disabled name='validade_dias' id='validade_dias' class="form-control" value="0">
+			
 			
 		</div>
 		<br>

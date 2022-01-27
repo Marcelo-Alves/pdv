@@ -3,8 +3,6 @@ define('titulo', "Painel de Alterar Nivel");
 require 'padrao/topo.php';
 $niveis = nivel::editar();
 
-//print_r($niveis);
-
 foreach($niveis as $nivel):
 	$id_nivel = $nivel->id_nivel;
 	$nome = $nivel->nome;  
@@ -15,6 +13,9 @@ foreach($niveis as $nivel):
 	$usuario = $nivel->usuario ;
 	$fornecedor = $nivel->fornecedor ;
 	$empresa = $nivel->empresa ;
+	$sangria = $nivel->sangria ;
+	$relatorio = $nivel->relatorio ;
+	$excluir_item = $nivel->excluir_item ;
 endforeach;
 
 ?>
@@ -26,11 +27,11 @@ endforeach;
 			<input type="hidden" name="id_nivel" id="id_nivel" value="<?php echo $id_nivel; ?>">
 			<label for="nome" > Nome </label>
 			<input type='text' name='nome' id='nome' class="form-control" value="<?php echo $nome ?>">	
-			<br>
-			<table class="table table-striped table-hover">
-				<tr>
-					<td>
+			<br><table class="table table-striped table-hover">
+				<tr><td>
 						<label for="">Tela de Caixa</label>
+					</td>
+					<td>
 						<input type="checkbox" name="caixa" id="caixa" 
 						<?php
 							echo $caixa == '1'?'checked':'';
@@ -40,6 +41,8 @@ endforeach;
 				<tr>
 					<td>
 						<label for="">Tela de Venda</label>
+					</td>
+					<td>
 						<input type="checkbox" name="venda" id="venda" 
 						<?php
 							echo $venda == '1'?'checked':'';
@@ -49,6 +52,8 @@ endforeach;
 				<tr>
 					<td>
 						<label for="">Tela de Estoque</label>
+					</td>
+					<td>
 						<input type="checkbox" name="estoque" id="estoque" 
 						<?php
 							echo $estoque == '1'?'checked':'';
@@ -58,6 +63,8 @@ endforeach;
 				<tr>
 					<td>
 						<label for="">Tela Cadastro de Produto</label>
+					</td>
+					<td>
 						<input type="checkbox" name="produto" id="produto"
 						<?php
 							echo $produto == '1'?'checked':'';
@@ -67,6 +74,8 @@ endforeach;
 				<tr>
 					<td>
 						<label for="">Tela de Usuário</label>
+					</td>
+					<td>
 						<input type="checkbox" name="usuario" id="usuario"
 						<?php
 							echo $usuario == '1'?'checked':'';
@@ -76,6 +85,8 @@ endforeach;
 				<tr>
 					<td>
 						<label for="">Tela de Fornecedor</label>
+					</td>
+					<td>
 						<input type="checkbox" name="fornecedor" id="fornecedor"
 						<?php
 							echo $fornecedor == '1'?'checked':'';
@@ -84,12 +95,46 @@ endforeach;
 				</tr>
 				<tr>
 					<td>
-						<label for="">Tela Empresa</label>
+						<label for="">Tela de Empresa</label>
+					</td>
+					<td>
 						<input type="checkbox" name="empresa" id="empresa"
 						<?php
 							echo $empresa == '1'?'checked':'';
 						?>>
-
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="">Tela de Relatório</label>
+					</td>
+					<td>
+						<input type="checkbox" name="relatorio" id="relatorio" 
+						<?php
+							echo $relatorio == '1'?'checked':'';
+						?>>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="">Sangria</label>
+					</td>
+					<td>
+						<input type="checkbox" name="sangria" id="sangria"
+						<?php
+							echo $sangria == '1'?'checked':'';
+						?>>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="">Excluir Item</label>
+					</td>
+					<td>
+						<input type="checkbox" name="excluir_item" id="excluir_item" 
+						<?php
+							echo $excluir_item == '1'?'checked':'';
+						?>>
 					</td>
 				</tr>
 			</table>

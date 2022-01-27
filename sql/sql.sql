@@ -70,6 +70,9 @@ CREATE TABLE nivel(
     usuario varchar(1),
     fornecedor varchar(1),
     empresa varchar(1),
+	sangria varchar(1),
+	excluir_item varchar(1),
+	relatorio varchar(1),
 	data_criar TIMESTAMP,
     data_atualizar TIMESTAMP NULL DEFAULT NULL
 );
@@ -132,7 +135,7 @@ INNER JOIN categoria C on P.id_categoria=C.id_categoria;
 drop trigger if exists TR_ESTOQUE;
 CREATE DEFINER =`root`@`localhost` 
 TRIGGER TR_ESTOQUE AFTER INSERT ON produto FOR EACH ROW
-insert into estoque(id_produto,quantidade) value (NEW.id_produto, 0, 0.00, 0.00);
+insert into estoque(id_produto,quantidade) value (NEW.id_produto, 0);
 
 insert into fornecedor values (null,'PADRÃO','00.000.000/0000-00',NOW(),null);
 

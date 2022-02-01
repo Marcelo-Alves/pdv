@@ -28,7 +28,7 @@ endforeach;
 		<div class="form-group">
 			<input type="hidden" name="id_nivel" id="id_nivel" value="<?php echo $id_nivel; ?>">
 			<label for="nome" > Nome </label>
-			<input type='text' name='nome' id='nome' class="form-control" value="<?php echo $nome ?>" required>	
+			<input type='text' name='nome' id='nome' class="form-control" value="<?php echo $nome ?>">	
 			<br><table class="table table-striped table-hover">
 				<tr><td>
 						<label for="">Tela de Caixa</label>

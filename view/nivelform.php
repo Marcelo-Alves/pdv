@@ -10,7 +10,7 @@ require 'padrao/topo.php';
 		<div class="form-group">
 			
 			<label for="nome" > Nome </label>
-			<input type='text' name='nome' id='nome' class="form-control" >	
+			<input type='text' name='nome' id='nome' class="form-control" required>	
 			<br>
 			<table class="table table-striped table-hover">
 				<tr>
@@ -87,10 +87,26 @@ require 'padrao/topo.php';
 				</tr>
 				<tr>
 					<td>
-						<label for="">Excluir Item</label>
+						<label for="">Excluir Item da Venda</label>
 					</td>
 					<td>
-						<input type="checkbox" name="excluir_item" id="empresa" >
+						<input type="checkbox" name="excluir_item" id="excluir_item" >
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="">Desconto</label>
+					</td>
+					<td>
+						<input type="checkbox" name="desconto" id="desconto" >
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="">Valor de Desconto</label>
+					</td>
+					<td>
+						<input type="number" name="valor_desconto" id="valor_desconto" value='0.00' >
 					</td>
 				</tr>
 				
@@ -104,7 +120,11 @@ require 'padrao/topo.php';
 	</form>
 
 
+
 <?php
+
+
+
 require 'padrao/rodape.php';
 ?>
 

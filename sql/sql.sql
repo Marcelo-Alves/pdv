@@ -47,11 +47,15 @@ CREATE TABLE ean(
     data_atualizar timestamp NULL DEFAULT NULL
 ) ; 
 
-drop table if exists usuario;
-CREATE TABLE usuario(  
-    id_usuario int(11) NOT NULL primary key AUTO_INCREMENT,
+drop table if exists funcionario;
+CREATE TABLE funcionario(  
+    id_funcionario int(11) NOT NULL primary key AUTO_INCREMENT,
     nome varchar(120),
-    login varchar(80) unique,
+    cpf varchar(120) UNIQUE,
+    telefone varchar(120),
+    email varchar(120),
+    matricula varchar(80),
+    usuario varchar(80) unique,
     senha varchar(80),
     id_nivel int(11),
     ativo int(1),
@@ -73,6 +77,8 @@ CREATE TABLE nivel(
 	sangria varchar(1),
 	excluir_item varchar(1),
 	relatorio varchar(1),
+    desconto varchar(1),
+    valor_desconto DECIMAL(4,2) DEFAULT 0.00,    
 	data_criar TIMESTAMP,
     data_atualizar TIMESTAMP NULL DEFAULT NULL
 );

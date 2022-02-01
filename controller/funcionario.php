@@ -9,14 +9,18 @@ include_once './model/inserir.php';
 include_once './model/alterar.php';
 include_once './model/deletar.php';
 
-class Nivel{
+class Funcionario{
 	public static function lista(){
-		 $nivel = busca::buscaTudo('*','nivel');
-		 return $nivel;
+		 $funcionario = busca::buscaTudo('*','funcionario');
+		 return $funcionario;
 	}
 	
 	public static function inserir(){
-		
+		echo "<pre>";
+		print_r($_POST);
+		echo "</pre>";
+
+		/*
 		$campos_inserir = array(
 			'nome'            => strtoupper($_POST['nome']),
 			'caixa' 	      => isset($_POST['caixa'])      ? '1' : '0' ,
@@ -47,8 +51,8 @@ class Nivel{
 		$model_valores  = substr($model_valores,0,-1);
 		
 		inserir::inserirBanco('nivel',$model_campos,$model_valores) ;
-		/*
-		header("Location: /nivel");
+		
+		header("Location: /funcionario");
 		die();*/
 	}
 	

@@ -11,30 +11,27 @@ include_once './model/deletar.php';
 
 class Funcionario{
 	public static function lista(){
-		 $funcionario = busca::buscaTudo('*','funcionario');
+		 $funcionario = busca::buscaTudo('f.id_funcionario,f.nome,f.cpf,f.email,n.nome as nivel','funcionario f inner join nivel n on f.id_nivel=n.id_nivel');
 		 return $funcionario;
 	}
 	
 	public static function inserir(){
-		echo "<pre>";
+		/*echo "<pre>";
 		print_r($_POST);
 		echo "</pre>";
 
-		/*
+		/*/
 		$campos_inserir = array(
 			'nome'            => strtoupper($_POST['nome']),
-			'caixa' 	      => isset($_POST['caixa'])      ? '1' : '0' ,
-			'venda' 	      => isset($_POST['venda'])      ? '1' : '0' ,
-			'estoque'         => isset($_POST['estoque'])    ? '1' : '0' ,
-			'produto'         => isset($_POST['produto'])    ? '1' : '0' ,
-			'usuario'         => isset($_POST['usuario'])    ? '1' : '0' ,
-			'fornecedor'      => isset($_POST['fornecedor']) ? '1' : '0' ,
-			'empresa'         => isset($_POST['empresa'])    ? '1' : '0' ,
-			'sangria'         => isset($_POST['sangria'])    ? '1' : '0' ,
-			'relatorio'       => isset($_POST['relatorio'])    ? '1' : '0' ,
-			'desconto'        => isset($_POST['desconto'])    ? '1' : '0' ,
-			'valor_desconto'  => str_replace( ",", ".",$_POST['valor_desconto']),
-			'excluir_item'    => isset($_POST['excluir_item'])    ? '1' : '0' ,
+			'telefone' 	      => $_POST['telefone'],
+			'email' 	      => $_POST['email'],	
+			'cpf' 	          => $_POST['cpf'],	
+			'matricula' 	  => $_POST['matricula'],	
+			'usuario' 	      => $_POST['usuario'],	
+			'senha' 	      => $_POST['senha'],	
+			'id_nivel' 	      => $_POST['id_nivel'],	
+			'ativo' 	      => isset($_POST['ativo'])? '1' : '0' ,
+			'trocasenha' 	  => isset($_POST['trocasenha'])? '1' : '0' ,
 			'data_criar'      => date('Y-m-d H:i:s'),
 			'data_atualizar'  => date('Y-m-d H:i:s')
 		);
@@ -50,9 +47,9 @@ class Funcionario{
 		$model_campos = substr($model_campos,0,-1);
 		$model_valores  = substr($model_valores,0,-1);
 		
-		inserir::inserirBanco('nivel',$model_campos,$model_valores) ;
+		inserir::inserirBanco('funcionario',$model_campos,$model_valores) ;
 		
-		header("Location: /funcionario");*/
+		header("Location: /funcionario");
 		die();
 	}
 	
@@ -60,30 +57,28 @@ class Funcionario{
 		$url = $_SERVER['REQUEST_URI'];
 		$u = explode('/',$url);
 		$id = $u[3];		
-		$where=" and id_nivel = ".$id;			
-		$categoria = busca::buscaWhere("*","nivel",$where);		
+		$where=" and id_funcionario = ".$id;			
+		$categoria = busca::buscaWhere("*","funcionario",$where);		
 		return $categoria ;	
 	}
 	
 	public static function alterar(){
-		$campos_alterar ='nome="' . strtoupper($_POST['nome']).'" ,'.
-		'caixa  	      ="' . (isset($_POST['caixa'])? 1 : 0).'" ,'.
-		'venda  	      ="' . (isset($_POST['venda'])? 1 : 0).'" ,'.		
-		'estoque          ="' . (isset($_POST['estoque'])? 1 : 0).'" ,'.
-		'produto          ="' . (isset($_POST['produto'])? 1 : 0) .'" ,'.
-		'usuario          ="' . (isset($_POST['usuario'])? 1 : 0).'" ,'.
-		'fornecedor       ="' . (isset($_POST['fornecedor']) ? 1 : 0) .'" ,'.
-		'empresa          ="' . (isset($_POST['empresa']) ? 1 : 0) .'" ,'.
-		'sangria          ="' . (isset($_POST['sangria']) ? 1 : 0) .'" ,'.
-		'relatorio        ="' . (isset($_POST['relatorio']) ? 1 : 0) .'" ,'.
-		'desconto         ="' . (isset($_POST['desconto'])    ? '1' : '0') .'" ,'.
-		'valor_desconto   ="' . str_replace( ",", ".",$_POST['valor_desconto']) .'" ,'.
-		'excluir_item     ="' . (isset($_POST['excluir_item']) ? 1 : 0) .'" ,'.
-		'data_criar       ="' . date('Y-m-d H:i:s').'" ,'.
-		'data_atualizar   ="'. date('Y-m-d H:i:s').'" ';			
-		$where ='id_nivel ="'.$_POST['id_nivel'].'"';
-		alterar::alterarBanco($campos_alterar,"nivel",$where);
-		header("Location: /nivel");
+		$campos_alterar = 'nome ="'. strtoupper($_POST['nome']) .'",
+			telefone 	     ="'. $_POST['telefone'].'",
+			email 	         ="'. $_POST['email'].'",
+			cpf 	         ="'. $_POST['cpf'].'",
+			matricula 	     ="'. $_POST['matricula'].'",
+			usuario 	     ="'. $_POST['usuario'].'",
+			senha 	         ="'. $_POST['senha'].'",
+			id_nivel 	     ="'. $_POST['id_nivel'].'",
+			ativo 	         ="'.( isset($_POST['ativo']) ? '1' : '0') .'",
+			trocasenha 	     ="'.( isset($_POST['trocasenha']) ? '1' : '0') .'",
+			data_criar       ="'. date('Y-m-d H:i:s').'",
+			data_atualizar   ="'. date('Y-m-d H:i:s') .'"';
+
+		$where ='id_funcionario ="'.$_POST['id_funcionario'].'"';
+		alterar::alterarBanco($campos_alterar,"funcionario",$where);
+		header("Location: /funcionario");
 		die();
 	}
 	public static function deletar(){
@@ -91,9 +86,9 @@ class Funcionario{
 		$u = explode('/',$url);
 		$id = $u[3];
 
-		$where ='id_nivel="'.$id.'"';
-		deletar::deletarBanco("nivel",$where);
-		header("Location: /nivel");
+		$where ='id_funcionario="'.$id.'"';
+		deletar::deletarBanco("funcionario",$where);
+		header("Location: /funcionario");
 		die();
 	}
 }

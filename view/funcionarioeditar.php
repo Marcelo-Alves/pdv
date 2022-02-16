@@ -1,13 +1,21 @@
 <?php
 define('titulo', "Painel Novo Funcionário");    
 require 'padrao/topo.php';
+
+$funcionarios = funcionario::editar();
+foreach ($funcionarios as $funcionario){
+	$id_funcionario = $funcionario->id_funcionario;
+}
+
+
 ?>
 <p class="h1">NOVO FUNCIONÁRIO</p>
 <hr>
-	<form action='./inserir' method='POST'>
+	<form action='../alterar' method='POST'>
 		<div class="form-group">
 			
 			<label for="nome" > Nome </label>
+			<input type='hidden' name='id_funcionario' id='id_funcionario' value="<?php echo $id_funcionario;?>" >
 			<input type='text' name='nome' id='nome' class="form-control" required >	
 			<br>
 			<label for="nome" > Telefone </label>
@@ -62,7 +70,7 @@ require 'padrao/topo.php';
 		<br>
 		
 		<div class="card text-center">
-			<input type='SUBMIT' VALUE='NOVO' class="btn btn-lg btn-block btn-outline-primary">
+			<input type='SUBMIT' VALUE='ALTERAR' class="btn btn-lg btn-block btn-outline-primary">
 		</div>
 	</form>
 

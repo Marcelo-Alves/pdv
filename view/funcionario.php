@@ -3,36 +3,45 @@ define('titulo', "Painel de Lista de Niveis");
 require 'padrao/topo.php';
 
 $listas = Funcionario::lista();
+/*echo "<pre>";
+print_r($listas);
+echo "</pre>";*/
 ?>
-<p class="h1">LISTA DE NIVEL</p>
+<p class="h1">LISTA DE FUNCIONÁRIO</p>
 <hr>
 <table class="table table-striped table-hover">
 	<thead> 
 		<tr> 
 			<th scope="col">Nome</th>
+			<th scope="col">email</th>
+			<th scope="col">CPF</th>
+			<th scope="col">Nivel</th>
 			<th scope="col">Editar</th>
 			<th scope="col">Deletar</th>
 		</tr>
 	</thead>
 	<tbody>
-	<!--
+	
 	<?php 
-		/*foreach($listas as $lista):
+		foreach($listas as $lista):
 	?>
 		
 		<td scope="row"><?php echo $lista->nome ;?></td>		
+		<td scope="row"><?php echo $lista->email ;?></td>
+		<td scope="row"><?php echo $lista->cpf ;?></td>
+		<td scope="row"><?php echo $lista->nivel ;?></td>
 		<td scope="row">
-			<a href="./nivel/editar/<?php echo $lista->id_nivel ;?>">
+			<a href="./editar/<?php echo $lista->id_funcionario ;?>">
 				<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/editar.png" width='30px' > 
 			</a>
 		</td>
 		<td scope="row">
-			<a href="./nivel/deletar/<?php echo $lista->id_nivel ;?>">
+			<a href="./deletar/<?php echo $lista->io ;?>">
 				<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/lixeira.jpg" width='30px' >  
 			</a>
 		</td>
 	</tbody>
 	<?php
-		endforeach;*/
+		endforeach;
 	?>
-</table>-->
+</table>

@@ -55,7 +55,7 @@ require 'padrao/topo.php';
 					
 						<input type="checkbox" name="trocasenha" id="trocasenha">
 					</td>
-				</tr>			
+				</tr>		
 			</table>
 			
 		</div>

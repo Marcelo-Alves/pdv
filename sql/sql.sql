@@ -59,6 +59,7 @@ CREATE TABLE funcionario(
     senha varchar(80),
     id_nivel int(11),
     ativo int(1),
+    trocasenha int(1),
 	data_criar TIMESTAMP,
     data_atualizar timestamp NULL DEFAULT NULL
 ); 

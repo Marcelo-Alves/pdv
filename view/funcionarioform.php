@@ -11,13 +11,13 @@ require 'padrao/topo.php';
 			<input type='text' name='nome' id='nome' class="form-control" required >	
 			<br>
 			<label for="nome" > Telefone </label>
-			<input type='text' name='telefone' id='telefone' required maxlength="14" class="form-control" onkeydown="javascript: fMasc( this, mTel );" class="form-control" >	
+			<input type='text' name='telefone' id='telefone' required maxlength="14" class="form-control" onkeydown="fMasc( this, mTel );" class="form-control" >	
 			<br>
 			<label for="nome" > e-mail </label>
 			<input type='email' name='email' id='email' class="form-control" required>	
 			<br>
 			<label for="nome" > CPF </label>
-			<input type='text' name='cpf' id='cpf' maxlength="14" onkeydown="javascript: fMasc( this, mCPF );" class="form-control" required>	
+			<input type='text' name='cpf' id='cpf' maxlength="14" onkeydown="fMasc( this, mCPF );" class="form-control" required>	
 			<br>
 			<label for="matricula" > Matricula </label>
 			<input type='text' name='matricula' id='matricula' class="form-control"  >	
@@ -47,11 +47,15 @@ require 'padrao/topo.php';
 				<tr>
 					<td>
 						<label for="">Ativo</label>
-					</td>
-					<td>
+					
 						<input type="checkbox" name="ativo" id="ativo">
 					</td>
-				</tr>				
+					<td>
+						<label for="">Troca Senha</label>
+					
+						<input type="checkbox" name="trocasenha" id="trocasenha">
+					</td>
+				</tr>			
 			</table>
 			
 		</div>
@@ -88,14 +92,7 @@ require 'padrao/topo.php';
 				}
 				return tel;
 			}
-			function mCNPJ(cnpj){
-				cnpj=cnpj.replace(/\D/g,"")
-				cnpj=cnpj.replace(/^(\d{2})(\d)/,"$1.$2")
-				cnpj=cnpj.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3")
-				cnpj=cnpj.replace(/\.(\d{3})(\d)/,".$1/$2")
-				cnpj=cnpj.replace(/(\d{4})(\d)/,"$1-$2")
-				return cnpj
-			}
+			
 			function mCPF(cpf){
 				cpf=cpf.replace(/\D/g,"")
 				cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
@@ -103,16 +100,7 @@ require 'padrao/topo.php';
 				cpf=cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
 				return cpf
 			}
-			function mCEP(cep){
-				cep=cep.replace(/\D/g,"")
-				cep=cep.replace(/^(\d{2})(\d)/,"$1.$2")
-				cep=cep.replace(/\.(\d{3})(\d)/,".$1-$2")
-				return cep
-			}
-			function mNum(num){
-				num=num.replace(/\D/g,"")
-				return num
-			}
+			
 		</script>
 
 <?php

@@ -52,8 +52,8 @@ class Funcionario{
 		
 		inserir::inserirBanco('nivel',$model_campos,$model_valores) ;
 		
-		header("Location: /funcionario");
-		die();*/
+		header("Location: /funcionario");*/
+		die();
 	}
 	
 	public static function editar(){

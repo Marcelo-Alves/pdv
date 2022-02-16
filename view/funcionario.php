@@ -2,7 +2,7 @@
 define('titulo', "Painel de Lista de Niveis");    
 require 'padrao/topo.php';
 
-$listas = nivel::lista();
+$listas = Funcionario::lista();
 ?>
 <p class="h1">LISTA DE NIVEL</p>
 <hr>
@@ -11,13 +11,13 @@ $listas = nivel::lista();
 		<tr> 
 			<th scope="col">Nome</th>
 			<th scope="col">Editar</th>
-			<th scope="col">Deletar</th
+			<th scope="col">Deletar</th>
 		</tr>
 	</thead>
 	<tbody>
-	
+	<!--
 	<?php 
-		foreach($listas as $lista):
+		/*foreach($listas as $lista):
 	?>
 		
 		<td scope="row"><?php echo $lista->nome ;?></td>		
@@ -33,6 +33,6 @@ $listas = nivel::lista();
 		</td>
 	</tbody>
 	<?php
-		endforeach;
+		endforeach;*/
 	?>
-</table>
+</table>-->

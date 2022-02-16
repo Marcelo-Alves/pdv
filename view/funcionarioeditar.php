@@ -1,173 +1,123 @@
 <?php
-define('titulo', "Painel de Alterar Nivel");    
+define('titulo', "Painel Novo Funcionário");    
 require 'padrao/topo.php';
-$niveis = nivel::editar();
-
-foreach($niveis as $nivel):
-	$id_nivel = $nivel->id_nivel;
-	$nome = $nivel->nome;  
-	$venda = $nivel->venda ;
-	$caixa = $nivel->caixa ;
-	$estoque = $nivel->estoque ;
-	$produto = $nivel->produto ;
-	$usuario = $nivel->usuario ;
-	$fornecedor = $nivel->fornecedor ;
-	$empresa = $nivel->empresa ;
-	$sangria = $nivel->sangria ;
-	$relatorio = $nivel->relatorio ;
-	$desconto = $nivel->desconto ;
-	$valor_desconto = $nivel->valor_desconto ;
-	$excluir_item = $nivel->excluir_item ;
-endforeach;
-
 ?>
-
-<p class="h1">ALTERAR NIVEL</p>
+<p class="h1">NOVO FUNCIONÁRIO</p>
 <hr>
-	<form action='../alterar' method='POST'>
+	<form action='./inserir' method='POST'>
 		<div class="form-group">
-			<input type="hidden" name="id_nivel" id="id_nivel" value="<?php echo $id_nivel; ?>">
+			
 			<label for="nome" > Nome </label>
-			<input type='text' name='nome' id='nome' class="form-control" value="<?php echo $nome ?>">	
-			<br><table class="table table-striped table-hover">
-				<tr><td>
-						<label for="">Tela de Caixa</label>
-					</td>
-					<td>
-						<input type="checkbox" name="caixa" id="caixa" 
-						<?php
-							echo $caixa == '1'?'checked':'';
-						?>>
-					</td>
-				</tr>
+			<input type='text' name='nome' id='nome' class="form-control" required >	
+			<br>
+			<label for="nome" > Telefone </label>
+			<input type='text' name='telefone' id='telefone' required maxlength="14" class="form-control" onkeydown="javascript: fMasc( this, mTel );" class="form-control" >	
+			<br>
+			<label for="nome" > e-mail </label>
+			<input type='email' name='email' id='email' class="form-control" required>	
+			<br>
+			<label for="nome" > CPF </label>
+			<input type='text' name='cpf' id='cpf' maxlength="14" onkeydown="javascript: fMasc( this, mCPF );" class="form-control" required>	
+			<br>
+			<label for="matricula" > Matricula </label>
+			<input type='text' name='matricula' id='matricula' class="form-control"  >	
+			<br>
+			<label for="usuario" > Usuário </label>
+			<input type='text' name='usuario' id='usuario' class="form-control" required>	
+			<br>
+			<label for="senha" > Senha </label>
+			<input type='password' name='senha' id='senha' class="form-control" required >	
+			<br>
+			<label for="confirmasenha" >Confirma Senha </label>
+			<input type='password' name='confirmasenha' id='confirmasenha' class="form-control" required >	
+			<br>
+			<label for="nivel" >Nivel </label>
+			<select name="id_nivel" id="id_nivel"  class="form-control" required>
+				<option>Escolha Nivel</option>
+			<?php
+				include_once './controller/nivel.php';
+				$niveis = Nivel::lista();
+				foreach($niveis as $nivel):
+					echo "<option value=".$nivel->id_nivel. ">". $nivel->nome ."</option>";
+				endforeach;
+			?>
+			</select>	
+			<br>
+			<table class="table table-striped table-hover">
 				<tr>
 					<td>
-						<label for="">Tela de Venda</label>
+						<label for="">Ativo</label>
+					
+						<input type="checkbox" name="ativo" id="ativo">
 					</td>
 					<td>
-						<input type="checkbox" name="venda" id="venda" 
-						<?php
-							echo $venda == '1'?'checked':'';
-						?>>
+						<label for="">Troca Senha</label>
+					
+						<input type="checkbox" name="trocasenha" id="trocasenha">
 					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="">Tela de Estoque</label>
-					</td>
-					<td>
-						<input type="checkbox" name="estoque" id="estoque" 
-						<?php
-							echo $estoque == '1'?'checked':'';
-						?>>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="">Tela Cadastro de Produto</label>
-					</td>
-					<td>
-						<input type="checkbox" name="produto" id="produto"
-						<?php
-							echo $produto == '1'?'checked':'';
-						?>>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="">Tela de Usuário</label>
-					</td>
-					<td>
-						<input type="checkbox" name="usuario" id="usuario"
-						<?php
-							echo $usuario == '1'?'checked':'';
-							?>>						
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="">Tela de Fornecedor</label>
-					</td>
-					<td>
-						<input type="checkbox" name="fornecedor" id="fornecedor"
-						<?php
-							echo $fornecedor == '1'?'checked':'';
-						?>>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="">Tela de Empresa</label>
-					</td>
-					<td>
-						<input type="checkbox" name="empresa" id="empresa"
-						<?php
-							echo $empresa == '1'?'checked':'';
-						?>>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="">Tela de Relatório</label>
-					</td>
-					<td>
-						<input type="checkbox" name="relatorio" id="relatorio" 
-						<?php
-							echo $relatorio == '1'?'checked':'';
-						?>>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="">Sangria</label>
-					</td>
-					<td>
-						<input type="checkbox" name="sangria" id="sangria"
-						<?php
-							echo $sangria == '1'?'checked':'';
-						?>>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="">Excluir Item</label>
-					</td>
-					<td>
-						<input type="checkbox" name="excluir_item" id="excluir_item" 
-						<?php
-							echo $excluir_item == '1'?'checked':'';
-						?>>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="">Desconto</label>
-					</td>
-					<td>
-						<input type="checkbox" name="desconto" id="desconto" <?php
-							echo $desconto == '1'?'checked':'';
-						?>>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="">Valor de Desconto em porcentagem "%"</label>
-					</td>
-					<td>
-						<input type="number" name="valor_desconto" id="valor_desconto" value="<?php
-							echo $valor_desconto;
-						?>">
-					</td>
-				</tr>
+				</tr>			
 			</table>
 			
 		</div>
 		<br>
+		
 		<div class="card text-center">
-			<input type='SUBMIT' VALUE='Alterar' class="btn btn-lg btn-block btn-outline-primary">
+			<input type='SUBMIT' VALUE='NOVO' class="btn btn-lg btn-block btn-outline-primary">
 		</div>
 	</form>
 
+	<script type="text/javascript">
+			function fMasc(objeto,mascara) {
+				obj=objeto
+				masc=mascara
+				setTimeout("fMascEx()",1)
+			}
+			function fMascEx() {
+				obj.value=masc(obj.value)
+			}
+			function mTel(tel) {
+				tel=tel.replace(/\D/g,"")
+				tel=tel.replace(/^(\d)/,"($1")
+				tel=tel.replace(/(.{3})(\d)/,"$1)$2")
+				if(tel.length == 9) {
+					tel=tel.replace(/(.{1})$/,"-$1")
+				} else if (tel.length == 10) {
+					tel=tel.replace(/(.{2})$/,"-$1")
+				} else if (tel.length == 11) {
+					tel=tel.replace(/(.{3})$/,"-$1")
+				} else if (tel.length == 12) {
+					tel=tel.replace(/(.{4})$/,"-$1")
+				} else if (tel.length > 12) {
+					tel=tel.replace(/(.{4})$/,"-$1")
+				}
+				return tel;
+			}
+			function mCNPJ(cnpj){
+				cnpj=cnpj.replace(/\D/g,"")
+				cnpj=cnpj.replace(/^(\d{2})(\d)/,"$1.$2")
+				cnpj=cnpj.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3")
+				cnpj=cnpj.replace(/\.(\d{3})(\d)/,".$1/$2")
+				cnpj=cnpj.replace(/(\d{4})(\d)/,"$1-$2")
+				return cnpj
+			}
+			function mCPF(cpf){
+				cpf=cpf.replace(/\D/g,"")
+				cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
+				cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
+				cpf=cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
+				return cpf
+			}
+			function mCEP(cep){
+				cep=cep.replace(/\D/g,"")
+				cep=cep.replace(/^(\d{2})(\d)/,"$1.$2")
+				cep=cep.replace(/\.(\d{3})(\d)/,".$1-$2")
+				return cep
+			}
+			function mNum(num){
+				num=num.replace(/\D/g,"")
+				return num
+			}
+		</script>
 
 <?php
 require 'padrao/rodape.php';

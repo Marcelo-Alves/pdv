@@ -24,19 +24,18 @@ echo "</pre>";*/
 	
 	<?php 
 		foreach($listas as $lista):
-	?>
-		
+	?>		
 		<td scope="row"><?php echo $lista->nome ;?></td>		
 		<td scope="row"><?php echo $lista->email ;?></td>
 		<td scope="row"><?php echo $lista->cpf ;?></td>
 		<td scope="row"><?php echo $lista->nivel ;?></td>
 		<td scope="row">
-			<a href="./editar/<?php echo $lista->id_funcionario ;?>">
+			<a href="funcionario/editar/<?php echo $lista->id_funcionario ;?>">
 				<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/editar.png" width='30px' > 
 			</a>
 		</td>
 		<td scope="row">
-			<a href="./deletar/<?php echo $lista->io ;?>">
+			<a href="deletar/<?php echo $lista->io ;?>">
 				<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/lixeira.jpg" width='30px' >  
 			</a>
 		</td>

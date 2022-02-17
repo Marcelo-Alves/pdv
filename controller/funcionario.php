@@ -63,18 +63,25 @@ class Funcionario{
 	}
 	
 	public static function alterar(){
+		/*echo "<pre>";
+		print_r($_POST);
+		echo "</pre>";*/
+
+
 		$campos_alterar = 'nome ="'. strtoupper($_POST['nome']) .'",
-			telefone 	     ="'. $_POST['telefone'].'",
-			email 	         ="'. $_POST['email'].'",
-			cpf 	         ="'. $_POST['cpf'].'",
-			matricula 	     ="'. $_POST['matricula'].'",
-			usuario 	     ="'. $_POST['usuario'].'",
-			senha 	         ="'. $_POST['senha'].'",
-			id_nivel 	     ="'. $_POST['id_nivel'].'",
-			ativo 	         ="'.( isset($_POST['ativo']) ? '1' : '0') .'",
-			trocasenha 	     ="'.( isset($_POST['trocasenha']) ? '1' : '0') .'",
-			data_criar       ="'. date('Y-m-d H:i:s').'",
-			data_atualizar   ="'. date('Y-m-d H:i:s') .'"';
+			telefone       ="'. $_POST['telefone'].'",
+			email 	       ="'. $_POST['email'].'",
+			cpf 	       ="'. $_POST['cpf'].'",
+			matricula      ="'. $_POST['matricula'].'",
+			usuario        ="'. $_POST['usuario'].'",
+			id_nivel       ="'. $_POST['id_nivel'].'",
+			ativo 	       ="'.( isset($_POST['ativo']) ? '1' : '0') .'",
+			trocasenha 	   ="'.( isset($_POST['trocasenha']) ? '1' : '0') .'",
+			data_criar     ="'. date('Y-m-d H:i:s').'",
+			data_atualizar ="'. date('Y-m-d H:i:s') .'"';
+			$campos_alterar . ($_POST['senha']='')  ? ',senha="'. $_POST['senha'].'",':'';
+
+			//echo $campos_alterar;
 
 		$where ='id_funcionario ="'.$_POST['id_funcionario'].'"';
 		alterar::alterarBanco($campos_alterar,"funcionario",$where);

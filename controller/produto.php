@@ -133,11 +133,10 @@ class produto{
 	}
 
 	public static function inserir(){
-		$campos_inserir = array(
-			'id_produto'     => "null",
+		$campos_inserir = array(			
+			'id_fornecedor'  => "'".$_POST['id_fornecedor']."'",
+			'id_categoria'   => "'".$_POST['categoria']."'",
 			'nome'         	 => "'". strtoupper($_POST['nome'])."'",
-			'id_fornecedor'  => $_POST['id_fornecedor'],
-			'id_categoria'   => $_POST['categoria'],
 			'data_criar'     => "'". date('Y-m-d H:i:s')."'",
 			'data_atualizar' => "'". date('Y-m-d H:i:s')."'",			/// date('Y-m-d H:i:s')
 		);
@@ -161,7 +160,7 @@ class produto{
 		
 		inserir::inserirBanco('produto',$model_campos,$model_valores) ;
 		
-		header("Location: /produto");
+		//header("Location: /produto");
 		die();
 	}
 	

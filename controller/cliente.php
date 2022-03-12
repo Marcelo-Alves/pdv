@@ -9,9 +9,9 @@ include_once './model/inserir.php';
 include_once './model/alterar.php';
 include_once './model/deletar.php';
 
-class Funcionario{
+class Cliente{
 	public static function lista(){
-		 $funcionario = busca::buscaTudo('f.id_funcionario,f.nome,f.cpf,f.email,n.nome as nivel','funcionario f inner join nivel n on f.id_nivel=n.id_nivel');
+		 $funcionario = busca::buscaTudo('*','cliente');
 		 return $funcionario;
 	}
 	

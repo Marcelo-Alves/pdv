@@ -19,29 +19,23 @@ require 'padrao/topo.php';
 			<label for="nome" > CPF </label>
 			<input type='text' name='cpf' id='cpf' maxlength="14" onkeydown="fMasc(this,mCPF);" class="form-control" required>	
 			<br>
-			<label for="matricula" > Matricula </label>
-			<input type='text' name='matricula' id='matricula' class="form-control"  >	
+			<label for="nome" > CEP </label>
+			<input type='text' name='cep' id='cep'  maxlength="10" onkeydown="fMasc(this,mCEP);"  class="form-control" required >	
 			<br>
-			<label for="usuario" > Usuário </label>
-			<input type='text' name='usuario' id='usuario' class="form-control" required>	
+			<label for="nome" > Rua </label>
+			<input type='text' name='rua' id='rua' class="form-control" required >	
 			<br>
-			<label for="senha" > Senha </label>
-			<input type='password' name='senha' id='senha' class="form-control" required >	
+			<label for="nome" > Número </label>
+			<input type='text' name='numero' id='numero' class="form-control" required >	
 			<br>
-			<label for="confirmasenha" >Confirma Senha </label>
-			<input type='password' name='confirmasenha' id='confirmasenha' class="form-control" required >	
+			<label for="nome" > Bairro </label>
+			<input type='text' name='bairro' id='bairro' class="form-control" required >	
 			<br>
-			<label for="nivel" >Nivel </label>
-			<select name="id_nivel" id="id_nivel"  class="form-control" required>
-				<option>Escolha Nivel</option>
-			<?php
-				include_once './controller/nivel.php';
-				$niveis = Nivel::lista();
-				foreach($niveis as $nivel):
-					echo "<option value=".$nivel->id_nivel. ">". $nivel->nome ."</option>";
-				endforeach;
-			?>
-			</select>	
+			<label for="nome" > Cidade </label>
+			<input type='text' name='cidade' id='cidade' class="form-control" required >	
+			<br>
+			<label for="nome" > Estado </label>
+			<input type='text' name='estado' id='estado' class="form-control" required >				
 			<br>
 			<table class="table table-striped table-hover">
 				<tr>
@@ -51,9 +45,8 @@ require 'padrao/topo.php';
 						<input type="checkbox" name="ativo" id="ativo">
 					</td>
 					<td>
-						<label for="">Troca Senha</label>
-					
-						<input type="checkbox" name="trocasenha" id="trocasenha">
+						<label for="nome" > Limite </label>
+						<input type='number' name='limite' id='limite' value='0.00' required >	
 					</td>
 				</tr>		
 			</table>

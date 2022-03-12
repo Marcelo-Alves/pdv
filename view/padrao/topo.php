@@ -94,6 +94,13 @@
               </ul>
             </li>
 			<li class="nav-item">
+              <a class="nav-link" href="#" onclick="esconde('lifornecedor')" >Fornecedor</a>
+              <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="lifornecedor">
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/fornecedor">Lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/fornecedor/form">Novo</a></li>
+              </ul>
+            </li>
+			<li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('linivel')" >Nível</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="linivel">
                 <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/nivel">Lista</a></li>

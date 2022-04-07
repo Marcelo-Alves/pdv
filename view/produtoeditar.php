@@ -7,8 +7,6 @@ foreach($produtos as $produto):
 	$id_fornecedor_prod = $produto->id_fornecedor;
 	$id_categoria_prod = $produto->id_categoria;
 	$nome = $produto->nome;
-	$validade = $produto->validade;
-	$validade_dias = $produto->validade_dias;
 endforeach;
 
 include_once 'controller/categoria.php';
@@ -31,7 +29,7 @@ $fornecedores = fornecedor::lista();
 				<?php
 					endforeach;
 				?>
-			<select/>
+			<select />
 			<br>
 			<input type="hidden" name="id_produto" id="id_produto" value="<?php echo $id_produto; ?>">
 			<label for="nome" > Nome </label>
@@ -49,17 +47,9 @@ $fornecedores = fornecedor::lista();
 				<?php
 					endforeach;
 				?>
-			<select/>
+			<select />
 			<br>
-			<label for="validade" > Validade </label>		
-			<select name='validade' id='validade' class="form-control"  onchange="desabilita()">>
-				<option selected>Escolher...</option>
-				<option value='0' <?php echo ($validade == 0?"selected":"");?> >Não</option>
-				<option value='1' <?php echo ($validade == 1?"selected":"");?> >Sim</option>
-			<select/>
-			<br>
-			<label for="validade_dias" >Validade em dias </label>			
-			<input type='number' <?php echo  ($validade_dias == 0?"disabled":""); ?>  name='validade_dias' id='validade_dias' class="form-control" value="<?php echo $validade_dias ?>">
+			
 		</div>
 		<br>
 		<div class="card text-center">

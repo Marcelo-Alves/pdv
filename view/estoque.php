@@ -1,11 +1,11 @@
 <?php
-define('titulo', "Painel de Lista de Produto");    
+define('titulo', "Painel de Lista de Estoque");    
 require 'padrao/topo.php';
 
 $listas = estoque::lista();
 $categorias = estoque::buscacategorias();
 $fornecedores = estoque::buscafornecedores();
-/*echo "<pre>";
+/*	echo "<pre>";
 print_r($listas);
 echo "</pre>";*/
 ?>
@@ -17,16 +17,14 @@ echo "</pre>";*/
 <script>
 	function autocompletar(){
 		var nome = document.getElementById('autocomplete').value;
-		fetch('./estoque/buscafetch/'+nome)
+		fetch('../buscafetch/'+nome)
 		.then(response => response.text())
-		.then(texto => document.getElementById('produto').innerHTML = texto)
+		.then(texto => document.getElementById('estoque').innerHTML = texto)
 	}
 
 </script>
 
-
-
-<p class="h1">LISTA DE PRODUTO</p>
+<p class="h1">LISTA DE ESTOQUE</p>
 <hr>
 <table class="table table-striped table-hover">
 	<thead> 
@@ -55,15 +53,15 @@ echo "</pre>";*/
 		</tr>
 	</tbody>
 </table>
-<div id="produto" name="produto">
+<div id="estoque" name="estoque">
 	<table class="table table-striped table-hover">
 		<thead> 
 			<tr> 
+				<th scope="col">id</th>
 				<th scope="col">Nome</th>
 				<th scope="col">Categoria</th>
 				<th scope="col">Lote</th>				
 				<th scope="col">Quantidade</th>
-				<th scope="col">Data de Validade</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -71,17 +69,15 @@ echo "</pre>";*/
 			foreach($listas as $lista):
 		?>
 			<tr>
+				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->id_estoque ;?></a></td>
 				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->produto ;?></a></td>
 				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->categoria ;?></a></td>
 				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->lote ;?></a></td>
 				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->quantidade ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->validade ;?></a></td>
-				
-				
-			</tr>
-		</tbody>
+			</tr>		
 		<?php
 			endforeach;
 		?>
+		</tbody>
 	</table>
 </div>

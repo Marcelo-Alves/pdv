@@ -97,8 +97,6 @@ class produto{
 		echo '<tr>';
 		echo '<th scope="col">id</th>';
 		echo '<th scope="col">Nome</th>';
-		echo '<th scope="col">Validade</th>';
-		echo '<th scope="col">Validade Dias</th>';
 		echo '<th scope="col">Código Produto</th>';
 		echo '<th scope="col">Editar</th>';
 		echo '<th scope="col">Deletar</th>';
@@ -109,20 +107,18 @@ class produto{
 
 			echo '<td scope="row">'.$lista->id_produto .'</th>';
 			echo '<td scope="row">'.$lista->nome .'</td>';
-			echo '<td scope="row">'.($lista->validade==0?"Não":"Dias").'</td>';
-			echo '<td scope="row">'.$lista->validade_dias.'</td>';
 			echo '<td scope="row">';
-			echo '<a href="./ean/.$lista->id_produto ">';
+			echo '<a href="./ean/'.$lista->id_produto .'">';
 			echo '<img src="http://'. $_SERVER['HTTP_HOST'].'/biblioteca/img/ean.png" width="45px" > ';
 			echo '</a>';
 			echo '</td>';
 			echo '<td scope="row">';
-			echo '<a href="./produto/editar/<?php echo $lista->id_produto ;?>">';
+			echo '<a href="./produto/editar/'. $lista->id_produto .'">';
 			echo '<img src="http://'. $_SERVER['HTTP_HOST'].'/biblioteca/img/editar.png" width="30px" > ';
 			echo '</a>';
 			echo '</td>';
 			echo '<td scope="row">';
-			echo '<a href="./produto/deletar/<?php echo $lista->id_produto ;?>">';
+			echo '<a href="./produto/deletar/'.$lista->id_produto .'">';
 			echo '<img src="http://'. $_SERVER['HTTP_HOST'].'/biblioteca/img/lixeira.png" width="30px" > '; 
 			echo '</a>';
 			echo '</td>';
@@ -138,7 +134,7 @@ class produto{
 			'id_categoria'   => "'".$_POST['categoria']."'",
 			'nome'         	 => "'". strtoupper($_POST['nome'])."'",
 			'data_criar'     => "'". date('Y-m-d H:i:s')."'",
-			'data_atualizar' => "'". date('Y-m-d H:i:s')."'",			/// date('Y-m-d H:i:s')
+			'data_atualizar' => "'". date('Y-m-d H:i:s')."'",
 		);
 		
 		/*echo "<pre>";
@@ -160,7 +156,7 @@ class produto{
 		
 		inserir::inserirBanco('produto',$model_campos,$model_valores) ;
 		
-		//header("Location: /produto");
+		header("Location: /produto");
 		die();
 	}
 	

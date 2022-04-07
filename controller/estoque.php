@@ -11,11 +11,11 @@ include_once './model/alterar.php';
 
 class estoque{
 	public static function lista(){
-		 $produto = busca::buscaTudo('e.id_estoque as id_estoque,p.nome as produto,p.id_produto,SUM( e.quantidade) as quantidade ,
-		 e.lote as lote ,DATE_FORMAT(e.validade,"%d/%m/%Y") as validade,c.nome as categoria',
+		 $produto = busca::buscaTudo('e.id_estoque as id_estoque,p.nome as produto,p.id_produto,e.quantidade as quantidade ,
+		 e.lote as lote ,c.nome as categoria',
 		 'estoque e inner join produto p on e.id_produto = p.id_produto
 		 inner JOIN categoria c on p.id_categoria = c.id_categoria ',
-		 "GROUP by p.nome, p.id_produto,e.lote,c.nome,DATE_FORMAT(e.validade,'%d/%m/%Y') order by p.nome");
+		 "ORDER BY p.nome");
 		 return $produto;
 	}
 
@@ -63,8 +63,11 @@ class estoque{
 		$url = $_SERVER['REQUEST_URI'];
 		$u = explode('/',$url);
 		$nome = $u[3];		
-		$where=" and nome like '%".$nome."%'";			
-		$listas = busca::buscaWhere("*","produto",$where);		
+		$where=" and p.nome like '%".$nome."%' ORDER BY p.nome";			
+		$listas = busca::buscaWhere('e.id_estoque as id_estoque,p.nome as produto,p.id_produto,e.quantidade as quantidade ,
+		e.lote as lote ,c.nome as categoria',
+		'estoque e inner join produto p on e.id_produto = p.id_produto
+		inner JOIN categoria c on p.id_categoria = c.id_categoria ',$where);		
 		
 		if(count($listas) == 0){
 			echo '<table class="table table-striped table-hover">';
@@ -75,7 +78,6 @@ class estoque{
 			echo '</tr>';
 			echo '</table>';
 			return;
-
 		}
 		
 		echo '<table class="table table-striped table-hover">';
@@ -83,37 +85,21 @@ class estoque{
 		echo '<tr>';
 		echo '<th scope="col">id</th>';
 		echo '<th scope="col">Nome</th>';
-		echo '<th scope="col">Validade</th>';
-		echo '<th scope="col">Validade Dias</th>';
-		echo '<th scope="col">Código Produto</th>';
-		echo '<th scope="col">Editar</th>';
-		echo '<th scope="col">Deletar</th>';
+		echo '<th scope="col">Categória</th>';
+		echo '<th scope="col">Lote</th>';
+		echo '<th scope="col">Quantidade</th>';
 		echo '</tr>';
 		echo '</thead>';
 		echo '<tbody>';
 		foreach($listas as $lista):
-
-			echo '<td scope="row">'.$lista->id_produto .'</th>';
-			echo '<td scope="row">'.$lista->nome .'</td>';
-			echo '<td scope="row">'.($lista->validade==0?"Não":"Dias").'</td>';
-			echo '<td scope="row">'.$lista->validade_dias.'</td>';
-			echo '<td scope="row">';
-			echo '<a href="./ean/.$lista->id_produto ">';
-			echo '<img src="http://'. $_SERVER['HTTP_HOST'].'/biblioteca/img/ean.png" width="45px" > ';
-			echo '</a>';
+			echo '<td scope="row">'.$lista->id_estoque .'</th>';
+			echo '<td scope="row">'.$lista->produto .'</td>';
+			echo '<td scope="row">'.$lista->categoria.'</td>';
+			echo '<td scope="row">'.$lista->lote.'</td>';			
+			echo '<td scope="row">'.$lista->quantidade.'</td>';
 			echo '</td>';
-			echo '<td scope="row">';
-			echo '<a href="./produto/editar/<?php echo $lista->id_produto ;?>">';
-			echo '<img src="http://'. $_SERVER['HTTP_HOST'].'/biblioteca/img/editar.png" width="30px" > ';
-			echo '</a>';
-			echo '</td>';
-			echo '<td scope="row">';
-			echo '<a href="./produto/deletar/<?php echo $lista->id_produto ;?>">';
-			echo '<img src="http://'. $_SERVER['HTTP_HOST'].'/biblioteca/img/lixeira.png" width="30px" > '; 
-			echo '</a>';
-			echo '</td>';
-			echo '</tbody>';
 		endforeach;
+		echo '</tbody>';
 		echo '</table>'; 
 				
 	}
@@ -133,8 +119,6 @@ class estoque{
 		);
 		$where=" and id_estoque = " .$_POST['id_estoque'] ." and lote = " .$_POST['lote'] ;			
 		$listas = busca::buscaWhere("*","visao_estoque",$where);	
-
-
 
 		//print_r($campos_inserir);
 		$model_campos="";

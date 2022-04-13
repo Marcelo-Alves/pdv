@@ -20,11 +20,11 @@
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
-                        <form id="login-form" class="form" action="" method="post">
+                        <form id="login-form" class="form" action="login" method="post">
                             <h3 class="text-center text-info">Login</h3>
                             <div class="form-group">
-                                <label for="login" class="text-info">Login:</label><br>
-                                <input type="text" name="login" id="login" class="form-control">
+                                <label for="login" class="text-info">Usuário:</label><br>
+                                <input type="text" name="usuario" id="usuario" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="senha" class="text-info">Senha:</label><br>

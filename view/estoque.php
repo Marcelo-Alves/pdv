@@ -5,9 +5,7 @@ require 'padrao/topo.php';
 $listas = estoque::lista();
 $categorias = estoque::buscacategorias();
 $fornecedores = estoque::buscafornecedores();
-/*	echo "<pre>";
-print_r($listas);
-echo "</pre>";*/
+
 ?>
 <style>
 	#produto{
@@ -26,6 +24,8 @@ echo "</pre>";*/
 
 <p class="h1">LISTA DE ESTOQUE</p>
 <hr>
+
+
 <table class="table table-striped table-hover">
 	<thead> 
 		<tr> 

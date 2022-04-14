@@ -1,4 +1,12 @@
+<?php
+session_start();
+/*$telas = array('caixa','venda','estoque','produto','usuario','fornecedor','empresa','usuario');
+for($i=0;$i<= count($telas);$i++){
+	/*pego a pagina junto com a sessao se for igual 1 blz retorna* /
+}
+*/
 
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -25,10 +33,11 @@
   </head>
 
   <body cz-shortcut-listen="true">
-    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse" style="background-color: #000;">
+    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse" style="background-color: #000;color: #fff;">
         <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+		<span class="navbar-brand"> Seja bem vindo, <?php echo $_SESSION['nome'];?></span>
         <a class="navbar-brand" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>">Principal</a>
   
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
@@ -112,41 +121,8 @@
               </li>  
           </ul>          
         </nav>
-
+		
+		
+		
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-
-<html lang="pt-BR">
-    <head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="Controle de estoque">
-		<meta name="author" content="Marcelo Alves">   
-		<title><?php echo titulo; ?></title>	
-
-		<!-- Principal CSS do Bootstrap -- >
-		<link href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/css/bootstrap.css" rel="stylesheet">        
-    </head>
-    <body>
-    <div class="container">
-	-->
+		

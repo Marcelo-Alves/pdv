@@ -13,6 +13,7 @@ foreach($niveis as $nivel):
 	$usuario = $nivel->usuario ;
 	$fornecedor = $nivel->fornecedor ;
 	$empresa = $nivel->empresa ;
+	$painel = $nivel->painel ;
 	$sangria = $nivel->sangria ;
 	$relatorio = $nivel->relatorio ;
 	$desconto = $nivel->desconto ;
@@ -30,6 +31,16 @@ endforeach;
 			<label for="nome" > Nome </label>
 			<input type='text' name='nome' id='nome' class="form-control" value="<?php echo $nome ?>" required>	
 			<br><table class="table table-striped table-hover">
+				<tr><td>
+						<label for="">Painel</label>
+					</td>
+					<td>
+						<input type="checkbox" name="painel" id="painel" 
+						<?php
+							echo $painel == '1'?'checked':'';
+						?>>
+					</td>
+				</tr>
 				<tr><td>
 						<label for="">Tela de Caixa</label>
 					</td>

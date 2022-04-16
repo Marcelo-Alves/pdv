@@ -14,6 +14,13 @@ class Login{
 		
 		$usuario =  html_entity_decode($POST->usuario);
 		$senha = html_entity_decode($POST->senha);	
+
+
+
+		if(empty($usuario) || empty($senha) ){
+			echo '{"nivel":"vazio"}';
+			return;
+		}
 		
 		$tabela = 'funcionario f inner join nivel n on f.id_nivel = n.id_nivel';
 		$campos = 'f.nome as nome, f.email, f.usuario, n.caixa, n.venda, n.estoque, n.produto, n.usuario, 
@@ -39,6 +46,6 @@ class Login{
 			}
 		}else{
 			echo '{"nivel":"erro"}';
-		}	
+		}
 	}
 }	

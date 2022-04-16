@@ -38,7 +38,23 @@ endif;
 			fetchGenerico('login',dados)
 			.then(response => response.json())
 			.then(retorno => {
-				window.location.href = '/'+retorno.nivel;
+                if(retorno.nivel == 'erro'){
+                    const div = document.createElement('div');
+                    div.setAttribute('class','alert alert-danger')
+                    div.innerHTML='Login invalido';
+                    document.getElementById('erro').append(div);
+                    
+                }
+                else if(retorno.nivel == 'vazio'){
+                    const div = document.createElement('div');
+                    div.setAttribute('class','alert alert-danger')
+                    div.innerHTML='Por favor preencher todos os campos.';
+                    document.getElementById('erro').append(div);
+                    
+                }
+                else{
+				    window.location.href = '/'+retorno.nivel;
+                }
 			});
 		}
 	</script>
@@ -49,12 +65,12 @@ endif;
     <div id="login">
         <h3 class="text-center text-white pt-5">Login form</h3>
         <div class="container">
-			<div id="erro" name="erro"></div>
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
                        <!-- <form id="login-form" name="login-form" class="form">-->
                             <h3 class="text-center text-info">Login</h3>
+                            <div id="erro" name="erro"></div>
                             <div class="form-group">
                                 <label for="login" class="text-info">Usuário:</label><br>
                                 <input type="text" name="usuario" id="usuario" class="form-control">

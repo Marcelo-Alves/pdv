@@ -15,6 +15,14 @@ require 'padrao/topo.php';
 			<table class="table table-striped table-hover">
 				<tr>
 					<td>
+						<label for="">Painel</label>
+					</td>
+					<td>
+						<input type="checkbox" name="painel" id="painel">
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<label for="">Tela de Caixa</label>
 					</td>
 					<td>

@@ -151,6 +151,9 @@ $idvenda = date('ymdHis').rand(100,999);
 							</div>							
 						</div>					
 				</div>
+				<div class="col-3">
+					<a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/sair">Sair</a>
+				</div>
 			</div>		
 	</body>
 </html>

@@ -29,18 +29,16 @@ class Login{
 			}
 			
 			foreach($funcionario  as $cha => $fun){
-					if( $fun->estoque == 1){
-						echo '{"nivel":"estoque"}';
-					}elseif( $fun->venda == 1){
-						echo '{"nivel":"venda"}';
-					}elseif( $fun->caixa == 1){
+					if( $fun->estoque ==1){
+						echo '{"nivel":"painel"}';
+					}elseif( $fun->venda ==1){
+						echo '{"nivel":"pedido"}';
+					}elseif( $fun->caixa ==1){
 						echo '{"nivel":"caixa"}';
 					}	
 			}
 		}else{
 			echo '{"nivel":"erro"}';
-		}
-		
+		}	
 	}
-	
-}
+}	

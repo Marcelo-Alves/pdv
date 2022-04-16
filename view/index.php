@@ -1,3 +1,20 @@
+<?php
+if(session_start() == false):
+	session_start();
+endif;
+$telas = array('painel','caixa','venda','estoque','produto','categoria','fornecedor','nivel','ean','funcionario','cliente');
+$URI = str_replace('/','',$_SERVER['REQUEST_URI']);
+
+if(isset($_SESSION['nome'])):
+	if($_SESSION[$URI]!=1):
+		for($i=0;$i<=count($telas);$i++):		
+			if($_SESSION[$telas[$i]]==1):				
+				header("Location: /".$telas[$i]);				
+			endif;
+		endfor;
+	endif;
+endif;
+?>
 <!doctype html>
 <html lang="pt-br">
   <head>
@@ -20,20 +37,8 @@
 		
 			fetchGenerico('login',dados)
 			.then(response => response.json())
-			.then(retorno => {switch(retorno.nivel){
-					case 'estoque':
-						window.location.href = '/estoque';
-						break;
-					case 'venda':
-						window.location.href = '/venda';
-						break;
-					case 'caixa':
-						window.location.href = '/caixa';
-						break;
-					case 'erro':
-						console.log('erro');
-						break;
-				}
+			.then(retorno => {
+				window.location.href = '/'+retorno.nivel;
 			});
 		}
 	</script>

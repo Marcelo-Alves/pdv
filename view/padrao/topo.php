@@ -1,26 +1,24 @@
 <?php
-session_start();
-$URL=  str_replace("/", "", $_SERVER['REQUEST_URI']);
-if(isset($_SESSION) == false){
-  //print_r($_SESSION);
-  header('Location: /');
-}
-
-if($_SESSION[$URL] != '1' ){
-  echo "VOcê esta no local errado ".$URL . " - ".$_SESSION[$URL] ."-";
-}
-else{
-  echo "VOcê esta no local certo ".$URL . " - ".$_SESSION[$URL] ."-";
-}
-
-/*$telas = array('caixa','venda','estoque','produto','usuario','fornecedor','empresa','usuario');
-for($i=0;$i<= count($telas);$i++){
-	/*pego a pagina junto com a sessao se for igual 1 blz retorna* /
-}
-*/
+if(session_start() == false):
+	session_start();
+endif;
+$telas = array('painel','caixa','venda','estoque','produto','categoria','fornecedor','nivel','ean','funcionario','cliente');
 /*echo "<pre>";
-print_r($_SESSION);
+$_SESSION['painel'];
+print_r($telas);
 echo "</pre>";*/
+$URI = str_replace('/','',$_SERVER['REQUEST_URI']);
+
+if(isset($_SESSION['nome'])):
+	if($_SESSION[$URI]!=1):
+		for($i=0;$i<=count($telas);$i++):		
+			if($_SESSION[$telas[$i]]==1):				
+				header("Location: /".$telas[$i]);				
+			endif;
+		endfor;
+	endif;
+endif;
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -53,23 +51,16 @@ echo "</pre>";*/
           <span class="navbar-toggler-icon"></span>
         </button>
 		<span class="navbar-brand"> Seja bem vindo, <?php echo $_SESSION['nome'];?></span>
-        <a class="navbar-brand" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>">Principal</a>
+        <a class="navbar-brand" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/painel">Principal</a>
   
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           
         </div>
       </nav>
 
-
-
-
     <div class="container">
       <div class="row">
 
-      
-          
-            
-      
         <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
         
           <ul class="nav nav-pills flex-column">
@@ -100,9 +91,6 @@ echo "</pre>";*/
               </ul>
             </li>
 			
-			
-			
-			
             <li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('licliente')" >Cliente</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="licliente">
@@ -132,12 +120,10 @@ echo "</pre>";*/
               </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">Sair</a>
+                <a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/sair">Sair</a>
               </li>  
           </ul>          
         </nav>
-		
-		
 		
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
 		

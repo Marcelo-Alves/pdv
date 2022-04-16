@@ -63,6 +63,14 @@ require 'padrao/topo.php';
 				</tr>
 				<tr>
 					<td>
+						<label for="">Tela de Funcionário</label>
+					</td>
+					<td>
+						<input type="checkbox" name="funcionario" id="funcionario">
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<label for="">Tela de Empresa</label>
 					</td>
 					<td>

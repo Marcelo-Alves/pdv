@@ -58,15 +58,15 @@ class Funcionario{
 		$u = explode('/',$url);
 		$id = $u[3];		
 		$where=" and id_funcionario = ".$id;			
-		$categoria = busca::buscaWhere("*","funcionario",$where);		
+		$categoria = busca::buscaWhere("*","funcionario",$where);	
+		
+		/*echo "<pre>";
+		print_r($categoria);
+		echo "</pre>";*/
 		return $categoria ;	
 	}
 	
 	public static function alterar(){
-		/*echo "<pre>";
-		print_r($_POST);
-		echo "</pre>";*/
-
 
 		$campos_alterar = 'nome ="'. strtoupper($_POST['nome']) .'",
 			telefone       ="'. $_POST['telefone'].'",

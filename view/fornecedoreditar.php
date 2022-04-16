@@ -13,7 +13,7 @@ endforeach;
 
 <p class="h1">ALTERAR FORNECEDOR</p>
 <hr>
-	<form action='../alterar' method='POST'>
+	<form action='./alterar' method='POST'>
 		<div class="form-group">
 			<input type="hidden" name="id_fornecedor" id="id_fornecedor" value="<?php echo $id_fornecedor; ?>">
 			<label for="nome" > Nome </label>

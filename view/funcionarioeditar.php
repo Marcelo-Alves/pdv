@@ -12,8 +12,8 @@ foreach ($funcionarios as $funcionario):
 	$matricula = $funcionario->matricula;
 	$id_nivel = $funcionario->id_nivel;
 	$telefone = $funcionario->telefone;
-	$ativo = ($funcionario->ativo=1?'checked':'');
-	$trocasenha = ($funcionario->trocasenha=1?'checked':'');	
+	$ativo = ($funcionario->ativo==1)?'checked':'';
+	$trocasenha = ($funcionario->trocasenha==1)?'checked':'';	
 endforeach;
 /*echo "<pre>";
 print_r($funcionarios);
@@ -81,7 +81,7 @@ echo "</pre>";*/
 		<br>
 		
 		<div class="card text-center">
-			<input  onclick='validar()' VALUE='ALTERAR' class="btn btn-lg btn-block btn-outline-primary">
+			<input type="submit" onclick='validar()' VALUE='ALTERAR' class="btn btn-lg btn-block btn-outline-primary">
 		</div>
 	</form>
 

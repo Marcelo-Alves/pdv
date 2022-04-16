@@ -1,11 +1,26 @@
 <?php
 session_start();
+$URL=  str_replace("/", "", $_SERVER['REQUEST_URI']);
+if(isset($_SESSION) == false){
+  //print_r($_SESSION);
+  header('Location: /');
+}
+
+if($_SESSION[$URL] != '1' ){
+  echo "VOcê esta no local errado ".$URL . " - ".$_SESSION[$URL] ."-";
+}
+else{
+  echo "VOcê esta no local certo ".$URL . " - ".$_SESSION[$URL] ."-";
+}
+
 /*$telas = array('caixa','venda','estoque','produto','usuario','fornecedor','empresa','usuario');
 for($i=0;$i<= count($telas);$i++){
 	/*pego a pagina junto com a sessao se for igual 1 blz retorna* /
 }
 */
-
+/*echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";*/
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">

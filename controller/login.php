@@ -15,13 +15,11 @@ class Login{
 		$usuario =  html_entity_decode($POST->usuario);
 		$senha = html_entity_decode($POST->senha);	
 		
-		
 		$tabela = 'funcionario f inner join nivel n on f.id_nivel = n.id_nivel';
 		$campos = 'f.nome as nome, f.email, f.usuario, n.caixa, n.venda, n.estoque, n.produto, n.usuario, 
-					n.fornecedor, n.empresa, n.sangria, n.excluir_item, n.relatorio, n.desconto ,n.valor_desconto';
-		$condicao = ' and f.usuario="'.$usuario.'" and f.senha="'.$senha.'"';
+					n.fornecedor,n.funcionario, n.empresa, n.sangria, n.excluir_item, n.relatorio, n.desconto ,n.valor_desconto';
+		$condicao = ' and f.usuario="'.$usuario.'" and f.senha="'.$senha.'" and ativo =1';
 		$funcionario = busca::buscaWhere($campos,$tabela,$condicao);
-		
 		
 		if($funcionario){
 			session_start();
@@ -31,23 +29,18 @@ class Login{
 			}
 			
 			foreach($funcionario  as $cha => $fun){
-					if( $fun->estoque ==1){
+					if( $fun->estoque == 1){
 						echo '{"nivel":"estoque"}';
-					}elseif( $fun->venda ==1){
+					}elseif( $fun->venda == 1){
 						echo '{"nivel":"venda"}';
-					}elseif( $fun->caixa ==1){
+					}elseif( $fun->caixa == 1){
 						echo '{"nivel":"caixa"}';
 					}	
 			}
-			
 		}else{
 			echo '{"nivel":"erro"}';
 		}
 		
-		
-		
-		
-		//return $funcionario;*/
 	}
 	
 }

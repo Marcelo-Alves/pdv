@@ -8,9 +8,12 @@ foreach($niveis as $nivel):
 	$nome = $nivel->nome;  
 	$venda = $nivel->venda ;
 	$caixa = $nivel->caixa ;
-	$estoque = $nivel->estoque ;
+	$cliente = $nivel->cliente;
+	$categoria = $nivel->categoria;
+ 	$estoque = $nivel->estoque ;
 	$produto = $nivel->produto ;
 	$usuario = $nivel->usuario ;
+	$nivel1 = $nivel->nivel;
 	$fornecedor = $nivel->fornecedor ;
 	$empresa = $nivel->empresa ;
 	$painel = $nivel->painel ;
@@ -75,6 +78,28 @@ endforeach;
 				</tr>
 				<tr>
 					<td>
+						<label for="">Tela Cadastro de Cliente</label>
+					</td>
+					<td>
+						<input type="checkbox" name="cliente" id="cliente"
+						<?php
+							echo $cliente == '1'?'checked':'';
+						?>>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="">Tela Cadastro de Nivel</label>
+					</td>
+					<td>
+						<input type="checkbox" name="nivel" id="nivel"
+						<?php
+							echo $nivel1 == '1'?'checked':'';
+						?>>
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<label for="">Tela Cadastro de Produto</label>
 					</td>
 					<td>
@@ -84,6 +109,20 @@ endforeach;
 						?>>
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<label for="">Tela Cadastro de Categoria</label>
+					</td>
+					<td>
+						<input type="checkbox" name="categoria" id="categoria"
+						<?php
+							echo $categoria == '1'?'checked':'';
+						?>>
+					</td>
+				</tr>
+				
+				
+				
 				<tr>
 					<td>
 						<label for="">Tela de Usuário</label>

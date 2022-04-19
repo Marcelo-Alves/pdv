@@ -2,11 +2,8 @@
 if(session_start() == false):
 	session_start();
 endif;
-$telas = array('painel','caixa','venda','estoque','produto','categoria','fornecedor','nivel','ean','funcionario','cliente');
-/*
-echo "<pre>";
-pritn_r($telas);
-echo "</pre>";*/
+$telas = array('painel','caixa','venda');
+
 $URI = str_replace('/','',$_SERVER['REQUEST_URI']);
 
 if(isset($_SESSION['nome'])):

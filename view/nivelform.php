@@ -47,10 +47,34 @@ require 'padrao/topo.php';
 				</tr>
 				<tr>
 					<td>
+						<label for="">Tela Cadastro de Cliente</label>
+					</td>
+					<td>
+						<input type="checkbox" name="cliente" id="cliente" >
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="">Tela Cadastro de Nivel</label>
+					</td>
+					<td>
+						<input type="checkbox" name="nivel" id="nivel">
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<label for="">Tela Cadastro de Produto</label>
 					</td>
 					<td>
 						<input type="checkbox" name="produto" id="produto">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="">Tela Cadastro de Categoria</label>
+					</td>
+					<td>
+						<input type="checkbox" name="categoria" id="categoria">
 					</td>
 				</tr>
 				<tr>

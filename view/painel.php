@@ -6,6 +6,3 @@ require 'padrao/topo.php';
 echo " O Painel esta " . painel::lista();
 
 require 'padrao/rodape.php';
-
-
-

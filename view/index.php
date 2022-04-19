@@ -40,8 +40,10 @@ endif;
 			.then(retorno => {
                 if(retorno.nivel == 'erro'){
                     const div = document.createElement('div');
-                    div.setAttribute('class','alert alert-danger')
+                    div.setAttribute('class','alert alert-danger');
+                    div.innerHTML='';
                     div.innerHTML='Login invalido';
+                    document.getElementById('erro').innerHTML='';
                     document.getElementById('erro').append(div);
                     
                 }
@@ -49,6 +51,7 @@ endif;
                     const div = document.createElement('div');
                     div.setAttribute('class','alert alert-danger')
                     div.innerHTML='Por favor preencher todos os campos.';
+                    document.getElementById('erro').innerHTML='';
                     document.getElementById('erro').append(div);
                     
                 }

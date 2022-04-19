@@ -19,8 +19,12 @@ class Nivel{
 		
 		$campos_inserir = array(
 			'nome'            => strtoupper($_POST['nome']),
+			'painel' 	      => isset($_POST['painel'])      ? '1' : '0' ,
 			'caixa' 	      => isset($_POST['caixa'])      ? '1' : '0' ,
 			'venda' 	      => isset($_POST['venda'])      ? '1' : '0' ,
+			'nivel' 	      => isset($_POST['nivel'])      ? '1' : '0' ,
+			'cliente' 	      => isset($_POST['cliente'])      ? '1' : '0' ,
+			'categoria' 	  => isset($_POST['categoria'])      ? '1' : '0' ,
 			'estoque'         => isset($_POST['estoque'])    ? '1' : '0' ,
 			'produto'         => isset($_POST['produto'])    ? '1' : '0' ,
 			'usuario'         => isset($_POST['usuario'])    ? '1' : '0' ,
@@ -63,8 +67,12 @@ class Nivel{
 	
 	public static function alterar(){
 		$campos_alterar ='nome="' . strtoupper($_POST['nome']).'" ,'.
+		'painel  	      ="' . (isset($_POST['painel'])? 1 : 0).'" ,'.
 		'caixa  	      ="' . (isset($_POST['caixa'])? 1 : 0).'" ,'.
-		'venda  	      ="' . (isset($_POST['venda'])? 1 : 0).'" ,'.		
+		'venda  	      ="' . (isset($_POST['venda'])? 1 : 0).'" ,'.	
+		'nivel  	      ="' . (isset($_POST['nivel'])? 1 : 0).'" ,'.	
+		'cliente  	      ="' . (isset($_POST['cliente'])? 1 : 0).'" ,'.		
+		'categoria  	  ="' . (isset($_POST['categoria'])? 1 : 0).'" ,'.		
 		'estoque          ="' . (isset($_POST['estoque'])? 1 : 0).'" ,'.
 		'produto          ="' . (isset($_POST['produto'])? 1 : 0) .'" ,'.
 		'usuario          ="' . (isset($_POST['usuario'])? 1 : 0).'" ,'.

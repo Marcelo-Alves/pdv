@@ -1,4 +1,20 @@
 <?php
+if(session_start() == false):
+	session_start();
+endif;
+$telas = array('painel','caixa','venda');
+
+$URI = str_replace('/','',$_SERVER['REQUEST_URI']);
+
+if(isset($_SESSION['nome'])):
+	if($_SESSION[$URI]!=1):
+		for($i=0;$i<=count($telas);$i++):		
+			if($_SESSION[$telas[$i]]==1):				
+				header("Location: /".$telas[$i]);				
+			endif;
+		endfor;
+	endif;
+endif;
 define('titulo', "Tela de Venda");  
 $idvenda = date('ymdHis').rand(100,999);
 ?>

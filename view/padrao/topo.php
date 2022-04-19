@@ -2,21 +2,30 @@
 if(session_start() == false):
 	session_start();
 endif;
-$telas = array('painel','caixa','venda','estoque','produto','categoria','fornecedor','nivel','ean','funcionario','cliente');
-/*echo "<pre>";
-$_SESSION['painel'];
-print_r($telas);
-echo "</pre>";*/
-$URI = str_replace('/','',$_SERVER['REQUEST_URI']);
+$telas = array('painel','caixa','venda');
+$URI = $_SERVER['REQUEST_URI'];
+$URI = explode('/',$URI);
+$URI =$URI[1];
+echo "<pre>";
+//print_r($_SESSION);
+//print_r($_SERVER);
+//print_r($telas);
+//print_r($URI[1]);
+echo "</pre>";
+
+
 
 if(isset($_SESSION['nome'])):
 	if($_SESSION[$URI]!=1):
-		for($i=0;$i<=count($telas);$i++):		
+		for($i=0;$i<count($telas);$i++):		
 			if($_SESSION[$telas[$i]]==1):				
-				header("Location: /".$telas[$i]);				
+				header("Location: /".$telas[$i]);	
+        $i = count($telas);
 			endif;
 		endfor;
 	endif;
+else:
+  header("Location: /");	
 endif;
 
 ?>

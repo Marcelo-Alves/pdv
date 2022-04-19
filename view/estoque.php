@@ -69,11 +69,11 @@ $fornecedores = estoque::buscafornecedores();
 			foreach($listas as $lista):
 		?>
 			<tr>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->id_estoque ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->produto ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->categoria ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->lote ;?></a></td>
-				<td scope="row"><a href="./editar/<?php echo $lista->id_estoque?>"><?php echo $lista->quantidade ;?></a></td>
+				<td scope="row"><a href="./estoque/editar/<?php echo $lista->id_estoque?>"><?php echo $lista->id_estoque ;?></a></td>
+				<td scope="row"><a href="./estoque/editar/<?php echo $lista->id_estoque?>"><?php echo $lista->produto ;?></a></td>
+				<td scope="row"><a href="./estoque/editar/<?php echo $lista->id_estoque?>"><?php echo $lista->categoria ;?></a></td>
+				<td scope="row"><a href="./estoque/editar/<?php echo $lista->id_estoque?>"><?php echo $lista->lote ;?></a></td>
+				<td scope="row"><a href="./estoque/editar/<?php echo $lista->id_estoque?>"><?php echo $lista->quantidade ;?></a></td>
 			</tr>		
 		<?php
 			endforeach;

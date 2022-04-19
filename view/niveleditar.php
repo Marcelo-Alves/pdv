@@ -15,6 +15,7 @@ foreach($niveis as $nivel):
 	$usuario = $nivel->usuario ;
 	$nivel1 = $nivel->nivel;
 	$fornecedor = $nivel->fornecedor ;
+	$funcionario = $nivel->funcionario ;
 	$empresa = $nivel->empresa ;
 	$painel = $nivel->painel ;
 	$sangria = $nivel->sangria ;
@@ -73,6 +74,17 @@ endforeach;
 						<input type="checkbox" name="estoque" id="estoque" 
 						<?php
 							echo $estoque == '1'?'checked':'';
+						?>>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="">Tela Cadastro de Funcionário</label>
+					</td>
+					<td>
+						<input type="checkbox" name="funcionario" id="funcionario"
+						<?php
+							echo $funcionario == '1'?'checked':'';
 						?>>
 					</td>
 				</tr>

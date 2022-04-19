@@ -15,9 +15,9 @@ include_once 'controller/fornecedor.php';
 
 ?>
 
-<p class="h1">ALTERAR PRODUTO</p>
+<p class="h1">ALTERAR ESTOQUE DO PRODUTO</p>
 <hr>
-	<form action='../inserir' method='POST'>
+	<form action='../alterar' method='POST'>
 		<div class="form-group">
 			<label for="fornecedor" > Fornecedor </label>
 			<label class="form-control" ><?php echo $fornecedor_prod ?></label>

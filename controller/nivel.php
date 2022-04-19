@@ -29,6 +29,7 @@ class Nivel{
 			'produto'         => isset($_POST['produto'])    ? '1' : '0' ,
 			'usuario'         => isset($_POST['usuario'])    ? '1' : '0' ,
 			'fornecedor'      => isset($_POST['fornecedor']) ? '1' : '0' ,
+			'funcionario'     => isset($_POST['funcionario']) ? '1' : '0' ,			
 			'empresa'         => isset($_POST['empresa'])    ? '1' : '0' ,
 			'sangria'         => isset($_POST['sangria'])    ? '1' : '0' ,
 			'relatorio'       => isset($_POST['relatorio'])    ? '1' : '0' ,
@@ -77,6 +78,7 @@ class Nivel{
 		'produto          ="' . (isset($_POST['produto'])? 1 : 0) .'" ,'.
 		'usuario          ="' . (isset($_POST['usuario'])? 1 : 0).'" ,'.
 		'fornecedor       ="' . (isset($_POST['fornecedor']) ? 1 : 0) .'" ,'.
+		'funcionario      ="' . (isset($_POST['funcionario']) ? 1 : 0) .'" ,'.
 		'empresa          ="' . (isset($_POST['empresa']) ? 1 : 0) .'" ,'.
 		'sangria          ="' . (isset($_POST['sangria']) ? 1 : 0) .'" ,'.
 		'relatorio        ="' . (isset($_POST['relatorio']) ? 1 : 0) .'" ,'.

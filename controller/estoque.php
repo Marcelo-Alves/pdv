@@ -108,13 +108,13 @@ class estoque{
 		$data = date_create($_POST['validade']);
 		
 		$campos_inserir = array(
-			'id_produto'  => $_POST['id_produto'],
-			'id_estoque'  => $_POST['id_estoque'],
-			'quantidade'  => $_POST['quantidade'],
-			/*'valor_compra'  => $_POST['valor_compra'],
-			'valor_venda'  => $_POST['valor_venda'],*/
-			'validade'    => date_format($data, 'Y-m-d H:i:s'),
-			'lote'        => $_POST['lote'],
+			'id_produto'   => $_POST['id_produto'],
+			'id_estoque'   => $_POST['id_estoque'],
+			'quantidade'   => $_POST['quantidade'],
+			'valor_compra' => $_POST['valor_compra'],
+			'valor_venda'  => $_POST['valor_venda'],
+			'validade'     => date_format($data, 'Y-m-d H:i:s'),
+			'lote'         => $_POST['lote'],
 			'data_atualizar'  => date('Y-m-d H:i:s')
 		);
 		$where=" and id_estoque = " .$_POST['id_estoque'] ." and lote = " .$_POST['lote'] ;			
@@ -152,19 +152,27 @@ class estoque{
 	
 	public static function alterar(){
 
-		$data = date_create($_POST['validade']);
-		
-
 		$campos_alterar =
 			'quantidade="' . $_POST['quantidade'].'" ,'.
-			'valor_compra="' . $_POST['valor_compra'].'" ,'.
-			'valor_venda="' .  $_POST['valor_venda'].'" ,'.
-			'validade="' . date_format($data, 'Y-m-d H:i:s').'" ,'.
 			'lote="' . $_POST['lote'].'" ,'.
 			'data_atualizar="' . date('Y-m-d H:i:s').'" ';
 			
 		$where ='id_estoque="'.$_POST['id_estoque'].'"';
 		alterar::alterarBanco($campos_alterar,"estoque",$where);
+		//echo "<pre>";
+		//print_r($_POST);
+		//echo "</pre>";
+		
+		$valores= '"' . $_POST['id_produto'] .'","' . $_POST['valor_compra'] .'","' . $_POST['valor_venda'].'","1"';
+		$campos = 'id_produto,valor_compra, valor_venda, valor_atual';
+
+		$campos_alterar="valor_atual='0'";
+		$where ='id_produto="'.$_POST['id_produto'].'"';
+		alterar::alterarBanco($campos_alterar,"valor_venda",$where);
+
+		inserir::inserirBanco('valor_venda',$campos,$valores) ;
+
+
 		header("Location: /estoque");
 		die();
 	}

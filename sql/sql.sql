@@ -78,6 +78,7 @@ CREATE TABLE nivel(
     usuario varchar(1),
     categoria varchar(1),
     fornecedor varchar(1),
+    funcionario varchar(1),
     empresa varchar(1),
 	sangria varchar(1),
 	excluir_item varchar(1),

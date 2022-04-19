@@ -15,8 +15,6 @@ class Login{
 		$usuario =  html_entity_decode($POST->usuario);
 		$senha = html_entity_decode($POST->senha);	
 
-
-
 		if(empty($usuario) || empty($senha) ){
 			echo '{"nivel":"vazio"}';
 			return;

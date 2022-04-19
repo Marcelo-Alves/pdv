@@ -5,7 +5,7 @@ endif;
 $telas = array('painel','caixa','venda');
 $URI = $_SERVER['REQUEST_URI'];
 $URI = explode('/',$URI);
-$URI =$URI[1];
+$URI = $URI[1];
 echo "<pre>";
 //print_r($_SESSION);
 //print_r($_SERVER);
@@ -96,7 +96,7 @@ endif;
 			<li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('livendas')" >Venda</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="livendas">
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/vendas">Relatórios</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/relatorio">Relatórios</a></li>
               </ul>
             </li>
 			

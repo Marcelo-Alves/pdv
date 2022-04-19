@@ -121,8 +121,6 @@ endforeach;
 					</td>
 				</tr>
 				
-				
-				
 				<tr>
 					<td>
 						<label for="">Tela de Usuário</label>

@@ -26,11 +26,16 @@ if(file_exists('./controller/'.$classe.".php") == true)
 }
 
 
-///*
+/*//*
 //echo "Entrou2 <br>";
 
 ///*
 //var_dump(file_exists('./view/'.$classe.$metodo.".php")); //* /
+echo('./view/'.$classe.$metodo.".php"); //* /
+
+echo("<br>"); //* /
+
+echo('./view/'.$classe.".php"); //* */
 
 if(file_exists('./view/'.$classe.$metodo.".php") == true)
 {

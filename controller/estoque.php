@@ -163,15 +163,16 @@ class estoque{
 		//print_r($_POST);
 		//echo "</pre>";
 		
-		$valores= '"' . $_POST['id_produto'] .'","' . $_POST['valor_compra'] .'","' . $_POST['valor_venda'].'","1"';
-		$campos = 'id_produto,valor_compra, valor_venda, valor_atual';
 
-		$campos_alterar="valor_atual='0'";
+		$campos_alterar="valor_atual='0' ";
 		$where ='id_produto="'.$_POST['id_produto'].'"';
 		alterar::alterarBanco($campos_alterar,"valor_venda",$where);
 
-		inserir::inserirBanco('valor_venda',$campos,$valores) ;
 
+		$campos = 'id_produto,valor_compra, valor_venda, valor_atual,data_atualizar';
+		$valores= '"' . $_POST['id_produto'] .'","' . $_POST['valor_compra'] .'","' . $_POST['valor_venda'].'","1","'. date('Y-m-d H:i:s').'" ';
+
+		inserir::inserirBanco('valor_venda',$campos,$valores) ;
 
 		header("Location: /estoque");
 		die();

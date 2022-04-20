@@ -11,7 +11,7 @@ class inserir  {
         } catch (Exception $ex) {
             echo $ex->getMessage();
             echo "<br>";
-            echo $sql;
+            echo " Erro sql ". $sql;
         }        
     }
     

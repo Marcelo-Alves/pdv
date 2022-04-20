@@ -9,7 +9,7 @@ class busca  {
             $dados=$rs->fetchAll(PDO::FETCH_OBJ);
             return $dados;
         } catch (Exception $ex) {
-            echo $ex->getMessage();
+            echo $ex->getMessage(). " Erro sql ". $sql;
         }        
     }
     
@@ -22,7 +22,7 @@ class busca  {
             //echo $sql;
             return $dados;
         } catch (Exception $ex) {
-            echo $ex->getMessage();
+            echo $ex->getMessage(). " Erro sql ". $sql;
         }        
     }
     public static function buscaWhere($campo,$tabela,$where,$ordem =null) {
@@ -34,7 +34,7 @@ class busca  {
             $dados=$rs->fetchAll(PDO::FETCH_OBJ);
             return $dados;
         } catch (Exception $ex) {
-            echo $ex->getMessage();
+            echo $ex->getMessage(). " Erro sql ". $sql;
         }        
     }
     

@@ -6,7 +6,7 @@ class mysql {
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $conn;
         } catch (Exception $e) {
-          print "Ocorreu um erro ao tentar executar esta ação,
+          print "Ocorreu um erro ao tentar executar esta ação, <br>
           foi gerado um LOG do mesmo, tente novamente mais tarde. <br>" . $e->getMessage();
       }
     }

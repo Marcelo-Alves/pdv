@@ -11,7 +11,7 @@ class deletar  {
             $rs->execute();
             
         } catch (Exception $ex) {
-            echo $ex->getMessage();
+            echo $ex->getMessage() . " Erro sql ". $sql;
         }       
     }
     

@@ -139,18 +139,31 @@ drop view if exists visao_estoque;
 CREATE VIEW  visao_estoque
 AS
 SELECT 
-F.nome as fornecedor,E.id_estoque ,P.id_produto,P.nome as nome, P.id_categoria, C.nome as categoria, E.lote,E.quantidade 
+F.nome as fornecedor,E.id_estoque ,P.id_produto,P.nome as nome, P.id_categoria, C.nome as categoria, E.lote,E.quantidade,
+V.valor_compra,V.valor_venda
 FROM 
 estoque E INNER JOIN  produto P ON E.id_produto=P.id_produto INNER JOIN fornecedor F on P.id_fornecedor=F.id_fornecedor
-INNER JOIN categoria C on P.id_categoria=C.id_categoria;
+INNER JOIN categoria C on P.id_categoria=C.id_categoria
+RIGHT JOIN valor_venda V on P.id_produto = V.id_produto
+WHERE V.valor_atual=1;
 
 drop trigger if exists TR_ESTOQUE;
 CREATE DEFINER =`root`@`localhost` 
 TRIGGER TR_ESTOQUE AFTER INSERT ON produto FOR EACH ROW
-insert into estoque(id_produto,quantidade) value (NEW.id_produto, 0);
+insert into estoque(id_produto,quantidade) values (NEW.id_produto, 0);
 
-insert into fornecedor values (null,'PADRÃO','00.000.000/0000-00',NOW(),null);
+drop trigger if exists TR_VALOR_VENDA;
+CREATE DEFINER =`root`@`localhost` 
+TRIGGER TR_VALOR_VENDA AFTER INSERT ON produto FOR EACH ROW
+insert into valor_venda(id_produto,valor_compra,valor_venda,valor_atual) values (NEW.id_produto, 0,0,1);
 
+insert into fornecedor values 
+(null,'PADRÃO','00.000.000/0000-00',NOW(),null);
+INSERT INTO nivel VALUES 
+(null,'MASTER','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','10.00','2022-04-19 01:05:38','2022-04-19 01:05:38');
+INSERT INTO funcionario VALUES 
+(null,'MARCELO ALVES MOREIRA','165.087.288-73','(11)98987-2622','mamdria@gmail.com','5598','5598','indios',1,1,1,'2022-04-06 00:00:23','2022-04-06 00:00:23');
+INSERT INTO categoria VALUES (1,'ALIMENTICIOS',1,'2022-04-05 23:51:24',NULL);
 
 
 

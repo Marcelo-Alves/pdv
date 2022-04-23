@@ -1,141 +1,146 @@
-drop table if exists estoque ;
+DROP TABLE IF EXISTS estoque ;
 CREATE TABLE estoque (
-  id_estoque int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  id_produto int(11) DEFAULT NULL,
-  quantidade int(6) DEFAULT NULL,
-  lote varchar(120) DEFAULT NULL,
-  validade timestamp NULL DEFAULT NULL,
-  data_atualizar timestamp NULL DEFAULT NULL
+  id_estoque INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  id_produto INT(11) DEFAULT NULL,
+  quantidade INT(6) DEFAULT NULL,
+  lote VARCHAR(120) DEFAULT NULL,
+  validade TIMESTAMP NULL DEFAULT NULL,
+  data_atualizar TIMESTAMP NULL DEFAULT NULL
 );
 
-drop table if exists produto;
+DROP TABLE IF EXISTS produto;
 CREATE TABLE produto (
-  id_produto int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  id_fornecedor int(11) DEFAULT NULL,
-  id_categoria int(11) DEFAULT NULL,
-  nome varchar(100) DEFAULT NULL,
-  data_criar timestamp NULL DEFAULT NULL,
-  data_atualizar timestamp NULL DEFAULT NULL
+  id_produto INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  id_fornecedor INT(11) DEFAULT NULL,
+  id_categoria INT(11) DEFAULT NULL,
+  nome VARCHAR(150) DEFAULT NULL,
+  data_criar TIMESTAMP NULL DEFAULT NULL,
+  data_atualizar TIMESTAMP NULL DEFAULT NULL
 ) ; 
 
-drop table if exists categoria;
+DROP TABLE IF EXISTS categoria;
 CREATE TABLE categoria(  
-    id_categoria int(11) NOT NULL primary key AUTO_INCREMENT,
-    nome varchar(100) unique,
-	ativo int(1) default 1,
-    data_criar TIMESTAMP,
-    data_atualizar TIMESTAMP
+    id_categoria INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(150) UNIQUE,
+	ativo INT(1) DEFAULT 1,
+    data_criar TIMESTAMP NULL DEFAULT NULL,
+    data_atualizar TIMESTAMP NULL DEFAULT NULL
 ) ;
 
-drop table if exists log;
+DROP TABLE IF EXISTS log;
 CREATE TABLE log(  
-    id_log int(11) NOT NULL primary key AUTO_INCREMENT,
-    id_usuario int(11),
-    id_produto int(11),
-    tipo varchar(12),
-    antigo varchar(100),
-    atual varchar(100),
-	data_criar TIMESTAMP
+    id_log INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id_usuario INT(11),
+    id_produto INT(11),
+    tipo VARCHAR(12),
+    antigo VARCHAR(150),
+    atual VARCHAR(150),
+	data_criar TIMESTAMP NULL DEFAULT NULL
 ) ; 
 
-drop table if exists ean;
+DROP TABLE IF EXISTS ean;
 CREATE TABLE ean(  
-    id_ean int(11) NOT NULL primary key AUTO_INCREMENT,
-	id_produto int(11),
-    ean varchar(100) unique,
-	data_criar TIMESTAMP,
-    data_atualizar timestamp NULL DEFAULT NULL
+    id_ean INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	id_produto INT(11),
+    ean VARCHAR(100) UNIQUE,
+	data_criar  TIMESTAMP NULL DEFAULT NULL,
+    data_atualizar TIMESTAMP NULL DEFAULT NULL
 ) ; 
 
-drop table if exists funcionario;
+DROP TABLE IF EXISTS funcionario;
 CREATE TABLE funcionario(  
-    id_funcionario int(11) NOT NULL primary key AUTO_INCREMENT,
-    nome varchar(120),
-    cpf varchar(120) UNIQUE,
-    telefone varchar(120),
-    email varchar(120),
-    matricula varchar(80),
-    usuario varchar(80) unique,
-    senha varchar(80),
-    id_nivel int(11),
-    ativo int(1),
-    trocasenha int(1),
-	data_criar TIMESTAMP,
-    data_atualizar timestamp NULL DEFAULT NULL
+    id_funcionario INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(120),
+    cpf VARCHAR(120) UNIQUE,
+    telefone VARCHAR(120),
+    email VARCHAR(120),
+    matricula VARCHAR(80),
+    usuario VARCHAR(80) UNIQUE,
+    senha VARCHAR(80),
+    id_nivel INT(11),
+    ativo INT(1),
+    trocasenha INT(1),
+	data_criar TIMESTAMP NULL DEFAULT NULL,
+    data_atualizar TIMESTAMP NULL DEFAULT NULL
 ); 
 
-drop table if exists nivel;
+DROP TABLE IF EXISTS nivel;
 CREATE TABLE nivel(  
-    id_nivel int(11) NOT NULL primary key AUTO_INCREMENT,
-    nome varchar(120) unique,
-    painel varchar(1),
-    cliente varchar(1),
-    nivel varchar(1),
-    caixa varchar(1),
-    venda varchar(1),
-    estoque varchar(1),
-    produto varchar(1),
-    usuario varchar(1),
-    categoria varchar(1),
-    fornecedor varchar(1),
-    funcionario varchar(1),
-    empresa varchar(1),
-	sangria varchar(1),
-	excluir_item varchar(1),
-	relatorio varchar(1),
-    desconto varchar(1),
+    id_nivel INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(120) UNIQUE,
+    painel VARCHAR(1),
+    cliente VARCHAR(1),
+    nivel VARCHAR(1),
+    caixa VARCHAR(1),
+    venda VARCHAR(1),
+    estoque VARCHAR(1),
+    produto VARCHAR(1),
+    usuario VARCHAR(1),
+    categoria VARCHAR(1),
+    fornecedor VARCHAR(1),
+    funcionario VARCHAR(1),
+    empresa VARCHAR(1),
+	sangria VARCHAR(1),
+	excluir_item VARCHAR(1),
+	relatorio VARCHAR(1),
+    desconto VARCHAR(1),
     valor_desconto DECIMAL(4,2) DEFAULT 0.00,    
-	data_criar TIMESTAMP,
+	data_criar TIMESTAMP NULL DEFAULT NULL,
     data_atualizar TIMESTAMP NULL DEFAULT NULL
 );
 
-drop table if exists fornecedor;
+DROP TABLE IF EXISTS fornecedor;
 CREATE TABLE fornecedor(  
-    id_fornecedor int(11) NOT NULL primary key AUTO_INCREMENT,
-    nome varchar(120),
-    cnpj varchar(22) unique,
-	data_criar TIMESTAMP,
+    id_fornecedor INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(120),
+    cnpj VARCHAR(22) UNIQUE,
+	data_criar TIMESTAMP NULL DEFAULT NULL,
     data_atualizar TIMESTAMP NULL DEFAULT NULL
 );
 
-drop table if exists valor_venda;
+DROP TABLE IF EXISTS valor_venda;
 CREATE TABLE valor_venda (
-  id_valor int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  id_produto int(11) NOT NULL,
+  id_valor INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  id_produto INT(11) NOT NULL,
   valor_venda decimal(10,2) DEFAULT '0.00',
   valor_compra decimal(10,2) DEFAULT '0.00',
-  valor_atual smallint DEFAULT '1',
-  data_atualizar timestamp NULL DEFAULT NULL
+  valor_atual smallINT DEFAULT '1',
+  data_atualizar TIMESTAMP NULL DEFAULT NULL
 ) ;
 
-drop table if exists venda;
+DROP TABLE IF EXISTS venda;
 CREATE TABLE venda (
-  id_venda int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  id_produto int(11) NOT NULL,
-  id_usuario int(11),
-  id_cliente int(11),
-  venda varchar(40),
+  id_venda INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  id_produto INT(11) NOT NULL,
+  id_usuario INT(11),
+  id_cliente INT(11),
+  venda VARCHAR(40),
   valor_venda decimal(10,2) DEFAULT '0.00',
-  quantidade int(11) default 0,
-  data_venda timestamp NULL DEFAULT NULL
+  quantidade INT(11) DEFAULT 0,
+  data_venda TIMESTAMP NULL DEFAULT NULL
 ) ;
 
-drop table if exists cliente;
+DROP TABLE IF EXISTS cliente;
 CREATE TABLE cliente (
-  id_cliente int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  nome varchar(40),
-  cpf varchar(14),
-  rua varchar(200),
-  bairro varchar(200),
-  cidade varchar(200),
-  UF varchar(2),
-  limite decimal(10,2) DEFAULT '0.00',  
-  ativo int(1) default 1,
-  data_criar timestamp NULL DEFAULT NULL
-) ;
+  id_cliente INT(11)  PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(140) DEFAULT NULL,
+  telefone VARCHAR(14) DEFAULT NULL,
+  email VARCHAR(100) DEFAULT NULL,
+  cpf VARCHAR(14) UNIQUE DEFAULT NULL,
+  cep VARCHAR(10) DEFAULT NULL,
+  rua VARCHAR(200) DEFAULT NULL,
+  numero VARCHAR(15) DEFAULT NULL,
+  bairro VARCHAR(200) DEFAULT NULL,
+  cidade VARCHAR(200) DEFAULT NULL,
+  UF VARCHAR(2) DEFAULT NULL,
+  limite decimal(10,2) DEFAULT '0.00',
+  ativo INT(1) DEFAULT '1',
+  data_criar TIMESTAMP NULL DEFAULT NULL,
+  data_atualizar TIMESTAMP NULL DEFAULT NULL
+);
 
 
-drop view if exists visao_estoque;
+DROP VIEW IF EXISTS visao_estoque;
 CREATE VIEW  visao_estoque
 AS
 SELECT 
@@ -147,23 +152,22 @@ INNER JOIN categoria C on P.id_categoria=C.id_categoria
 RIGHT JOIN valor_venda V on P.id_produto = V.id_produto
 WHERE V.valor_atual=1;
 
-drop trigger if exists TR_ESTOQUE;
+DROP TRIGGER IF EXISTS TR_ESTOQUE;
 CREATE DEFINER =`root`@`localhost` 
 TRIGGER TR_ESTOQUE AFTER INSERT ON produto FOR EACH ROW
-insert into estoque(id_produto,quantidade) values (NEW.id_produto, 0);
+INSERT INTo estoque(id_produto,quantidade) VALUES (NEW.id_produto, 0);
 
-drop trigger if exists TR_VALOR_VENDA;
+DROP TRIGGER IF EXISTS TR_VALOR_VENDA;
 CREATE DEFINER =`root`@`localhost` 
 TRIGGER TR_VALOR_VENDA AFTER INSERT ON produto FOR EACH ROW
-insert into valor_venda(id_produto,valor_compra,valor_venda,valor_atual) values (NEW.id_produto, 0,0,1);
+INSERT INTO valor_venda(id_produto,valor_compra,valor_venda,valor_atual) VALUES (NEW.id_produto, 0,0,1);
 
-insert into fornecedor values 
-(null,'PADRÃO','00.000.000/0000-00',NOW(),null);
+insert INTO fornecedor VALUES 
+(NULL,'PADRÃO','00.000.000/0000-00',NOW(),NULL);
 INSERT INTO nivel VALUES 
-(null,'MASTER','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','10.00','2022-04-19 01:05:38','2022-04-19 01:05:38');
+(NULL,'MASTER','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','10.00',NOW(),NULL);
 INSERT INTO funcionario VALUES 
-(null,'MARCELO ALVES MOREIRA','165.087.288-73','(11)98987-2622','mamdria@gmail.com','5598','5598','indios',1,1,1,'2022-04-06 00:00:23','2022-04-06 00:00:23');
+(NULL,'MARCELO ALVES MOREIRA','165.087.288-73','(11)98987-2622','mamdria@gmail.com','5598','5598','indios',1,1,1,NOW(),NULL);
 INSERT INTO categoria VALUES (1,'ALIMENTICIOS',1,'2022-04-05 23:51:24',NULL);
-
-
-
+INSERT INTO cliente VALUES 
+(1,'PADRÃO','(11)11111-1111','padrao@padrao.com','111.111.111-11','00.000-000','RUA PADRÃO','000','PADRÃO','PADRÃO','SP',100.00,1,NOW(),NULL);

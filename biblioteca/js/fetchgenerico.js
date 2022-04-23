@@ -7,8 +7,18 @@ function fetchGenerico(link,dados){
 					},
 					body: dados})
 				
-	return retorno;
-	
+	return retorno;	
 }
+
+function fetchGenericoTudo(link){
+			
+	const retorno = fetch(link,	
+				{method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					}})				
+	return retorno;	
+}
+
 
 

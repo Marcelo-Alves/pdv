@@ -1,10 +1,10 @@
-<?php
+	<?php
 define('titulo', "Painel Novo Funcionário");    
 require 'padrao/topo.php';
 ?>
-<p class="h1">NOVO FUNCIONÁRIO</p>
+<p class="h1">NOVO CLIENTE</p>
 <hr>
-	<form action='./inserir' method='POST' id='frmfuncionario'>
+	<form action='./inserir' method='POST' id='frmcliente'>
 		<div class="form-group">
 			
 			<label for="nome" > Nome </label>
@@ -35,7 +35,37 @@ require 'padrao/topo.php';
 			<input type='text' name='cidade' id='cidade' class="form-control" required >	
 			<br>
 			<label for="nome" > Estado </label>
-			<input type='text' name='estado' id='estado' class="form-control" required >				
+			<select id="estado" name="estado" class="form-control" required>
+				<option ></option>
+				<option value="AC">Acre</option>
+				<option value="AL">Alagoas</option>
+				<option value="AP">Amapá</option>
+				<option value="AM">Amazonas</option>
+				<option value="BA">Bahia</option>
+				<option value="CE">Ceará</option>
+				<option value="DF">Distrito Federal</option>
+				<option value="ES">Espírito Santo</option>
+				<option value="GO">Goiás</option>
+				<option value="MA">Maranhão</option>
+				<option value="MT">Mato Grosso</option>
+				<option value="MS">Mato Grosso do Sul</option>
+				<option value="MG">Minas Gerais</option>
+				<option value="PA">Pará</option>
+				<option value="PB">Paraíba</option>
+				<option value="PR">Paraná</option>
+				<option value="PE">Pernambuco</option>
+				<option value="PI">Piauí</option>
+				<option value="RJ">Rio de Janeiro</option>
+				<option value="RN">Rio Grande do Norte</option>
+				<option value="RS">Rio Grande do Sul</option>
+				<option value="RO">Rondônia</option>
+				<option value="RR">Roraima</option>
+				<option value="SC">Santa Catarina</option>
+				<option value="SP">São Paulo</option>
+				<option value="SE">Sergipe</option>
+				<option value="TO">Tocantins</option>
+			</select>
+
 			<br>
 			<table class="table table-striped table-hover">
 				<tr>
@@ -55,7 +85,7 @@ require 'padrao/topo.php';
 		<br>
 		
 		<div class="card text-center">
-			<input onclick='validar()' VALUE='NOVO' class="btn btn-lg btn-block btn-outline-primary">
+			<input VALUE='NOVO' type="submit" class="btn btn-lg btn-block btn-outline-primary">
 		</div>
 	</form>
 

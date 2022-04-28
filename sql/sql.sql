@@ -75,6 +75,7 @@ CREATE TABLE nivel(
     venda VARCHAR(1),
     estoque VARCHAR(1),
     produto VARCHAR(1),
+    ean VARCHAR(1),
     usuario VARCHAR(1),
     categoria VARCHAR(1),
     fornecedor VARCHAR(1),

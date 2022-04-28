@@ -12,6 +12,7 @@ foreach($niveis as $nivel):
 	$categoria = $nivel->categoria;
  	$estoque = $nivel->estoque ;
 	$produto = $nivel->produto ;
+	$ean = $nivel->ean ;
 	$usuario = $nivel->usuario ;
 	$nivel1 = $nivel->nivel;
 	$fornecedor = $nivel->fornecedor ;
@@ -118,6 +119,17 @@ endforeach;
 						<input type="checkbox" name="produto" id="produto"
 						<?php
 							echo $produto == '1'?'checked':'';
+						?>>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="">Tela Cadastro de EAN</label>
+					</td>
+					<td>
+						<input type="checkbox" name="ean" id="ean"
+						<?php
+							echo $ean == '1'?'checked':'';
 						?>>
 					</td>
 				</tr>

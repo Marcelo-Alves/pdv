@@ -71,6 +71,14 @@ require 'padrao/topo.php';
 				</tr>
 				<tr>
 					<td>
+						<label for="">Tela Cadastro de EAN</label>
+					</td>
+					<td>
+						<input type="checkbox" name="ean" id="ean">
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<label for="">Tela Cadastro de Categoria</label>
 					</td>
 					<td>

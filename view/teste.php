@@ -25,7 +25,7 @@
     Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
   </div>
 </div>
-	<form action="teste.php" method="post">
+	<form action="teste" method="post">
   <input type="text" name="nome" id="nome">
   <br>
   <input type="text" name="sobre" id="sobre">
@@ -36,9 +36,9 @@
   
 <pre>
   <?php
-  /*var_dump($_POST);
+  var_dump($_POST);
   echo '<br>';
-  print_r($_POST);*/
+  print_r($_POST);
   $nome = array($_POST['nome']);
   foreach ($nome as $campo => $chave){
     echo $campo . ' '. $chave.'<br>';

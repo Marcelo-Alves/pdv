@@ -21,7 +21,7 @@ class Login{
 		}
 		
 		$tabela = 'funcionario f inner join nivel n on f.id_nivel = n.id_nivel';
-		$campos = 'f.nome as nome, f.email, f.usuario,n.painel,n.nivel,n.cliente,n.categoria, n.caixa, n.venda, n.estoque, n.produto, n.usuario, 
+		$campos = 'f.nome as nome, f.email, f.usuario,n.painel,n.nivel,n.cliente,n.categoria, n.caixa, n.venda, n.estoque, n.produto, n.ean, n.usuario, 
 					n.fornecedor,n.funcionario, n.empresa, n.sangria, n.excluir_item, n.relatorio, n.desconto ,n.valor_desconto';
 		$condicao = ' and f.usuario="'.$usuario.'" and f.senha="'.$senha.'" and ativo =1';
 		$funcionario = busca::buscaWhere($campos,$tabela,$condicao);

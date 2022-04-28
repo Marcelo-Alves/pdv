@@ -51,22 +51,23 @@ class produto{
 		inner join valor_venda ve on p.id_produto = ve.id_produto',
 		'and ve.valor_atual =1 and p.nome like "%'.$nome.'%" or e.ean like "%'.$nome.'%" and es.quantidade > 0');
 		
-		if(count($produtos) > 0):
+		if(count($produtos) > 0){
 			$retorno ="<div style='z-index:1;position:absolute;' class='card card-body mb-1'>
 			<ul class='list-group'>";
-			foreach($produtos as $produto):
+			foreach($produtos as $produto){
 				$retorno .='<i class="fas fa-history mr-3"></i>
 				<span onclick="PegaTexto('.trim($produto->id_produto).')">'.$produto->ean ." - ".$produto->nome.'</span></li> 
 				<input type="hidden" name="texto'.$produto->id_produto.'" id="texto'.$produto->id_produto.'" value="'.$produto->id_produto."-".$produto->ean ."-".$produto->nome."-".$produto->valor_venda.'" />';
-			endforeach;
+			}
 			$retorno .="<ul> </div>";
 			echo $retorno;
-		else:
+		}
+		else{
 			$retorno ='<div style="z-index:1;position:absolute;" class="card card-body mb-1"><ul class="list-group">
 						<i class="fas fa-history mr-3"></i><span> Não existe produto com este código</span></li>		
 						<ul> </div>';
 			echo $retorno;
-		endif;
+		}
     }
 		
 
@@ -100,7 +101,7 @@ class produto{
 		echo '</tr>';
 		echo '</thead>';
 		echo '<tbody>';
-		foreach($listas as $lista):
+		foreach($listas as $lista){
 
 			echo '<td scope="row">'.$lista->id_produto .'</th>';
 			echo '<td scope="row">'.$lista->nome .'</td>';
@@ -120,7 +121,7 @@ class produto{
 			echo '</a>';
 			echo '</td>';
 			echo '</tbody>';
-		endforeach;
+		}
 		echo '</table>'; 
 				
 	}

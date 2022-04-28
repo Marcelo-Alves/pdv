@@ -15,6 +15,12 @@ class Cliente{
 		 return $funcionario;
 	}
 	
+
+	public static function fetch(){
+		$funcionario = busca::buscaTudo('*','cliente');
+		echo json_encode($funcionario);
+   }
+
 	public static function inserir(){
 		/*echo "<pre>";
 		print_r($_POST);

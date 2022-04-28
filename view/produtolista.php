@@ -97,7 +97,7 @@ $fornecedores = produto::buscafornecedores();
 				</td>
 				<td scope="row">
 					<a href="./produto/deletar/<?php echo $lista->id_produto ;?>">
-						<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/lixeira.png" width='30px' >  
+						<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/lixeira.jpg" width='30px' >  
 					</a>
 				</td>
 			</tr>

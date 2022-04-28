@@ -37,5 +37,4 @@ class busca  {
             echo $ex->getMessage(). " Erro sql ". $sql;
         }        
     }
-    
 }

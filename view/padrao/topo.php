@@ -43,6 +43,7 @@ endif;
           min-height: 400px;
       }
   </style>
+  <script src='<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/js/fetchgenerico.js'></script>
   <script>
     function esconde(campo){
       var div = document.getElementById(campo);

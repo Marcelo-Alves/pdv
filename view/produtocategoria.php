@@ -80,7 +80,7 @@ $fornecedores = produto::buscafornecedores();
 			foreach($listas as $lista):
 		?>
 			<td scope="row"><?php echo $lista->id_produto ;?></th>
-			<td scope="row"><?php echo $lista->nome ;?></td>
+			<td scope="row"><?php echo $lista->nome ;?></td>	
 			<td scope="row">
 				<a href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/ean/<?php echo $lista->id_produto ;?>">
 					<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/ean.png" width='45px' > 

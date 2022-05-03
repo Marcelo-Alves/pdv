@@ -99,13 +99,22 @@ $fornecedores = produto::buscafornecedores();
 </div>
 <script>
 	function autocompletar(){
-		const tabela = document.getElementById('tabela_corpo');
-		const prot = window.location.protocol
-		const host = window.location.host;
-		tabela.innerHTML ="";
-
-		const nome = document.getElementById('nome').value;
 		
+		const nome = document.getElementById('nome').value;
+		const dados = 'nome='+nome;
+
+		fetchGenerico('produto/buscaproduto',dados)
+		.then(response => response.json())
+		.then(response => popular(response));
+	}
+
+
+	function popular(ObjJson) {
+
+		const tabela = document.getElementById('tabela_corpo');
+		const prot = window.location.protocol;
+		const host = window.location.host;
+		tabela.innerHTML = null;
 		const tr = document.createElement('tr');
 		const tdid = document.createElement('td');
 		const tdnome = document.createElement('td');
@@ -125,12 +134,11 @@ $fornecedores = produto::buscafornecedores();
 		const acodigo = document.createElement('a');	
 		const aeditar = document.createElement('a');		
 		const adeletar = document.createElement('a');
-		const dados = 'nome='+nome;
-
-		fetchGenerico('produto/buscaproduto',dados)
-		.then(response => response.json())
-		.then(response => response.map(itens => {
-			if(itens.erro !='vazio'){
+		let i =0;
+		ObjJson.map(itens => {
+			
+			
+			if(itens.erro != 'undefined'){
 				tdid.innerHTML     = itens.id_produto;
 				tdnome.innerHTML   = itens.nome;
 
@@ -138,32 +146,34 @@ $fornecedores = produto::buscafornecedores();
 				aeditar.href  = "produto/editar/"+itens.id_produto;			
 				adeletar.href = "produto/deletar/"+itens.id_produto;
 
-				acodigo.append(imgean);
-				tdcodigo.append(acodigo);
+				acodigo.appendChild(imgean);
+				tdcodigo.appendChild(acodigo);
 
-				aeditar.append(imgeditar);
-				tdeditar.append(aeditar);
+				aeditar.appendChild(imgeditar);
+				tdeditar.appendChild(aeditar);
 
-				adeletar.append(imgdeletar);
-				tddeletar.append(adeletar);
+				adeletar.appendChild(imgdeletar);
+				tddeletar.appendChild(adeletar);
 
-				tr.append(tdid);
-				tr.append(tdnome);
-				tr.append(tdcodigo);
-				tr.append(tdeditar);
-				tr.append(tddeletar);
-				tabela.appendChild(tr);  
+				tr.appendChild(tdid);
+				tr.appendChild(tdnome);
+				tr.appendChild(tdcodigo);
+				tr.appendChild(tdeditar);
+				tr.appendChild(tddeletar);
+				tabela.appendChild(tr); 
+				alert(i + ' - '+itens.nome + ' - '+itens.erro )
+
 			}
 			else{
 				const trerro = document.createElement('tr');
 				const tderro = document.createElement('td');
 				tderro.colSpan = 5;
-				//tderro.textAlign = "center";
 				tderro.innerHTML = "Não existe produto";
 				trerro.appendChild(tderro);
 				tabela.appendChild(trerro);
-			}
-		}));
+				}
+				i=i+1;
+		});
 	}
 
 </script>

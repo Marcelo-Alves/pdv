@@ -45,8 +45,12 @@ class produto{
 
 		$produtos = busca::buscaWhere('p.id_produto,p.nome',
 		'produto p inner join estoque es on p.id_produto = es.id_produto',
-		'and p.nome like "%'.$nome.'%" and es.quantidade > 0');
+		'and p.nome like "%'.$nome.'%"');
 		
+/*
+		echo json_encode($nome);
+/*/
+
 		if(count($produtos) > 0){
 			echo json_encode($produtos);
 		}

@@ -17,15 +17,48 @@ class produto{
 		$produto = busca::buscaWhere('*','produto',"and id_categoria = $id","") ;
 		return $produto;
 	}
-	
-	public static function fornecedor(){
-		$url = ($_SERVER['REQUEST_URI']=="/"?"/index":$_SERVER['REQUEST_URI']);
-		$u = explode('/',$url);
-		$id = $u[3];
-		$produto = busca::buscaWhere('*','produto',"and id_fornecedor = $id","") ;
-		//print_r($produto);
-		return $produto;
+
+	public static function categorias(){
+		$id_categoria = $_POST['categoria'];
+		$where = ($id_categoria == ""?"":" and id_categoria = $id_categoria");		
+		$categoria = busca::buscaWhere('p.id_produto,p.nome','produto p',$where,"") ;
+		
+		if(count($categoria) > 0){
+			echo json_encode($categoria);
+		}
+		else{
+			echo json_encode(array(0 => array("erro"=>"vazio")));
+		}
 	}
+	
+	public static function buscaproduto(){
+		$nome = $_POST['nome'];
+		$where = ($nome == ""?"":" and p.nome like '%".$nome."%'");
+		$produtos = busca::buscaWhere('p.id_produto,p.nome','produto p',$where,"");
+
+		if(count($produtos) > 0){
+			echo json_encode($produtos);
+		}
+		else{
+			echo json_encode(array(0 => array("erro"=>"vazio")));
+		} 
+    }
+
+	public static function Buscafornecedor(){
+		$id_fornecedor = $_POST['fornecedor'];
+		$where = ($id_fornecedor == ""?"":" and id_fornecedor = $id_fornecedor");		
+		$fornecedor = busca::buscaWhere('p.id_produto,p.nome','produto p',$where) ;
+		
+		if(count($fornecedor) > 0){
+			echo json_encode($fornecedor);
+		}
+		else{
+			echo json_encode(array(0 => array("erro"=>"vazio")));
+		}
+	}
+
+
+
 
 	public static function buscacategorias(){
 		$produto = busca::buscaWhere('id_categoria,nome','categoria','and ativo = 1');
@@ -40,26 +73,6 @@ class produto{
 		return $produto;
    	}
 	
-	public static function buscaproduto(){
-		$nome = $_POST['nome'];
-
-		$produtos = busca::buscaWhere('p.id_produto,p.nome',
-		'produto p inner join estoque es on p.id_produto = es.id_produto',
-		'and p.nome like "%'.$nome.'%"');
-		
-/*
-		echo json_encode($nome);
-/*/
-
-		if(count($produtos) > 0){
-			echo json_encode($produtos);
-		}
-		else{
-			echo json_encode(array(0 => array("erro"=>"vazio")));
-		} 
-    }
-		
-
 	public static function buscafetch(){
 		$url = $_SERVER['REQUEST_URI'];
 		$u = explode('/',$url);

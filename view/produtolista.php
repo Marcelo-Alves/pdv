@@ -26,12 +26,12 @@ $fornecedores = produto::buscafornecedores();
 	<tbody>
 		<tr>
 			<td scope="row">
-				<select id="id_fornecedor" name="id_fornecedor"  class="form-control" onchange="document.location.href=this.value">
-					<option value="/produto">Escolha uma Fornecedor</option>
+				<select id="id_fornecedor" name="id_fornecedor"  class="form-control" onchange="BuscaFornecedor()">
+					<option value="">Escolha uma Fornecedor</option>
 					<?php
 						foreach($fornecedores as $fornecedor):
 					?>
-							<option value="/produto/fornecedor/<?php echo $fornecedor->id_fornecedor;?>"><?php echo $fornecedor->nome; ?></option>
+							<option value="<?php echo $fornecedor->id_fornecedor;?>"><?php echo $fornecedor->nome; ?></option>
 					<?php	
 						endforeach;
 					?>
@@ -39,19 +39,19 @@ $fornecedores = produto::buscafornecedores();
 			</td>
 				
 			<td scope="row">
-				<select id="categoria" name="categoria"  class="form-control" onchange="document.location.href=this.value">
-					<option value="/produto">Escolha uma Categoria</option>
+				<select id="categoria" name="categoria"  class="form-control" onchange="BuscaCategoria()">
+					<option value="">Escolha uma Categoria</option>
 					<?php
 						foreach($categorias as $categoria):
 					?>
-							<option value="/produto/categoria/<?php echo $categoria->id_categoria;?>"><?php echo $categoria->nome; ?></option>
+							<option value="<?php echo $categoria->id_categoria;?>"><?php echo $categoria->nome; ?></option>
 					<?php	
 						endforeach;
 					?>
 				</select>
 			</td>
 			<td scope="row">
-				<input type="text" name="nome" id="nome" class="form-control" onkeypress='autocompletar()' >
+				<input type="text" name="produto" id="produto" class="form-control" onkeyup='BuscaProduto()' >
 			</td>
 		</tr>
 	</tbody>
@@ -98,16 +98,37 @@ $fornecedores = produto::buscafornecedores();
 	</table>
 </div>
 <script>
-	function autocompletar(){
+	function BuscaProduto(){
 		
-		const nome = document.getElementById('nome').value;
-		const dados = 'nome='+nome;
+		const nome = document.getElementById('produto').value;
 
-		fetchGenerico('produto/buscaproduto',dados)
+		if(nome != null){
+			const dados = 'nome='+nome;
+			fetchGenerico('produto/buscaproduto',dados)
+			.then(response => response.json())
+			.then(response => popular(response));
+		}
+	}
+
+	function BuscaFornecedor(){
+		
+		const fornecedor = document.getElementById('id_fornecedor').value;
+		//alert(fornecedor)
+		const dados = 'fornecedor='+fornecedor;
+		fetchGenerico('produto/Buscafornecedor',dados)
+		.then(response => response.json())
+		.then(response => popular(response));
+	
+	}
+
+	function BuscaCategoria(){
+		
+		const categoria = document.getElementById('categoria').value;		
+		const dados = 'categoria='+categoria;
+		fetchGenerico('produto/categorias',dados)
 		.then(response => response.json())
 		.then(response => popular(response));
 	}
-
 
 	function popular(ObjJson) {
 
@@ -115,30 +136,31 @@ $fornecedores = produto::buscafornecedores();
 		const prot = window.location.protocol;
 		const host = window.location.host;
 		tabela.innerHTML = null;
-		const tr = document.createElement('tr');
-		const tdid = document.createElement('td');
-		const tdnome = document.createElement('td');
-		const tdcodigo = document.createElement('td');
-		const tdeditar = document.createElement('td');
 
-		const imgean = document.createElement('img');
-		imgean.src = prot+"//"+host+'/biblioteca/img/ean.png';
-		imgean.setAttribute('width','30px');
-		const imgeditar = document.createElement('img');
-		imgeditar.src = prot+"//"+host+'/biblioteca/img/editar.png';	
-		imgeditar.setAttribute('width','30px');
-		const imgdeletar = document.createElement('img');
-		imgdeletar.src = prot+"//"+host+'/biblioteca/img/lixeira.jpg';	
-		imgdeletar.setAttribute('width','30px');
-		const tddeletar = document.createElement('td');
-		const acodigo = document.createElement('a');	
-		const aeditar = document.createElement('a');		
-		const adeletar = document.createElement('a');
-		let i =0;
 		ObjJson.map(itens => {
-			
-			
-			if(itens.erro != 'undefined'){
+			if(itens.erro != 'vazio'){
+
+			const tr = document.createElement('tr');
+			const tdid = document.createElement('td');
+			const tdnome = document.createElement('td');
+			const tdcodigo = document.createElement('td');
+			const tdeditar = document.createElement('td');
+
+			const imgean = document.createElement('img');
+			imgean.src = prot+"//"+host+'/biblioteca/img/ean.png';
+			imgean.setAttribute('width','30px');
+			const imgeditar = document.createElement('img');
+			imgeditar.src = prot+"//"+host+'/biblioteca/img/editar.png';	
+			imgeditar.setAttribute('width','30px');
+			const imgdeletar = document.createElement('img');
+			imgdeletar.src = prot+"//"+host+'/biblioteca/img/lixeira.jpg';	
+			imgdeletar.setAttribute('width','30px');
+			const tddeletar = document.createElement('td');
+			const acodigo = document.createElement('a');	
+			const aeditar = document.createElement('a');		
+			const adeletar = document.createElement('a');
+
+		
 				tdid.innerHTML     = itens.id_produto;
 				tdnome.innerHTML   = itens.nome;
 
@@ -161,8 +183,6 @@ $fornecedores = produto::buscafornecedores();
 				tr.appendChild(tdeditar);
 				tr.appendChild(tddeletar);
 				tabela.appendChild(tr); 
-				alert(i + ' - '+itens.nome + ' - '+itens.erro )
-
 			}
 			else{
 				const trerro = document.createElement('tr');
@@ -171,8 +191,7 @@ $fornecedores = produto::buscafornecedores();
 				tderro.innerHTML = "Não existe produto";
 				trerro.appendChild(tderro);
 				tabela.appendChild(trerro);
-				}
-				i=i+1;
+			}
 		});
 	}
 

@@ -47,15 +47,20 @@ $idvenda = date('ymdHis').rand(100,999);
 				const dados = 'nome='+nome;
 				const popup = document.getElementById('popup');
 				const ul = document.createElement('ul');
+				ul.setAttribute("class","list-group position-fixed");
 				fetchGenerico('produto/buscaproduto',dados)
 				.then(response => response.json())
 				.then(response =>  response.map(produto =>{
 					
 					const li = document.createElement('li');
+					li.setAttribute("class","list-group-item list-group-item-action");
+					li.setAttribute("onclick","PegaTexto('"+produto.nome+"')");
 					li.innerHTML = produto.id_produto + ' - ' + produto.nome;
-					
+					ul.append(li)
 				}));
-				console.log(li);
+				popup.append(ul);
+				
+				
 				
 				
 				
@@ -63,8 +68,8 @@ $idvenda = date('ymdHis').rand(100,999);
 			}
 		}
 		function PegaTexto(texto){
-			var frmtexto = document.getElementById('texto'+texto).value;
-			document.getElementById('nome_prod').value = frmtexto
+			//var frmtexto = document.getElementById('texto'+texto).value;
+			document.getElementById('nome_prod').value = texto
 			document.getElementById('popup').innerHTML = '';
 		}
 		/*function Dinheiro(){ 		

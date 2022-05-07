@@ -15,7 +15,7 @@ if(isset($_SESSION['nome'])):
 		endfor;
 	endif;
 endif;
-define('titulo', "Tela de Venda");  
+define('titulo', "Tela de Pedido");  
 $idvenda = date('ymdHis').rand(100,999);
 ?>
 <!DOCTYPE html>
@@ -28,6 +28,7 @@ $idvenda = date('ymdHis').rand(100,999);
 	<title><?php echo titulo; ?></title>
     <link href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/css/bootstrap.css" rel="stylesheet">   
 	<link href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/css/dashboard.css" rel="stylesheet">     
+
     <style>
       #pesquisa{border:1px solid #000000;padding:10px;}
 	  #itens,#total{border:1px solid #000000;padding:5px;}
@@ -38,13 +39,27 @@ $idvenda = date('ymdHis').rand(100,999);
 	  #principal{border:1px solid #000000;padding:5px;height: 100%;}
 
 	</style>
+	<script src='<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/js/fetchgenerico.js'></script>
 	<script>
 		function autocompletar(){
-			var nome = document.getElementById('nome_prod').value;
+			const nome = document.getElementById('nome_prod').value;
 			if(nome != ""){
-				fetch('./produto/buscaproduto/'+nome)
-				.then(response => response.text())
-				.then(texto => document.getElementById('popup').innerHTML = texto)
+				const dados = 'nome='+nome;
+				const popup = document.getElementById('popup');
+				const ul = document.createElement('ul');
+				fetchGenerico('produto/buscaproduto',dados)
+				.then(response => response.json())
+				.then(response =>  response.map(produto =>{
+					
+					const li = document.createElement('li');
+					li.innerHTML = produto.id_produto + ' - ' + produto.nome;
+					
+				}));
+				console.log(li);
+				
+				
+				
+				//test document.getElementById('popup').innerHTML = texto)
 			}
 		}
 		function PegaTexto(texto){
@@ -52,7 +67,7 @@ $idvenda = date('ymdHis').rand(100,999);
 			document.getElementById('nome_prod').value = frmtexto
 			document.getElementById('popup').innerHTML = '';
 		}
-		function Dinheiro(){ 		
+		/*function Dinheiro(){ 		
 			if(document.getElementById('seltipo').value == 'dinheiro'){
 				document.getElementById('dintotal').disabled=false;
 				document.getElementById('dintotal').focus();
@@ -61,7 +76,7 @@ $idvenda = date('ymdHis').rand(100,999);
 				document.getElementById('dintotal').disabled=true;
 			}
 		}
-		
+		*/
 
 		String.prototype.reverse = function(){
 		  return this.split('').reverse().join(''); 
@@ -88,7 +103,7 @@ $idvenda = date('ymdHis').rand(100,999);
   </head>
 	<body  class="pt-0">
 		 <div class="container">
-				<h1 class="display-1 text-center">CAIXA</h1>
+				<h1 class="display-1 text-center">PEDIDOs</h1>
 				<div id='principal' class="row">
 					
 							<label class='h2'>

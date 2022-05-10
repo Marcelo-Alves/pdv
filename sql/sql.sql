@@ -140,6 +140,12 @@ CREATE TABLE cliente (
   data_atualizar TIMESTAMP NULL DEFAULT NULL
 );
 
+DROP TABLE IF EXISTS pedido;
+CREATE TABLE pedido(
+id_pedido INT(11)  PRIMARY KEY NOT NULL AUTO_INCREMENT,
+pedido INT(2),
+ativo INT(1)
+);
 
 DROP VIEW IF EXISTS visao_estoque;
 CREATE VIEW  visao_estoque

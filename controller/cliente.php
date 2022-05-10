@@ -9,10 +9,10 @@ include_once './model/inserir.php';
 include_once './model/alterar.php';
 include_once './model/deletar.php';
 
-class Cliente{
+class cliente{
 	public static function lista(){
-		 $funcionario = busca::buscaTudo('*','cliente');
-		 return $funcionario;
+		 $cliente = busca::buscaTudo('*','cliente');
+		 return $cliente;
 	}
 	
 

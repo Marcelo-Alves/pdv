@@ -16,7 +16,10 @@ if(isset($_SESSION['nome'])):
 	endif;
 endif;
 define('titulo', "Tela de Pedido");  
-$idvenda = date('ymdHis').rand(100,999);
+
+$idvenda = $_POST['pedido'];
+include_once('./controller/cliente.php') ;
+$clientes = cliente::lista();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -108,7 +111,7 @@ $idvenda = date('ymdHis').rand(100,999);
   </head>
 	<body  class="pt-0">
 		 <div class="container">
-				<h1 class="display-1 text-center">PEDIDOs</h1>
+				<h1 class="display-1 text-center">PEDIDO</h1>
 				<div id='principal' class="row">
 					
 							<label class='h2'>
@@ -122,14 +125,18 @@ $idvenda = date('ymdHis').rand(100,999);
 								<input type='text' id='buscapedido' name='buscapedido' style='width:200px;' />
 								<button type='button'>Buscar</button>
 						</div>
-						<div class="col-6 mb-2">
+						<div class="col-4 mb-2">
 								<label for="buscvenda">Busca venda:</label>
 								<input type='hidden' id='idvenda' name='idvenda' value='<?php echo $idvenda;?>' />
-								<input type='text' id='buscavenda' name='buscavenda' style='width:200px;' />
+								<input type='text' id='buscavenda' name='buscavenda' style='width:40px;' />
 								<button type='button'>Buscar</button>
 								<label for="cliente">Cliente:</label>
 								<select id="id_cliente" name="id_cliente">
-									<option value="0">Padrão</option>
+									<?php
+										foreach($clientes as $cliente):
+											echo "<option value='".$cliente->id_cliente."'>".$cliente->nome."</option>";
+										endforeach;
+									?>
 								</select>
 						</div>
 						

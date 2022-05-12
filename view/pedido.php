@@ -17,28 +17,25 @@ define('titulo', "Tela de Pedido");
 	<link href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/css/dashboard.css" rel="stylesheet">     
     <style>
 		.col-xs-4 button{font-size: 50px;}
-		.col-xs-4{width: 80px; height: 80px;}
-
+		.col-xs-4{width: 80px; height: 80px;margin: 5px;}
+		body{padding-top: 0;}
 	</style>
   </head>
 	<body>
 		<div class="container">
+			<div class="row d-flex justify-content-center">
+					<p class="text-center display-2"> TELA DE PEDIDO</p>
+			</div>
 			<div class="row justify-content-md-center">
-		<?php  for($i=1;$i<=98;$i++):  ?>
+		<?php  for($i=1;$i <= QUANT_PEDIDO;$i++):  ?>
 			<div  class="col-xs-4">
 				<form action="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/venda/" method="POST">
 					<input type="hidden" value="<?php echo $i ?>" name="pedido" />
 					<button><?php echo ($i<10?"0".$i:$i)?></button>
 				</form>
-
-					
-			
 			</div>
 		<?php  endfor; ?>
-			</div>
-				<div class="col-3">
-					
-				</div>
+			</div>				
 		</div>		
 	</body>
 </html>

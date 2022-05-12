@@ -4,6 +4,7 @@ error_reporting(E_ALL);
 /* Habilita a exibição de erros */
 ini_set("display_errors", 1); 
 //*/
+include('./conf/definicao.php');
 
 $url = ($_SERVER['REQUEST_URI']=="/"?"/index":$_SERVER['REQUEST_URI']);
 $u = explode('/',$url);

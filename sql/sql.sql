@@ -85,6 +85,7 @@ CREATE TABLE nivel(
 	excluir_item VARCHAR(1),
 	relatorio VARCHAR(1),
     desconto VARCHAR(1),
+    valor VARCHAR(1),
     valor_desconto DECIMAL(4,2) DEFAULT 0.00,    
 	data_criar TIMESTAMP NULL DEFAULT NULL,
     data_atualizar TIMESTAMP NULL DEFAULT NULL
@@ -120,6 +121,19 @@ CREATE TABLE venda (
   quantidade INT(11) DEFAULT 0,
   data_venda TIMESTAMP NULL DEFAULT NULL
 ) ;
+
+DROP TABLE IF EXISTS pedido_venda;
+CREATE TABLE pedido_venda (
+  id_venda INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  id_produto INT(11) NOT NULL,
+  id_usuario INT(11),
+  id_cliente INT(11),
+  venda VARCHAR(40),
+  valor_venda decimal(10,2) DEFAULT '0.00',
+  quantidade INT(11) DEFAULT 0,
+  data_venda TIMESTAMP NULL DEFAULT NULL
+) ;
+
 
 DROP TABLE IF EXISTS cliente;
 CREATE TABLE cliente (

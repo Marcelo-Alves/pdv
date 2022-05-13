@@ -7,7 +7,7 @@ $URI = $_SERVER['REQUEST_URI'];
 $URI = explode('/',$URI);
 $URI = $URI[1];
 /*echo "<pre>";
-//print_r($_SESSION);
+print_r($_SESSION);
 //print_r($_SERVER);
 //print_r($telas);
 //print_r($URI[1]);
@@ -92,10 +92,16 @@ endif;
                 <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/categoria/form">Novo</a></li>
               </ul>
             </li>
-			<li class="nav-item">
+			      <li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('livendas')" >Venda</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="livendas">
                 <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/relatorio">Relatórios</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="esconde('livalor')" >Valor</a>
+              <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="livalor">
+                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/valor">Lista</a></li>
               </ul>
             </li>
 			

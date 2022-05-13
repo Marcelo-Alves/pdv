@@ -33,8 +33,10 @@ class produto{
 	
 	public static function buscaproduto(){
 		$nome = $_POST['nome'];
-		$where = ($nome == ""?"":" and p.nome like '%".$nome."%'");
-		$produtos = busca::buscaWhere('p.id_produto,p.nome','produto p',$where,"");
+		$tabela ="produto p left join ean e on p.id_produto = e.id_produto";
+		$where = ($nome == ""?"":" and p.nome like '%".$nome."%' or e.ean like '%".$nome."%'" );
+
+		$produtos = busca::buscaWhere('p.id_produto,p.nome',$tabela,$where,"");
 
 		if(count($produtos) > 0){
 			echo json_encode($produtos);

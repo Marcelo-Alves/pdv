@@ -21,6 +21,7 @@ foreach($niveis as $nivel):
 	$painel = $nivel->painel ;
 	$sangria = $nivel->sangria ;
 	$relatorio = $nivel->relatorio ;
+	$valor_produto =$nivel->valor;
 	$desconto = $nivel->desconto ;
 	$valor_desconto = $nivel->valor_desconto ;
 	$excluir_item = $nivel->excluir_item ;
@@ -208,6 +209,16 @@ endforeach;
 						<input type="checkbox" name="excluir_item" id="excluir_item" 
 						<?php
 							echo $excluir_item == '1'?'checked':'';
+						?>>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="">Valor Produto</label>
+					</td>
+					<td>
+						<input type="checkbox" name="valor" id="valor" <?php
+							echo $valor_produto == '1'?'checked':'';
 						?>>
 					</td>
 				</tr>

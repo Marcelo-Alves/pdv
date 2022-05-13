@@ -143,6 +143,14 @@ require 'padrao/topo.php';
 				</tr>
 				<tr>
 					<td>
+						<label for="">Valor Produto</label>
+					</td>
+					<td>
+						<input type="checkbox" name="valor" id="valor" >
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<label for="">Desconto</label>
 					</td>
 					<td>

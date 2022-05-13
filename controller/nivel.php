@@ -85,6 +85,7 @@ class Nivel{
 		'sangria          ="' . (isset($_POST['sangria']) ? 1 : 0) .'" ,'.
 		'relatorio        ="' . (isset($_POST['relatorio']) ? 1 : 0) .'" ,'.
 		'desconto         ="' . (isset($_POST['desconto'])    ? '1' : '0') .'" ,'.
+		'valor            ="' . (isset($_POST['valor'])    ? '1' : '0') .'" ,'.
 		'valor_desconto   ="' . str_replace( ",", ".",$_POST['valor_desconto']) .'" ,'.
 		'excluir_item     ="' . (isset($_POST['excluir_item']) ? 1 : 0) .'" ,'.
 		'data_criar       ="' . date('Y-m-d H:i:s').'" ,'.

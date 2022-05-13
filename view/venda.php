@@ -17,7 +17,7 @@ if(isset($_SESSION['nome'])):
 endif;
 define('titulo', "Tela de Pedido");  
 
-$idvenda = $_POST['pedido'];
+$idvenda = (isset($_POST['pedido'])?$_POST['pedido']:"01");
 include_once('./controller/cliente.php') ;
 $clientes = cliente::lista();
 ?>
@@ -51,10 +51,9 @@ $clientes = cliente::lista();
 				const popup = document.getElementById('popup');
 				const ul = document.createElement('ul');
 				ul.setAttribute("class","list-group position-fixed");
-				fetchGenerico('produto/buscaproduto',dados)
+				fetchGenerico('../produto/buscaproduto',dados)
 				.then(response => response.json())
-				.then(response =>  response.map(produto =>{
-					
+				.then(response =>  response.map(produto => {					
 					const li = document.createElement('li');
 					li.setAttribute("class","list-group-item list-group-item-action");
 					li.setAttribute("onclick","PegaTexto('"+produto.nome+"')");
@@ -62,29 +61,16 @@ $clientes = cliente::lista();
 					ul.append(li)
 				}));
 				popup.append(ul);
-				
-				
-				
-				
-				
-				//test document.getElementById('popup').innerHTML = texto)
 			}
 		}
 		function PegaTexto(texto){
-			//var frmtexto = document.getElementById('texto'+texto).value;
 			document.getElementById('nome_prod').value = texto
 			document.getElementById('popup').innerHTML = '';
+			document.getElementById('quant').focus;
 		}
-		/*function Dinheiro(){ 		
-			if(document.getElementById('seltipo').value == 'dinheiro'){
-				document.getElementById('dintotal').disabled=false;
-				document.getElementById('dintotal').focus();
-				
-			}else{
-				document.getElementById('dintotal').disabled=true;
-			}
-		}
-		*/
+
+		function CarregaProduto(){}
+
 
 		String.prototype.reverse = function(){
 		  return this.split('').reverse().join(''); 
@@ -153,7 +139,7 @@ $clientes = cliente::lista();
 									<thead>
 										<tr > <th  scope="col">Produto</th> <th scope="col"> Quantidade</th>  <th scope="col"> Valor Unitário</th>  <th scope="col"> Valor</th>  <th scope="col"> Vendedor</th><tr>
 									</thead>
-									<tbody>
+									<tbody id='produto_corpo'>
 										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> <td scope="col">Clemente</td> </tr>
 										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> <td scope="col">Clemente</td></tr>
 										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td><td scope="col">Clemente</td> </tr>
@@ -167,23 +153,6 @@ $clientes = cliente::lista();
 							<label class='vertotallabel'> TOTAL DE ITENS  0 </label>
 							<br>
 							<label class='vertotallabel'> TOTAL DA VENDA  R$ 0,00 </label>
-							<br>
-							<label class='vertotallabel'> TROCO R$ 0,00 </label>
-							<br>
-							<input type='hidden' id='total' name='total' />
-							
-							<label class='vertotallabel'>TIPO PAGAMENTO 
-								<select id="seltipo" name="seltipo" onchange='Dinheiro()'>
-									<option > </option>
-									<option value='cartao'> CARTÃO </option>
-									<option value='debito'> DEBITO </option>
-									<option value='dinheiro'> DINHEIRO </option>
-								</select>
-							</label>
-							<br>
-							<label class='vertotallabel'>
-							<input type='text' id='dintotal' name='dintotal' disabled value='0,00' onKeyUp="mascaraMoeda(this, event)" />
-							</label>
 							<br>
 							<div class="text-center">
 								<button type="button" class="btn btn-danger btn-block"> Fechar </button>

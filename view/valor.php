@@ -15,15 +15,10 @@ $listas = valor::lista();
 <p class="h1">LISTA DE VALOR PRODUTO</p>
 <hr>
 <table class="table table-striped table-hover">
-	<thead> 
-		<tr> 
-			<th scope="col" >Produto</th>
-		</tr>
-	</thead>
 	<tbody>
 		<tr>
 			<td scope="row">
-				<input type="text" name="produto" id="produto" class="form-control" onkeyup='BuscaProduto()' >
+				<input type="text" name="produto" id="produto" class="form-control" placeholder="Nome Produto" onkeyup='BuscaProduto()' >
 			</td>
 		</tr>
 	</tbody>
@@ -34,7 +29,8 @@ $listas = valor::lista();
 			<tr> 
 				<th scope="col">id</th>
 				<th scope="col">Nome</th>
-				<th scope="col">Valor</th>
+				<th scope="col">Valor Compra</th>
+				<th scope="col">Valor Venda</th>
 			</tr>
 		</thead>
 		<tbody id='tabela_corpo'>
@@ -46,7 +42,12 @@ $listas = valor::lista();
 				<td scope="row"><?php echo $lista->nome ;?></td>
 				
 				<td scope="row">
-					<input type="number" name="valor" id="valor">
+					<input type="number" name="compra" id="compra" style="width: 100px ;" value="<?php echo $lista->valor_compra ;?>">
+					<input type="hidden" name="id_produto" id="id_produto" value="<?php echo $lista->id_produto ;?>">
+					
+				</td>
+				<td scope="row">
+					<input type="number" name="venda" id="venda"  style="width: 100px ;" value="<?php echo $lista->valor_venda ;?>">
                     <button>Cadastrar</button>
 				</td>
 			</tr>
@@ -64,31 +65,13 @@ $listas = valor::lista();
 
 		if(nome != null){
 			const dados = 'nome='+nome;
-			fetchGenerico('produto/buscaproduto',dados)
+			fetchGenerico('valor/buscavalor',dados)
 			.then(response => response.json())
 			.then(response => popular(response));
 		}
 	}
 
-	function BuscaFornecedor(){
-		
-		const fornecedor = document.getElementById('id_fornecedor').value;
-		//alert(fornecedor)
-		const dados = 'fornecedor='+fornecedor;
-		fetchGenerico('produto/Buscafornecedor',dados)
-		.then(response => response.json())
-		.then(response => popular(response));
-	
-	}
 
-	function BuscaCategoria(){
-		
-		const categoria = document.getElementById('categoria').value;		
-		const dados = 'categoria='+categoria;
-		fetchGenerico('produto/categorias',dados)
-		.then(response => response.json())
-		.then(response => popular(response));
-	}
 
 	function popular(ObjJson) {
 
@@ -104,38 +87,14 @@ $listas = valor::lista();
 			const tdid = document.createElement('td');
 			const tdnome = document.createElement('td');
 			const tdcodigo = document.createElement('td');
-			const tdeditar = document.createElement('td');
 
-			const imgean = document.createElement('img');
-			imgean.src = prot+"//"+host+'/biblioteca/img/ean.png';
-			imgean.setAttribute('width','30px');
+			
 			const imgeditar = document.createElement('img');
-			imgeditar.src = prot+"//"+host+'/biblioteca/img/editar.png';	
-			imgeditar.setAttribute('width','30px');
-			const imgdeletar = document.createElement('img');
-			imgdeletar.src = prot+"//"+host+'/biblioteca/img/lixeira.jpg';	
-			imgdeletar.setAttribute('width','30px');
 			const tddeletar = document.createElement('td');
-			const acodigo = document.createElement('a');	
-			const aeditar = document.createElement('a');		
-			const adeletar = document.createElement('a');
 
 		
 				tdid.innerHTML     = itens.id_produto;
 				tdnome.innerHTML   = itens.nome;
-
-				acodigo.href  = "/ean/"+itens.id_produto;
-				aeditar.href  = "produto/editar/"+itens.id_produto;			
-				adeletar.href = "produto/deletar/"+itens.id_produto;
-
-				acodigo.appendChild(imgean);
-				tdcodigo.appendChild(acodigo);
-
-				aeditar.appendChild(imgeditar);
-				tdeditar.appendChild(aeditar);
-
-				adeletar.appendChild(imgdeletar);
-				tddeletar.appendChild(adeletar);
 
 				tr.appendChild(tdid);
 				tr.appendChild(tdnome);

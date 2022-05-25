@@ -6,12 +6,6 @@ $telas = array('painel','caixa','venda');
 $URI = $_SERVER['REQUEST_URI'];
 $URI = explode('/',$URI);
 $URI = $URI[1];
-/*echo "<pre>";
-print_r($_SESSION);
-//print_r($_SERVER);
-//print_r($telas);
-//print_r($URI[1]);
-echo "</pre>";*/
 
 if(isset($_SESSION['nome'])):
 	if($_SESSION[$URI]!=1):

@@ -1,5 +1,4 @@
 <?php
-
 include_once './model/busca.php';
 include_once './model/inserir.php';
 include_once './model/alterar.php';
@@ -58,9 +57,6 @@ class produto{
 			echo json_encode(array(0 => array("erro"=>"vazio")));
 		}
 	}
-
-
-
 
 	public static function buscacategorias(){
 		$produto = busca::buscaWhere('id_categoria,nome','categoria','and ativo = 1');
@@ -137,12 +133,7 @@ class produto{
 			'nome'         	 => "'". strtoupper($_POST['nome'])."'",
 			'data_criar'     => "'". date('Y-m-d H:i:s')."'",
 			'data_atualizar' => "'". date('Y-m-d H:i:s')."'",
-		);
-		
-		/*echo "<pre>";
-		print_r($campos_inserir);
-		echo "</pre>";*/
-		
+		);	
 		
 		$model_campos="";
 		$model_valores="";

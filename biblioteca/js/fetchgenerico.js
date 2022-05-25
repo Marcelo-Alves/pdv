@@ -5,8 +5,7 @@ function fetchGenerico(link,dados){
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
 					},
-					body: dados})
-				
+					body: dados});				
 	return retorno;	
 }
 
@@ -16,7 +15,7 @@ function fetchGenericoTudo(link){
 				{method: 'POST',
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
-					}})				
+					}});				
 	return retorno;	
 }
 

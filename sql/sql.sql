@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS estoque ;
-CREATE TABLE estoque (
+CREATE TABLE estoque(
   id_estoque INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   id_produto INT(11) DEFAULT NULL,
   quantidade INT(6) DEFAULT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE estoque (
 );
 
 DROP TABLE IF EXISTS produto;
-CREATE TABLE produto (
+CREATE TABLE produto(
   id_produto INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   id_fornecedor INT(11) DEFAULT NULL,
   id_categoria INT(11) DEFAULT NULL,
@@ -177,12 +177,9 @@ CREATE DEFINER =`root`@`localhost`
 TRIGGER TR_VALOR_VENDA AFTER INSERT ON produto FOR EACH ROW
 INSERT INTO valor_venda(id_produto,valor_compra,valor_venda,valor_atual) VALUES (NEW.id_produto, 0,0,1);
 
-insert INTO fornecedor VALUES 
-(NULL,'PADRÃO','00.000.000/0000-00',NOW(),NULL);
-INSERT INTO nivel VALUES 
-(NULL,'MASTER','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','10.00',NOW(),NULL);
+insert INTO fornecedor VALUES (NULL,'PADRÃO','00.000.000/0000-00',NOW(),NULL);
+INSERT INTO nivel VALUES (NULL,'MASTER','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','10.00',NOW(),NULL);
 INSERT INTO funcionario VALUES 
 (NULL,'MARCELO ALVES MOREIRA','165.087.288-73','(11)98987-2622','mamdria@gmail.com','5598','5598','indios',1,1,1,NOW(),NULL);
 INSERT INTO categoria VALUES (1,'ALIMENTICIOS',1,'2022-04-05 23:51:24',NULL);
-INSERT INTO cliente VALUES 
-(1,'PADRÃO','(11)11111-1111','padrao@padrao.com','111.111.111-11','00.000-000','RUA PADRÃO','000','PADRÃO','PADRÃO','SP',100.00,1,NOW(),NULL);
+INSERT INTO cliente VALUES (1,'PADRÃO','(11)11111-1111','padrao@padrao.com','111.111.111-11','00.000-000','RUA PADRÃO','000','PADRÃO','PADRÃO','SP',100.00,1,NOW(),NULL);

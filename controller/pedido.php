@@ -8,7 +8,7 @@ include_once './model/deletar.php';
 class pedido{
 
     public static function busca($pedido){
-		//$pedido = $_POST['pedido'];
+
         $campo ="p.nome as produto,v.quantidade,v.valor_venda as unitario,f.nome as funcionario,v.quantidade * v.valor_venda as valor";
         $tabela ="pedido_venda v inner join produto p on v.id_produto=p.id_produto inner join 
         funcionario f on v.id_funcionario=f.id_funcionario ";
@@ -42,11 +42,40 @@ class pedido{
 		
 		$model_campos = substr($model_campos,0,-1);
 		$model_valores  = substr($model_valores,0,-1);
-		
-		inserir::inserirBanco('pedido_venda',$model_campos,$model_valores) ;
+
+		$tabela = 'pedido_venda';
+		$campo = 'quantidade';
+		$where = 'venda ='.$_POST['id_venda'].' and  id_funcionario  ='. $_POST['id_funcionario'].'
+				 and id_produto ='. $_POST['id_produto'];
+
+		$quantidade = busca::buscaWhere($campo,$tabela, ' and '.$where);
+
+		if(isset($quantidade[0]->quantidade)){
+			$campos = 'quantidade='.($_POST['qtde'] + $quantidade[0]->quantidade);
+			alterar::alterarBanco($campos,$tabela,$where);
+		}
+		else{
+			inserir::inserirBanco($tabela,$model_campos,$model_valores) ;
+		}
 
         pedido::busca($_POST['id_venda']);
 	
 	}	
+
+	public static function limparpedido(){
+		$url = ($_SERVER['REQUEST_URI']=="/"?"/index":$_SERVER['REQUEST_URI']);
+		$u = explode('/',$url);
+		$id = $u[3];
+
+		$tabela = 'pedido_venda';
+		$where = 'venda ='.$id;
+
+		deletar::deletarBanco($tabela,$where);
+
+		header("Location: /pedido");
+		die();
+
+
+	}
 	
 }

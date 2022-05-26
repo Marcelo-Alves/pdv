@@ -76,8 +76,6 @@ $funcionarios = funcionario::lista();
 			document.getElementById('quant').focus;
 		}
 
-		function CarregaProduto(){}
-
 
 		String.prototype.reverse = function(){
 		  return this.split('').reverse().join(''); 
@@ -101,9 +99,12 @@ $funcionarios = funcionario::lista();
 		  campo.value = resultado.reverse();
 		}
 
+		let itenstotal = 0;
+		let valorreal = 0.00;
+
+
 		function inseririten(){
-			let itenstotal = 0;
-			let valorreal = 0;
+			
 			const id_produto = document.getElementById('id_produto').value;
 			const id_funcionario = document.getElementById('id_funcionario').value;
 			const id_cliente = document.getElementById('id_cliente').value;
@@ -116,10 +117,21 @@ $funcionarios = funcionario::lista();
 
 			fetchGenerico('../pedido/inserir',dados)
 				.then(response => response.json())
-				.then(response => response.map(itens => {
+				.then(response => carregatabelaitens(response));
+
+			document.getElementById('qtdetotal').innerHTML=itenstotal;
+			document.getElementById('valorreal').innerHTML=valorreal;
+			document.getElementById('nome_prod').value = "";
+			document.getElementById('id_produto').value = 1;
+		}
+
+		function carregatabelaitens(linhas){
+			const tabela = document.getElementById('produto_corpo');
+			tabela.innerHTML='';
+			linhas.map(itens => {
 					if(itens.erro != 'vazio'){
 
-						const tabela = document.getElementById('produto_corpo');
+						
 						const tr = document.createElement('tr');
 						const tdproduto = document.createElement('td');
 						const tdquant = document.createElement('td');
@@ -133,8 +145,8 @@ $funcionarios = funcionario::lista();
 						tdvunitario.innerHTML=itens.unitario;
 						tdvenda.innerHTML=itens.valor;
 						tdvendedor.innerHTML=itens.funcionario;
-						//tdexcluir.innerHTML=itens.produto;
 
+						
 						tr.appendChild(tdproduto);
 						tr.appendChild(tdquant);
 						tr.appendChild(tdvunitario);
@@ -142,16 +154,14 @@ $funcionarios = funcionario::lista();
 						tr.appendChild(tdvendedor);
 						tabela.append(tr);
 
-						itenstotal = itenstotal + itens.quantidade;
-						valorreal = valorreal + itens.valor;
+						itenstotal = parseInt(itenstotal + itens.quantidade);
+						valorreal = parseFloat(valorreal + itens.valor);
 
 					}
-				}));
-
-				document.getElementById('qtdetotal').innerHTML=itenstotal;
-				document.getElementById('valorreal').innerHTML=valorreal;
-
+				})
 		}
+
+
 
 	</script>
   </head>
@@ -201,7 +211,7 @@ $funcionarios = funcionario::lista();
 							<input type="hidden" name="id_venda" id="id_venda" value="<?php echo $idvenda; ?>" >
 							<input type="hidden" name="valor_venda" id="valor_venda" >
 							<label> Quantidade </label>
-							<input type='number' name='quant' id='quant'  />
+							<input type='number' name='quant' id='quant' value="1" />
 							<button type="button" onclick="inseririten()"> INCLUIR </button>
 						</div>
 						<div class="dropdown">
@@ -210,20 +220,23 @@ $funcionarios = funcionario::lista();
 						<div id='itens'>
 								<table  class="table table-striped table-hover">
 									<thead>
-										<tr > <th  scope="col">Produto</th> <th scope="col"> Quantidade</th>  <th scope="col"> Valor Unitário</th>  <th scope="col"> Valor</th>  <th scope="col"> Vendedor</th><tr>
+										<tr><th  scope="col">Produto</th> 
+											<th scope="col"> Quantidade</th>  
+											<th scope="col"> Valor Unitário</th>  
+											<th scope="col"> Valor</th>  
+											<th scope="col"> Vendedor</th>
+										<tr>
 									</thead>
 									<tbody id='produto_corpo'>
-										
-									
 									</tbody>
 								</table>
 						</div>
 					</div>
 					<div  class="col-3">
 						<div id='vertotal'  >
-							<label class='vertotallabel'> TOTAL DE ITENS  <span id="qtdetotal"></span> </label>
+							<label class='vertotallabel'> TOTAL DE ITENS  <span id="qtdetotal" name="qtdetotal"></span> </label>
 							<br>
-							<label class='vertotallabel'> TOTAL DA VENDA  R$ <span id="valorreal"></span></label>
+							<label class='vertotallabel'> TOTAL DA VENDA  R$ <span id="valorreal" name="qtdetotal"></span></label>
 							<br>
 							<div class="text-center">
 								<button type="button" class="btn btn-danger btn-block"> Fechar </button>
@@ -232,6 +245,9 @@ $funcionarios = funcionario::lista();
 				</div>
 				<div class="col-3">
 					<a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/sair">Sair</a>
+				</div>
+				<div class="col-3">
+					<a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/pedido/limparpedido/<?php echo $idvenda; ?>">Limpar Pedido</a>
 				</div>
 			</div>		
 	</body>

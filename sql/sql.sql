@@ -126,7 +126,7 @@ DROP TABLE IF EXISTS pedido_venda;
 CREATE TABLE pedido_venda (
   id_venda INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   id_produto INT(11) NOT NULL,
-  id_usuario INT(11),
+  id_funcionario INT(11),
   id_cliente INT(11),
   venda VARCHAR(40),
   valor_venda decimal(10,2) DEFAULT '0.00',
@@ -154,12 +154,6 @@ CREATE TABLE cliente (
   data_atualizar TIMESTAMP NULL DEFAULT NULL
 );
 
-DROP TABLE IF EXISTS pedido;
-CREATE TABLE pedido(
-id_pedido INT(11)  PRIMARY KEY NOT NULL AUTO_INCREMENT,
-pedido INT(2),
-ativo INT(1)
-);
 
 DROP VIEW IF EXISTS visao_estoque;
 CREATE VIEW  visao_estoque

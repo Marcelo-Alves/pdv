@@ -133,7 +133,14 @@ $listas = valor::lista();
 
 	function CadastrarValor(idproduto,comprar,valor){
 
-		//const dados = 'id_produto='+idproduto+',compra='+comprar+',valor='+comprar;
+		
+
+		if(comprar == "" || valor == ""){
+
+			alert("Por favor, preencha os valores corretamente");
+			return false;
+		}
+		
 
 		const dados = new URLSearchParams({'id_produto': idproduto,'compra': comprar.replace(',','.'),'venda': valor.replace(',','.')});
 
@@ -149,11 +156,7 @@ $listas = valor::lista();
 					alert("Não possivel alterar o valor!");
 					BuscaProduto();
 				}
-
-			}));  
-			//console.log(response));//popular(response));*/
-
-
+			}));
 	}
 
 </script>

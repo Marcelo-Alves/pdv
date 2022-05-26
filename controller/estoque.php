@@ -15,7 +15,7 @@ class estoque{
 		 e.lote as lote ,c.nome as categoria',
 		 'estoque e inner join produto p on e.id_produto = p.id_produto
 		 inner JOIN categoria c on p.id_categoria = c.id_categoria ',
-		 "ORDER BY p.nome");
+		 "ORDER BY p.id_produto");
 		 return $produto;
 	}
 

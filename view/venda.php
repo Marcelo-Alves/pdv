@@ -19,7 +19,11 @@ define('titulo', "Tela de Pedido");
 
 $idvenda = (isset($_POST['pedido'])?$_POST['pedido']:"01");
 include_once('./controller/cliente.php') ;
+include_once('./controller/funcionario.php') ;
 $clientes = cliente::lista();
+$funcionarios = funcionario::lista();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -56,15 +60,18 @@ $clientes = cliente::lista();
 				.then(response =>  response.map(produto => {					
 					const li = document.createElement('li');
 					li.setAttribute("class","list-group-item list-group-item-action");
-					li.setAttribute("onclick","PegaTexto('"+produto.nome+"')");
+					li.setAttribute("onclick","PegaTexto('"+produto.id_produto+"','"+produto.valor_venda+"','"+produto.nome+"')");
 					li.innerHTML = produto.id_produto + ' - ' + produto.nome;
 					ul.append(li)
 				}));
 				popup.append(ul);
 			}
 		}
-		function PegaTexto(texto){
-			document.getElementById('nome_prod').value = texto
+		function PegaTexto(id_prod,valor,texto){
+			document.getElementById('nome_prod').value = texto;
+			document.getElementById('id_produto').value = id_prod;
+			document.getElementById('valor_venda').value = valor.replace('.',',');
+			
 			document.getElementById('popup').innerHTML = '';
 			document.getElementById('quant').focus;
 		}
@@ -93,6 +100,59 @@ $clientes = cliente::lista();
 		  }
 		  campo.value = resultado.reverse();
 		}
+
+		function inseririten(){
+			let itenstotal = 0;
+			let valorreal = 0;
+			const id_produto = document.getElementById('id_produto').value;
+			const id_funcionario = document.getElementById('id_funcionario').value;
+			const id_cliente = document.getElementById('id_cliente').value;
+			const id_venda = document.getElementById('id_venda').value;
+			const valor_venda = document.getElementById('valor_venda').value.replace(',','.');			
+			const qtde = document.getElementById('quant').value;
+
+			const dados = new URLSearchParams({'id_produto': id_produto,'id_venda': id_venda,'valor_venda':valor_venda,
+				'id_funcionario': id_funcionario,'id_cliente': id_cliente,'qtde': qtde});
+
+			fetchGenerico('../pedido/inserir',dados)
+				.then(response => response.json())
+				.then(response => response.map(itens => {
+					if(itens.erro != 'vazio'){
+
+						const tabela = document.getElementById('produto_corpo');
+						const tr = document.createElement('tr');
+						const tdproduto = document.createElement('td');
+						const tdquant = document.createElement('td');
+						const tdvunitario = document.createElement('td');
+						const tdvenda = document.createElement('td');
+						const tdvendedor = document.createElement('td');
+						const tdexcluir = document.createElement('td');
+
+						tdproduto.innerHTML=itens.produto;
+						tdquant.innerHTML=itens.quantidade;
+						tdvunitario.innerHTML=itens.unitario;
+						tdvenda.innerHTML=itens.valor;
+						tdvendedor.innerHTML=itens.funcionario;
+						//tdexcluir.innerHTML=itens.produto;
+
+						tr.appendChild(tdproduto);
+						tr.appendChild(tdquant);
+						tr.appendChild(tdvunitario);
+						tr.appendChild(tdvenda);
+						tr.appendChild(tdvendedor);
+						tabela.append(tr);
+
+						itenstotal = itenstotal + itens.quantidade;
+						valorreal = valorreal + itens.valor;
+
+					}
+				}));
+
+				document.getElementById('qtdetotal').innerHTML=itenstotal;
+				document.getElementById('valorreal').innerHTML=valorreal;
+
+		}
+
 	</script>
   </head>
 	<body  class="pt-0">
@@ -105,16 +165,26 @@ $clientes = cliente::lista();
 							</label>
 						
 					<div class="row">
-						<div class="col-6 mb-2">
-							<label for="buscvenda">Pedido:</label>
-								<input type='hidden' id='idpedido' name='idpedido' value='<?php echo $idvenda;?>' />
-								<input type='text' id='buscapedido' name='buscapedido' style='width:200px;' />
+						<div class="col-4 mb-2">
+								<input type='hidden' id='idpedido' name='idpedido' value='<?php echo $idvenda;?>'/>
+								<input type='text' id='buscapedido' name='buscapedido' style='width:200px;'   placeholder="Pedido"/>
 								<button type='button'>Buscar</button>
 						</div>
-						<div class="col-6 mb-2">
-								<label for="cliente">Cliente:</label>
-								<select id="id_cliente" name="id_cliente">
+						<div class="col-4 mb-2">
+								<select id="id_funcionario" name="id_funcionario">
+								<option  value="" disabled selected hidden>Funcionário</option>
 									<?php
+										foreach($funcionarios as $funcionario):
+											echo "<option value='".$funcionario->id_funcionario."'>".$funcionario->nome."</option>";
+										endforeach;
+									?>
+								</select>
+						</div>
+						<div class="col-4 mb-2">
+								
+								<select id="id_cliente" name="id_cliente">
+								<option  value="" disabled selected hidden>Cliente</option>
+								<?php
 										foreach($clientes as $cliente):
 											echo "<option value='".$cliente->id_cliente."'>".$cliente->nome."</option>";
 										endforeach;
@@ -126,10 +196,13 @@ $clientes = cliente::lista();
 					<div class="col-9">
 						<div id='pesquisa'>
 							<label> Produto </label>
-							<input type='text' name='nome_prod' id='nome_prod' onkeyup='autocompletar()'/>							
+							<input type='text' name='nome_prod' id='nome_prod' onkeyup='autocompletar()' placeholder="Produto ou Ean"/>							
+							<input type="hidden" name="id_produto" id="id_produto" >
+							<input type="hidden" name="id_venda" id="id_venda" value="<?php echo $idvenda; ?>" >
+							<input type="hidden" name="valor_venda" id="valor_venda" >
 							<label> Quantidade </label>
 							<input type='number' name='quant' id='quant'  />
-							<button type="button"> INCLUIR </button>
+							<button type="button" onclick="inseririten()"> INCLUIR </button>
 						</div>
 						<div class="dropdown">
 							<span id="popup"></span>
@@ -140,19 +213,17 @@ $clientes = cliente::lista();
 										<tr > <th  scope="col">Produto</th> <th scope="col"> Quantidade</th>  <th scope="col"> Valor Unitário</th>  <th scope="col"> Valor</th>  <th scope="col"> Vendedor</th><tr>
 									</thead>
 									<tbody id='produto_corpo'>
-										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> <td scope="col">Clemente</td> </tr>
-										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> <td scope="col">Clemente</td></tr>
-										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td><td scope="col">Clemente</td> </tr>
-										<tr> <td  scope="col">Produto</td> <td scope="col"> 2</td> <td scope="col"> 10,00</td>  <td scope="col"> 20,00</td> <td scope="col">Clemente</td></tr>
+										
+									
 									</tbody>
 								</table>
 						</div>
 					</div>
 					<div  class="col-3">
 						<div id='vertotal'  >
-							<label class='vertotallabel'> TOTAL DE ITENS  0 </label>
+							<label class='vertotallabel'> TOTAL DE ITENS  <span id="qtdetotal"></span> </label>
 							<br>
-							<label class='vertotallabel'> TOTAL DA VENDA  R$ 0,00 </label>
+							<label class='vertotallabel'> TOTAL DA VENDA  R$ <span id="valorreal"></span></label>
 							<br>
 							<div class="text-center">
 								<button type="button" class="btn btn-danger btn-block"> Fechar </button>

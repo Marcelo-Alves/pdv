@@ -5,7 +5,7 @@ include_once './model/alterar.php';
 
 class produto{
 	public static function lista(){
-		 $produto = busca::buscaTudo('*','produto',"order by id_categoria");
+		 $produto = busca::buscaTudo('*','produto',"order by id_produto");
 		 return $produto;
 	}
 
@@ -32,10 +32,10 @@ class produto{
 	
 	public static function buscaproduto(){
 		$nome = $_POST['nome'];
-		$tabela ="produto p left join ean e on p.id_produto = e.id_produto";
-		$where = ($nome == ""?"":" and p.nome like '%".$nome."%' or e.ean like '%".$nome."%'" );
+		$tabela ="produto p left join ean e on p.id_produto = e.id_produto inner join valor_venda v on p.id_produto=v.id_produto";
+		$where = ($nome == ""?"":" and (p.nome like '%".$nome."%' or e.ean like '%".$nome."%') and v.valor_atual =1" );
 
-		$produtos = busca::buscaWhere('p.id_produto,p.nome',$tabela,$where,"");
+		$produtos = busca::buscaWhere('p.id_produto,p.nome,v.valor_venda',$tabela,$where,"");
 
 		if(count($produtos) > 0){
 			echo json_encode($produtos);

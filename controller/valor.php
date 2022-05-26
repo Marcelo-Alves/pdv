@@ -7,7 +7,7 @@
         public static function lista(){
             $produto = busca::buscaWhere('*',
             'pdv.produto p inner join pdv.valor_venda v on p.id_produto=v.id_produto',
-            ' and valor_atual=1',"order by id_categoria,p.id_produto");
+            ' and valor_atual=1',"order by p.id_produto");
             return $produto;
         }
  
@@ -16,7 +16,7 @@
             $campos = '*';
             $tabela = 'produto p inner join valor_venda v on p.id_produto=v.id_produto';
             $where = ' and p.nome like "%'.$nome.'%" and valor_atual=1';
-            $order = "order by id_categoria,p.id_produto";
+            $order = "order by p.id_produto";
             $produto = busca::buscaWhere($campos, $tabela , $where,$order);
             
             if(count($produto) > 0){

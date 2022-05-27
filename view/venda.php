@@ -126,12 +126,12 @@ $funcionarios = funcionario::lista();
 		}
 
 		function carregatabelaitens(linhas){
+			let i=0;
 			const tabela = document.getElementById('produto_corpo');
 			tabela.innerHTML='';
 			linhas.map(itens => {
 					if(itens.erro != 'vazio'){
 
-						
 						const tr = document.createElement('tr');
 						const tdproduto = document.createElement('td');
 						const tdquant = document.createElement('td');
@@ -140,12 +140,15 @@ $funcionarios = funcionario::lista();
 						const tdvendedor = document.createElement('td');
 						const tdexcluir = document.createElement('td');
 
+						tdquant.setAttribute('onclick','alterarquantidade("idquant'+i+'","'+itens.id_venda+'","'+itens.quantidade+'")');
+
 						tdproduto.innerHTML=itens.produto;
 						tdquant.innerHTML=itens.quantidade;
+						tdquant.id = 'idquant'+i;
+						tdquant.name = 'idquant'+i;
 						tdvunitario.innerHTML=itens.unitario;
 						tdvenda.innerHTML=itens.valor;
 						tdvendedor.innerHTML=itens.funcionario;
-
 						
 						tr.appendChild(tdproduto);
 						tr.appendChild(tdquant);
@@ -156,11 +159,37 @@ $funcionarios = funcionario::lista();
 
 						itenstotal = parseInt(itenstotal + itens.quantidade);
 						valorreal = parseFloat(valorreal + itens.valor);
-
+						i=i+1;
 					}
 				})
 		}
 
+		function alterarquantidade(id,id_venda,quantidade){
+
+			const hiddenid_venda = document.createElement('input');
+			const inputquantidade = document.createElement('input');
+			const button = document.createElement('button');
+			const trocaquantidade = document.getElementById(id);
+			trocaquantidade.innerHTML="";
+
+			hiddenid_venda.type='hidden';
+			inputquantidade.type='number';
+			hiddenid_venda.value = id_venda;
+			inputquantidade.value = quantidade;
+			hiddenid_venda.id = "quantid_venda";
+			hiddenid_venda.name = "quantid_venda";
+			inputquantidade.id = "quantquantidade";
+			inputquantidade.name = "quantquantidade";
+			inputquantidade.setAttribute('style','width:50px');
+			button.innerHTML='Alterar';
+
+			trocaquantidade.append(hiddenid_venda);
+			trocaquantidade.append(inputquantidade);
+			trocaquantidade.append(button);
+
+			alert("id "+id+" id_venda "+id_venda+" quantidade "+quantidade);
+
+		}
 
 
 	</script>

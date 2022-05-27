@@ -78,8 +78,7 @@ $listas = valor::lista();
 				const tr = document.createElement('tr');
 				const tdid = document.createElement('td');
 				const tdnome = document.createElement('td');
-				const tdcodigo = document.createElement('td');
-				
+				const tdcodigo = document.createElement('td');				
 				const tdcompra = document.createElement('td');
 				const tdvenda = document.createElement('td');
 				const tdcadastrar = document.createElement('td');

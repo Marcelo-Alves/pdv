@@ -5,7 +5,6 @@ require 'padrao/topo.php';
 $listas = produto::lista();
 $categorias = produto::buscacategorias();
 $fornecedores = produto::buscafornecedores();
-//print_r($listas);
 ?>
 <style>
 	#produto{
@@ -113,12 +112,10 @@ $fornecedores = produto::buscafornecedores();
 	function BuscaFornecedor(){
 		
 		const fornecedor = document.getElementById('id_fornecedor').value;
-		//alert(fornecedor)
 		const dados = 'fornecedor='+fornecedor;
 		fetchGenerico('produto/Buscafornecedor',dados)
 		.then(response => response.json())
 		.then(response => popular(response));
-	
 	}
 
 	function BuscaCategoria(){

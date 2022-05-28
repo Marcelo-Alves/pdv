@@ -15,6 +15,7 @@ if(isset($_SESSION['nome'])):
 		endfor;
 	endif;
 endif;
+
 define('titulo', "Tela de Pedido");  
 
 $idvenda = (isset($_POST['pedido'])?$_POST['pedido']:"01");
@@ -52,19 +53,28 @@ $funcionarios = funcionario::lista();
 			const nome = document.getElementById('nome_prod').value;
 			if(nome != ""){
 				const dados = 'nome='+nome;
+				const dropdown = document.getElementsByClassName('dropdown');
 				const popup = document.getElementById('popup');
 				const ul = document.createElement('ul');
+				popup.innerHTML ='';
 				ul.setAttribute("class","list-group position-fixed");
 				fetchGenerico('../produto/buscaproduto',dados)
 				.then(response => response.json())
-				.then(response =>  response.map(produto => {					
+				.then(response =>  response.map(produto => {	
+					if(nome.length <= 1 || produto.erro == "vazio" || produto.erro == undefined){
+						alert(nome.length + " - "+produto.erro);
+						popup.innerHTML ='';
+						return false;
+					}				
 					const li = document.createElement('li');
 					li.setAttribute("class","list-group-item list-group-item-action");
 					li.setAttribute("onclick","PegaTexto('"+produto.id_produto+"','"+produto.valor_venda+"','"+produto.nome+"')");
 					li.innerHTML = produto.id_produto + ' - ' + produto.nome;
 					ul.append(li)
 				}));
+				
 				popup.append(ul);
+				
 			}
 		}
 		function PegaTexto(id_prod,valor,texto){
@@ -111,6 +121,13 @@ $funcionarios = funcionario::lista();
 			const id_venda = document.getElementById('id_venda').value;
 			const valor_venda = document.getElementById('valor_venda').value.replace(',','.');			
 			const qtde = document.getElementById('quant').value;
+
+			if(id_funcionario == ""){
+				alert('Selecione um Vendedor');
+				document.getElementById('id_funcionario').style.backgroundColor = "#FF0000";
+				return false;
+			}
+
 
 			const dados = new URLSearchParams({'id_produto': id_produto,'id_venda': id_venda,'valor_venda':valor_venda,
 				'id_funcionario': id_funcionario,'id_cliente': id_cliente,'qtde': qtde});
@@ -187,8 +204,6 @@ $funcionarios = funcionario::lista();
 			trocaquantidade.append(inputquantidade);
 			trocaquantidade.append(button);
 
-			alert("id "+id+" id_venda "+id_venda+" quantidade "+quantidade);
-
 		}
 
 
@@ -206,26 +221,27 @@ $funcionarios = funcionario::lista();
 					<div class="row">
 						<div class="col-4 mb-2">
 								<input type='hidden' id='idpedido' name='idpedido' value='<?php echo $idvenda;?>'/>
-								<input type='text' id='buscapedido' name='buscapedido' style='width:200px;'   placeholder="Pedido"/>
-								<button type='button'>Buscar</button>
+								<input type='text' id='buscapedido' name='buscapedido' style='width:200px;' class="form-control"   placeholder="Pedido"/>
+								<button type='button' >Buscar</button>
 						</div>
 						<div class="col-4 mb-2">
-								<select id="id_funcionario" name="id_funcionario">
+								<select class="form-control" id="id_funcionario" name="id_funcionario" style='width:300px;' >
 								<option  value="" disabled selected hidden>Funcionário</option>
 									<?php
 										foreach($funcionarios as $funcionario):
-											echo "<option value='".$funcionario->id_funcionario."'>".$funcionario->nome."</option>";
+											$selecionado = ($funcionario->id_funcionario == $_SESSION['id_funcionario'] ? 'selected':'');
+											echo "<option value='".$funcionario->id_funcionario."' $selecionado >".$funcionario->nome."</option>";
 										endforeach;
 									?>
 								</select>
 						</div>
 						<div class="col-4 mb-2">
 								
-								<select id="id_cliente" name="id_cliente">
-								<option  value="" disabled selected hidden>Cliente</option>
+								<select class="form-control" id="id_cliente" name="id_cliente" style='width:300px;' >
 								<?php
 										foreach($clientes as $cliente):
-											echo "<option value='".$cliente->id_cliente."'>".$cliente->nome."</option>";
+											$selecionado =($cliente->id_cliente == 0 ? 'selected':'');
+											echo "<option value='".$cliente->id_cliente."' $selecionado >".$cliente->nome."</option>";
 										endforeach;
 									?>
 								</select>
@@ -235,7 +251,7 @@ $funcionarios = funcionario::lista();
 					<div class="col-9">
 						<div id='pesquisa'>
 							<label> Produto </label>
-							<input type='text' name='nome_prod' id='nome_prod' onkeyup='autocompletar()' placeholder="Produto ou Ean"/>							
+							<input type='text' name='nome_prod' id='nome_prod' onkeypress='autocompletar()' placeholder="Produto ou Ean"/>							
 							<input type="hidden" name="id_produto" id="id_produto" >
 							<input type="hidden" name="id_venda" id="id_venda" value="<?php echo $idvenda; ?>" >
 							<input type="hidden" name="valor_venda" id="valor_venda" >

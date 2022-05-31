@@ -8,7 +8,7 @@ class alterar  {
             $rs = mysql::conexao()->prepare($sql);  
             $rs->execute();
 
-            //echo  " Erro sql ". $sql;
+            //echo  $sql;
             
         } catch (Exception $ex) {
             echo $ex->getMessage() . " Erro sql ". $sql;

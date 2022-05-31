@@ -20,9 +20,11 @@ define('titulo', "Tela de Pedido");
 
 $idvenda = (isset($_POST['pedido'])?$_POST['pedido']:"01");
 include_once('./controller/cliente.php') ;
+include_once('./controller/pedido.php') ;
 include_once('./controller/funcionario.php') ;
 $clientes = cliente::lista();
 $funcionarios = funcionario::lista();
+$pedidos = pedido::buscapedido($idvenda);
 
 
 ?>
@@ -61,8 +63,7 @@ $funcionarios = funcionario::lista();
 				fetchGenerico('../produto/buscaproduto',dados)
 				.then(response => response.json())
 				.then(response =>  response.map(produto => {	
-					if(nome.length <= 1 || produto.erro == "vazio" || produto.erro == undefined){
-						alert(nome.length + " - "+produto.erro);
+					if(nome.length <= 1 || produto.erro == "vazio" ){
 						popup.innerHTML ='';
 						return false;
 					}				
@@ -139,7 +140,7 @@ $funcionarios = funcionario::lista();
 			document.getElementById('qtdetotal').innerHTML=itenstotal;
 			document.getElementById('valorreal').innerHTML=valorreal;
 			document.getElementById('nome_prod').value = "";
-			document.getElementById('id_produto').value = 1;
+			document.getElementById('quant').value = 1;
 		}
 
 		function carregatabelaitens(linhas){
@@ -147,8 +148,8 @@ $funcionarios = funcionario::lista();
 			const tabela = document.getElementById('produto_corpo');
 			tabela.innerHTML='';
 			linhas.map(itens => {
+				
 					if(itens.erro != 'vazio'){
-
 						const tr = document.createElement('tr');
 						const tdproduto = document.createElement('td');
 						const tdquant = document.createElement('td');
@@ -195,15 +196,28 @@ $funcionarios = funcionario::lista();
 			inputquantidade.value = quantidade;
 			hiddenid_venda.id = "quantid_venda";
 			hiddenid_venda.name = "quantid_venda";
-			inputquantidade.id = "quantquantidade";
-			inputquantidade.name = "quantquantidade";
+			inputquantidade.id = "quantquantidade"+id_venda;
+			inputquantidade.name = "quantquantidade"+id_venda;
 			inputquantidade.setAttribute('style','width:50px');
 			button.innerHTML='Alterar';
+			button.setAttribute("onclick","gravaralterar("+id_venda+",quantquantidade"+id_venda+")")
 
 			trocaquantidade.append(hiddenid_venda);
 			trocaquantidade.append(inputquantidade);
 			trocaquantidade.append(button);
+			document.getElementById(id).setAttribute("onclick","");
+			
 
+		}
+		
+		function gravaralterar(id_venda,quantidade){
+			alert("id_venda " + id_venda + " quantidade "+quantidade.value );
+			
+			const dados = new URLSearchParams({'id_venda': id_venda,'qtde': quantidade.value});
+			
+			fetchGenerico('../pedido/alteraprodutopedido',dados)
+				.then(response => response.json())
+				.then(response => carregatabelaitens(response));
 		}
 
 
@@ -214,17 +228,19 @@ $funcionarios = funcionario::lista();
 				<h1 class="display-2 text-center">PEDIDO</h1>
 				<div id='principal' class="row">
 					
-							<label class='h2'>
-								VENDA N° <?php echo $idvenda;?>
-							</label>
+					<div class="row h2">
+						VENDA N° <?php echo $idvenda;?>
+					</div>
 						
 					<div class="row">
-						<div class="col-4 mb-2">
+						<div class="col-4">
+							<div class="row">	
 								<input type='hidden' id='idpedido' name='idpedido' value='<?php echo $idvenda;?>'/>
 								<input type='text' id='buscapedido' name='buscapedido' style='width:200px;' class="form-control"   placeholder="Pedido"/>
-								<button type='button' >Buscar</button>
+								<button type='button' style="width:70px;margin-left: 10px">Buscar</button>
+							</div>
 						</div>
-						<div class="col-4 mb-2">
+						<div class="col-4">
 								<select class="form-control" id="id_funcionario" name="id_funcionario" style='width:300px;' >
 								<option  value="" disabled selected hidden>Funcionário</option>
 									<?php
@@ -235,7 +251,7 @@ $funcionarios = funcionario::lista();
 									?>
 								</select>
 						</div>
-						<div class="col-4 mb-2">
+						<div class="col-4 ">
 								
 								<select class="form-control" id="id_cliente" name="id_cliente" style='width:300px;' >
 								<?php
@@ -273,6 +289,21 @@ $funcionarios = funcionario::lista();
 										<tr>
 									</thead>
 									<tbody id='produto_corpo'>
+										<?php 
+										$i=0;
+										foreach($pedidos as $pedido):  
+										?>
+										<tr>
+											<td  scope="col"><?php echo $pedido->produto; ?></td> 
+											<td onclick="alterarquantidade('idquant<?php echo $i?>','<?php echo $pedido->id_venda?>','<?php echo $pedido->quantidade; ?>')" id="idquant<?php echo $i?>" > <?php echo $pedido->quantidade; ?></td>
+											<td scope="col"> <?php echo $pedido->unitario; ?></td>  
+											<td scope="col"> <?php echo $pedido->valor; ?></td>  
+											<td scope="col"> <?php echo $pedido->funcionario; ?></td>
+										<tr>
+										<?php 
+										$i=$i+1;
+										endforeach;  
+										?>
 									</tbody>
 								</table>
 						</div>

@@ -137,25 +137,25 @@ $fornecedores = produto::buscafornecedores();
 		ObjJson.map(itens => {
 			if(itens.erro != 'vazio'){
 
-			const tr = document.createElement('tr');
-			const tdid = document.createElement('td');
-			const tdnome = document.createElement('td');
-			const tdcodigo = document.createElement('td');
-			const tdeditar = document.createElement('td');
+				const tr = document.createElement('tr');
+				const tdid = document.createElement('td');
+				const tdnome = document.createElement('td');
+				const tdcodigo = document.createElement('td');
+				const tdeditar = document.createElement('td');
 
-			const imgean = document.createElement('img');
-			imgean.src = prot+"//"+host+'/biblioteca/img/ean.png';
-			imgean.setAttribute('width','30px');
-			const imgeditar = document.createElement('img');
-			imgeditar.src = prot+"//"+host+'/biblioteca/img/editar.png';	
-			imgeditar.setAttribute('width','30px');
-			const imgdeletar = document.createElement('img');
-			imgdeletar.src = prot+"//"+host+'/biblioteca/img/lixeira.jpg';	
-			imgdeletar.setAttribute('width','30px');
-			const tddeletar = document.createElement('td');
-			const acodigo = document.createElement('a');	
-			const aeditar = document.createElement('a');		
-			const adeletar = document.createElement('a');
+				const imgean = document.createElement('img');
+				imgean.src = prot+"//"+host+'/biblioteca/img/ean.png';
+				imgean.setAttribute('width','30px');
+				const imgeditar = document.createElement('img');
+				imgeditar.src = prot+"//"+host+'/biblioteca/img/editar.png';	
+				imgeditar.setAttribute('width','30px');
+				const imgdeletar = document.createElement('img');
+				imgdeletar.src = prot+"//"+host+'/biblioteca/img/lixeira.jpg';	
+				imgdeletar.setAttribute('width','30px');
+				const tddeletar = document.createElement('td');
+				const acodigo = document.createElement('a');	
+				const aeditar = document.createElement('a');		
+				const adeletar = document.createElement('a');
 
 		
 				tdid.innerHTML     = itens.id_produto;

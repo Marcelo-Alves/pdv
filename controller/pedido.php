@@ -19,6 +19,21 @@ class pedido{
 
 		echo json_encode($vendas);
     }
+	
+	
+	 public static function buscapedido($pedido){
+
+        $campo ="v.venda as venda,v.id_venda,p.nome as produto,v.quantidade,v.valor_venda as unitario,f.nome as funcionario,v.quantidade * v.valor_venda as valor";
+        $tabela ="pedido_venda v inner join produto p on v.id_produto=p.id_produto inner join 
+        funcionario f on v.id_funcionario=f.id_funcionario ";
+		$where = " and v.venda =".$pedido;
+        $ordem ="order by v.id_venda";
+
+		$vendas = busca::buscaWhere($campo,$tabela,$where,$ordem);
+
+		return $vendas;
+    }
+	
 
     public static function inserir(){
 
@@ -61,6 +76,19 @@ class pedido{
         pedido::busca($_POST['id_venda']);
 	
 	}	
+	
+	public static function alteraprodutopedido(){
+		$tabela = 'pedido_venda';
+		$campos = 'quantidade='.($_POST['qtde']);
+		$where = 'id_venda ='.$_POST['id_venda'];
+		
+		alterar::alterarBanco($campos,$tabela,$where);
+		
+		pedido::busca($_POST['id_venda']);
+		
+	}
+	
+	
 
 	public static function limparpedido(){
 		$url = ($_SERVER['REQUEST_URI']=="/"?"/index":$_SERVER['REQUEST_URI']);

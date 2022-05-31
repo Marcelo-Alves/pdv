@@ -9,7 +9,7 @@ class pedido{
 
     public static function busca($pedido){
 
-        $campo ="v.id_venda,p.nome as produto,v.quantidade,v.valor_venda as unitario,f.nome as funcionario,v.quantidade * v.valor_venda as valor";
+        $campo ="v.venda as venda,v.id_venda,p.nome as produto,v.quantidade,v.valor_venda as unitario,f.nome as funcionario,v.quantidade * v.valor_venda as valor";
         $tabela ="pedido_venda v inner join produto p on v.id_produto=p.id_produto inner join 
         funcionario f on v.id_funcionario=f.id_funcionario ";
 		$where = " and v.venda =".$pedido;
@@ -84,7 +84,7 @@ class pedido{
 		
 		alterar::alterarBanco($campos,$tabela,$where);
 		
-		pedido::busca($_POST['id_venda']);
+		pedido::busca($_POST['venda']);
 		
 	}
 	

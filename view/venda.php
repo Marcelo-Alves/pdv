@@ -158,7 +158,7 @@ $pedidos = pedido::buscapedido($idvenda);
 						const tdvendedor = document.createElement('td');
 						const tdexcluir = document.createElement('td');
 
-						tdquant.setAttribute('onclick','alterarquantidade("idquant'+i+'","'+itens.id_venda+'","'+itens.quantidade+'")');
+						tdquant.setAttribute('onclick','alterarquantidade("idquant'+i+'","'+itens.id_venda+'","'+itens.quantidade+'","'+itens.venda+'")');
 
 						tdproduto.innerHTML=itens.produto;
 						tdquant.innerHTML=itens.quantidade;
@@ -182,27 +182,33 @@ $pedidos = pedido::buscapedido($idvenda);
 				})
 		}
 
-		function alterarquantidade(id,id_venda,quantidade){
+		function alterarquantidade(id,id_venda,quantidade,venda){
 
 			const hiddenid_venda = document.createElement('input');
+			const hidden_venda = document.createElement('input');
 			const inputquantidade = document.createElement('input');
 			const button = document.createElement('button');
 			const trocaquantidade = document.getElementById(id);
 			trocaquantidade.innerHTML="";
 
 			hiddenid_venda.type='hidden';
+			hidden_venda.type='hidden';
 			inputquantidade.type='number';
 			hiddenid_venda.value = id_venda;
+			hidden_venda.value = venda;
 			inputquantidade.value = quantidade;
 			hiddenid_venda.id = "quantid_venda";
+			hidden_venda.id = "quant_venda";
+			hidden_venda.name = "quant_venda";
 			hiddenid_venda.name = "quantid_venda";
 			inputquantidade.id = "quantquantidade"+id_venda;
 			inputquantidade.name = "quantquantidade"+id_venda;
 			inputquantidade.setAttribute('style','width:50px');
 			button.innerHTML='Alterar';
-			button.setAttribute("onclick","gravaralterar("+id_venda+",quantquantidade"+id_venda+")")
+			button.setAttribute("onclick","gravaralterar("+id_venda+",quantquantidade"+id_venda+","+venda+")")
 
 			trocaquantidade.append(hiddenid_venda);
+			trocaquantidade.append(hidden_venda);
 			trocaquantidade.append(inputquantidade);
 			trocaquantidade.append(button);
 			document.getElementById(id).setAttribute("onclick","");
@@ -210,10 +216,9 @@ $pedidos = pedido::buscapedido($idvenda);
 
 		}
 		
-		function gravaralterar(id_venda,quantidade){
-			alert("id_venda " + id_venda + " quantidade "+quantidade.value );
+		function gravaralterar(id_venda,quantidade,venda){
 			
-			const dados = new URLSearchParams({'id_venda': id_venda,'qtde': quantidade.value});
+			const dados = new URLSearchParams({'id_venda': id_venda,'qtde': quantidade.value,'venda': venda});
 			
 			fetchGenerico('../pedido/alteraprodutopedido',dados)
 				.then(response => response.json())

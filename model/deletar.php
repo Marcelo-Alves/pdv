@@ -5,7 +5,7 @@ class deletar  {
     public static function deletarBanco($tabela,$where) {
         try {
             $sql= "delete from $tabela WHERE $where;";			
-			echo $sql;
+			//echo $sql;
 			
             $rs = mysql::conexao()->prepare($sql);  
             $rs->execute();

@@ -88,6 +88,15 @@ class pedido{
 		
 	}
 	
+	public static function excluiritem(){
+		$tabela = 'pedido_venda';
+		$where = 'id_venda ='.$_POST['id_venda'];
+
+		deletar::deletarBanco($tabela,$where);
+
+		pedido::busca($_POST['venda']);
+
+	}
 	
 
 	public static function limparpedido(){
@@ -102,8 +111,6 @@ class pedido{
 
 		header("Location: /pedido");
 		die();
-
-
 	}
 	
 }

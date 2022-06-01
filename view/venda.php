@@ -47,6 +47,7 @@ $pedidos = pedido::buscapedido($idvenda);
 	  #quant{width: 80px;}
 	  #nome_prod{width: 480px;}
 	  #principal{border:1px solid #000000;padding:5px;height: 100%;}
+	  .aexcluir{font-size: 40px; text-decoration: none;  color: #000000;  margin: 0;   padding: 0;}
 
 	</style>
 	<script src='<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/js/fetchgenerico.js'></script>
@@ -157,6 +158,7 @@ $pedidos = pedido::buscapedido($idvenda);
 						const tdvenda = document.createElement('td');
 						const tdvendedor = document.createElement('td');
 						const tdexcluir = document.createElement('td');
+						const aexcluir = document.createElement('a');
 
 						tdquant.setAttribute('onclick','alterarquantidade("idquant'+i+'","'+itens.id_venda+'","'+itens.quantidade+'","'+itens.venda+'")');
 
@@ -167,12 +169,17 @@ $pedidos = pedido::buscapedido($idvenda);
 						tdvunitario.innerHTML=itens.unitario;
 						tdvenda.innerHTML=itens.valor;
 						tdvendedor.innerHTML=itens.funcionario;
+						aexcluir.innerHTML='-';
+						aexcluir.setAttribute('class','aexcluir');
+						aexcluir.setAttribute('onclick','excluiritem('+itens.id_venda+','+itens.venda+')')
+						tdexcluir.appendChild(aexcluir);
 						
 						tr.appendChild(tdproduto);
 						tr.appendChild(tdquant);
 						tr.appendChild(tdvunitario);
 						tr.appendChild(tdvenda);
 						tr.appendChild(tdvendedor);
+						tr.appendChild(tdexcluir);
 						tabela.append(tr);
 
 						itenstotal = parseInt(itenstotal + itens.quantidade);
@@ -221,6 +228,16 @@ $pedidos = pedido::buscapedido($idvenda);
 			const dados = new URLSearchParams({'id_venda': id_venda,'qtde': quantidade.value,'venda': venda});
 			
 			fetchGenerico('../pedido/alteraprodutopedido',dados)
+				.then(response => response.json())
+				.then(response => carregatabelaitens(response));
+		}
+
+		function excluiritem(id_venda,venda){
+			const dados = new URLSearchParams({'id_venda': id_venda,'venda': venda});
+			let excluir = confirm('Deseja excluir?');
+			//alert(excluir);
+			
+			fetchGenerico('../pedido/excluiritem',dados)
 				.then(response => response.json())
 				.then(response => carregatabelaitens(response));
 		}
@@ -291,6 +308,7 @@ $pedidos = pedido::buscapedido($idvenda);
 											<th scope="col"> Valor Unitário</th>  
 											<th scope="col"> Valor</th>  
 											<th scope="col"> Vendedor</th>
+											<th scope="col"> Excluir</th>
 										<tr>
 									</thead>
 									<tbody id='produto_corpo'>
@@ -300,10 +318,11 @@ $pedidos = pedido::buscapedido($idvenda);
 										?>
 										<tr>
 											<td  scope="col"><?php echo $pedido->produto; ?></td> 
-											<td onclick="alterarquantidade('idquant<?php echo $i?>','<?php echo $pedido->id_venda?>','<?php echo $pedido->quantidade; ?>')" id="idquant<?php echo $i?>" > <?php echo $pedido->quantidade; ?></td>
+											<td onclick="alterarquantidade('idquant<?php echo $i?>','<?php echo $pedido->id_venda?>','<?php echo $pedido->quantidade; ?>','<?php echo $pedido->venda; ?>')" id="idquant<?php echo $i?>" > <?php echo $pedido->quantidade; ?></td>
 											<td scope="col"> <?php echo $pedido->unitario; ?></td>  
 											<td scope="col"> <?php echo $pedido->valor; ?></td>  
 											<td scope="col"> <?php echo $pedido->funcionario; ?></td>
+											<td scope="col"> <a href="#" class='aexcluir' onclick="excluiritem(<?php echo $pedido->id_venda; ?>,<?php echo $pedido->venda; ?>)">-</td>
 										<tr>
 										<?php 
 										$i=$i+1;

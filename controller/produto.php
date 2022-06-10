@@ -2,6 +2,8 @@
 include_once './model/busca.php';
 include_once './model/inserir.php';
 include_once './model/alterar.php';
+include_once './model/deletar.php';
+
 
 class produto{
 	public static function lista(){
@@ -175,5 +177,35 @@ class produto{
 		alterar::alterarBanco($campos_alterar,"produto",$where);
 		header("Location: /produto");
 		die();
+	}
+
+	public static function deletar(){
+		$url = $_SERVER['REQUEST_URI'];
+		$u = explode('/',$url);
+		$id = $u[3];
+		$tabela = 'produto';
+		$where = 'id_produto ='.$id ;
+
+		deletar::deletarBanco($tabela,$where);
+		
+		$tabela = 'estoque';
+		$where = '(id_produto ='.$id.')' ;
+
+		deletar::deletarBanco($tabela,$where);
+
+		$tabela = 'ean';
+		$where = '(id_produto ='.$id.')' ;
+
+		deletar::deletarBanco($tabela,$where);
+		
+		$where ='id_produto="'.$id.'"';
+
+		$campos_alterar ='valor_atual="1"';
+		alterar::alterarBanco($campos_alterar,"valor_venda",$where);
+
+		header("Location: /produto");
+		die();
+		
+
 	}
 }

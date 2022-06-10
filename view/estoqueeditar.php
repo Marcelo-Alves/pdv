@@ -35,10 +35,10 @@ include_once 'controller/fornecedor.php';
 			<label class="form-control" ><?php echo $categoria_prod ?></label>	
 			<br>
 			<label for="categoria" > Valor Compra </label>	
-			<input type='number' min='0,00' max="10000,00" name='valor_compra' id='valor_compra' class="form-control"  value="<?php echo $valor_compra; ?>" required>	
+			<input type='number' min='0,00' step="any" max="10000,00" name='valor_compra' id='valor_compra' class="form-control"  value="<?php echo $valor_compra; ?>" required>	
 			<br>
 			<label for="categoria" > Valor Venda </label>	
-			<input type='number' min='0,00' max="10000,00" name='valor_venda' id='valor_venda'  value="<?php echo $valor_venda; ?>" class="form-control" required>
+			<input type='number' min='0,00' step="any"  max="10000,00" name='valor_venda' id='valor_venda'  value="<?php echo $valor_venda; ?>" class="form-control" required>
 			<br>
 			<label for="categoria" > Lote </label>	
 			<input type='text' name='lote' id='lote' class="form-control"  value="<?php echo $lote; ?>">

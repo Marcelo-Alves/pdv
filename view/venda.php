@@ -150,43 +150,43 @@ $pedidos = pedido::buscapedido($idvenda);
 			tabela.innerHTML='';
 			linhas.map(itens => {
 				
-					if(itens.erro != 'vazio'){
-						const tr = document.createElement('tr');
-						const tdproduto = document.createElement('td');
-						const tdquant = document.createElement('td');
-						const tdvunitario = document.createElement('td');
-						const tdvenda = document.createElement('td');
-						const tdvendedor = document.createElement('td');
-						const tdexcluir = document.createElement('td');
-						const aexcluir = document.createElement('a');
+				if(itens.erro != 'vazio'){
+					const tr = document.createElement('tr');
+					const tdproduto = document.createElement('td');
+					const tdquant = document.createElement('td');
+					const tdvunitario = document.createElement('td');
+					const tdvenda = document.createElement('td');
+					const tdvendedor = document.createElement('td');
+					const tdexcluir = document.createElement('td');
+					const aexcluir = document.createElement('a');
 
-						tdquant.setAttribute('onclick','alterarquantidade("idquant'+i+'","'+itens.id_venda+'","'+itens.quantidade+'","'+itens.venda+'")');
+					tdquant.setAttribute('onclick','alterarquantidade("idquant'+i+'","'+itens.id_venda+'","'+itens.quantidade+'","'+itens.venda+'")');
 
-						tdproduto.innerHTML=itens.produto;
-						tdquant.innerHTML=itens.quantidade;
-						tdquant.id = 'idquant'+i;
-						tdquant.name = 'idquant'+i;
-						tdvunitario.innerHTML=itens.unitario;
-						tdvenda.innerHTML=itens.valor;
-						tdvendedor.innerHTML=itens.funcionario;
-						aexcluir.innerHTML='-';
-						aexcluir.setAttribute('class','aexcluir');
-						aexcluir.setAttribute('onclick','excluiritem('+itens.id_venda+','+itens.venda+')')
-						tdexcluir.appendChild(aexcluir);
-						
-						tr.appendChild(tdproduto);
-						tr.appendChild(tdquant);
-						tr.appendChild(tdvunitario);
-						tr.appendChild(tdvenda);
-						tr.appendChild(tdvendedor);
-						tr.appendChild(tdexcluir);
-						tabela.append(tr);
+					tdproduto.innerHTML=itens.produto;
+					tdquant.innerHTML=itens.quantidade;
+					tdquant.id = 'idquant'+i;
+					tdquant.name = 'idquant'+i;
+					tdvunitario.innerHTML=itens.unitario;
+					tdvenda.innerHTML=itens.valor;
+					tdvendedor.innerHTML=itens.funcionario;
+					aexcluir.innerHTML='-';
+					aexcluir.setAttribute('class','aexcluir');
+					aexcluir.setAttribute('onclick','excluiritem('+itens.id_venda+','+itens.venda+')')
+					tdexcluir.appendChild(aexcluir);
+					
+					tr.appendChild(tdproduto);
+					tr.appendChild(tdquant);
+					tr.appendChild(tdvunitario);
+					tr.appendChild(tdvenda);
+					tr.appendChild(tdvendedor);
+					tr.appendChild(tdexcluir);
+					tabela.append(tr);
 
-						itenstotal = parseInt(itenstotal + itens.quantidade);
-						valorreal = parseFloat(valorreal + itens.valor);
-						i=i+1;
-					}
-				})
+					itenstotal = parseInt(itenstotal + itens.quantidade);
+					valorreal = parseFloat(valorreal + itens.valor);
+					i=i+1;
+				}
+			})
 		}
 
 		function alterarquantidade(id,id_venda,quantidade,venda){
@@ -235,7 +235,6 @@ $pedidos = pedido::buscapedido($idvenda);
 		function excluiritem(id_venda,venda){
 			const dados = new URLSearchParams({'id_venda': id_venda,'venda': venda});
 			let excluir = confirm('Deseja excluir?');
-			//alert(excluir);
 			
 			fetchGenerico('../pedido/excluiritem',dados)
 				.then(response => response.json())

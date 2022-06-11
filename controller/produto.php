@@ -189,18 +189,16 @@ class produto{
 		deletar::deletarBanco($tabela,$where);
 		
 		$tabela = 'estoque';
-		$where = '(id_produto ='.$id.')' ;
-
+		$where = '(id_produto ='.$id.')';
 		deletar::deletarBanco($tabela,$where);
 
 		$tabela = 'ean';
 		$where = '(id_produto ='.$id.')' ;
-
 		deletar::deletarBanco($tabela,$where);
 		
 		$where ='id_produto="'.$id.'"';
 
-		$campos_alterar ='valor_atual="1"';
+		$campos_alterar ='valor_atual="0"';
 		alterar::alterarBanco($campos_alterar,"valor_venda",$where);
 
 		header("Location: /produto");

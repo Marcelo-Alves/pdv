@@ -48,9 +48,12 @@ $pedidos = pedido::buscapedido($idvenda);
 	  #nome_prod{width: 480px;}
 	  #principal{border:1px solid #000000;padding:5px;height: 100%;}
 	  .aexcluir{font-size: 40px; text-decoration: none;  color: #000000;  margin: 0;   padding: 0;}
+	  #valorreal{font-weight: bold;}
+	  #qtdetotal{font-weight: bold;}
 
 	</style>
 	<script src='<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/js/fetchgenerico.js'></script>
+	
 	<script>
 		function autocompletar(){
 			const nome = document.getElementById('nome_prod').value;
@@ -89,31 +92,6 @@ $pedidos = pedido::buscapedido($idvenda);
 		}
 
 
-		String.prototype.reverse = function(){
-		  return this.split('').reverse().join(''); 
-		};
-
-		function mascaraMoeda(campo,evento){
-		  var tecla = (!evento) ? window.event.keyCode : evento.which;
-		  var valor  =  campo.value.replace(/[^\d]+/gi,'').reverse();
-		  var resultado  = "";
-		  var mascara = "##.###.###,##".reverse();
-		  for (var x=0, y=0; x<mascara.length && y<valor.length;) {
-			if (mascara.charAt(x) != '#') {
-			  resultado += mascara.charAt(x);
-			  x++;
-			} else {
-			  resultado += valor.charAt(y);
-			  y++;
-			  x++;
-			}
-		  }
-		  campo.value = resultado.reverse();
-		}
-
-		let itenstotal = 0;
-		let valorreal = 0.00;
-
 
 		function inseririten(){
 			
@@ -138,15 +116,19 @@ $pedidos = pedido::buscapedido($idvenda);
 				.then(response => response.json())
 				.then(response => carregatabelaitens(response));
 
-			document.getElementById('qtdetotal').innerHTML=itenstotal;
-			document.getElementById('valorreal').innerHTML=valorreal;
 			document.getElementById('nome_prod').value = "";
 			document.getElementById('quant').value = 1;
 		}
 
 		function carregatabelaitens(linhas){
 			let i=0;
+			let itenstotal = 0;
+			let valorreal = 0.00;
 			const tabela = document.getElementById('produto_corpo');
+			const spvalor = document.getElementById('valorreal');
+			const spitens = document.getElementById('qtdetotal');
+			spvalor.innerHTML='';
+			spitens.innerHTML='';
 			tabela.innerHTML='';
 			linhas.map(itens => {
 				
@@ -166,8 +148,8 @@ $pedidos = pedido::buscapedido($idvenda);
 					tdquant.innerHTML=itens.quantidade;
 					tdquant.id = 'idquant'+i;
 					tdquant.name = 'idquant'+i;
-					tdvunitario.innerHTML=itens.unitario;
-					tdvenda.innerHTML=itens.valor;
+					tdvunitario.innerHTML=itens.unitario.toLocaleString('pt-br', {minimumFractionDigits: 2});
+					tdvenda.innerHTML=itens.valor.toLocaleString('pt-br', {minimumFractionDigits: 2});
 					tdvendedor.innerHTML=itens.funcionario;
 					aexcluir.innerHTML='-';
 					aexcluir.setAttribute('class','aexcluir');
@@ -182,11 +164,14 @@ $pedidos = pedido::buscapedido($idvenda);
 					tr.appendChild(tdexcluir);
 					tabela.append(tr);
 
-					itenstotal = parseInt(itenstotal + itens.quantidade);
-					valorreal = parseFloat(valorreal + itens.valor);
+					itenstotal = parseInt(itenstotal) + parseInt(itens.quantidade);
+					valorreal = parseFloat(valorreal) + parseFloat(itens.valor);
 					i=i+1;
 				}
 			})
+			spitens.innerHTML = itenstotal;			
+			spvalor.innerHTML = valorreal.toLocaleString('pt-br', {minimumFractionDigits: 2});
+			
 		}
 
 		function alterarquantidade(id,id_venda,quantidade,venda){
@@ -243,6 +228,7 @@ $pedidos = pedido::buscapedido($idvenda);
 
 
 	</script>
+
   </head>
 	<body  class="pt-0">
 		 <div class="container">
@@ -313,18 +299,22 @@ $pedidos = pedido::buscapedido($idvenda);
 									<tbody id='produto_corpo'>
 										<?php 
 										$i=0;
+										$spvalor=0;
+										$spitens=0;
 										foreach($pedidos as $pedido):  
 										?>
 										<tr>
 											<td  scope="col"><?php echo $pedido->produto; ?></td> 
 											<td onclick="alterarquantidade('idquant<?php echo $i?>','<?php echo $pedido->id_venda?>','<?php echo $pedido->quantidade; ?>','<?php echo $pedido->venda; ?>')" id="idquant<?php echo $i?>" > <?php echo $pedido->quantidade; ?></td>
-											<td scope="col"> <?php echo $pedido->unitario; ?></td>  
-											<td scope="col"> <?php echo $pedido->valor; ?></td>  
+											<td scope="col"> <?php echo number_format($pedido->unitario,2,',','.'); ?></td>  
+											<td scope="col"> <?php echo  number_format($pedido->valor,2,',','.'); ?></td>  
 											<td scope="col"> <?php echo $pedido->funcionario; ?></td>
 											<td scope="col"> <a href="#" class='aexcluir' onclick="excluiritem(<?php echo $pedido->id_venda; ?>,<?php echo $pedido->venda; ?>)">-</td>
 										<tr>
 										<?php 
 										$i=$i+1;
+										$spvalor = $spvalor + $pedido->valor;
+										$spitens = $spitens + $pedido->quantidade;
 										endforeach;  
 										?>
 									</tbody>
@@ -333,9 +323,9 @@ $pedidos = pedido::buscapedido($idvenda);
 					</div>
 					<div  class="col-3">
 						<div id='vertotal'  >
-							<label class='vertotallabel'> TOTAL DE ITENS  <span id="qtdetotal" name="qtdetotal"></span> </label>
+							<label class='vertotallabel'> TOTAL DE ITENS  <span id="qtdetotal" name="qtdetotal"><?php echo $spitens;?> </span> </label>
 							<br>
-							<label class='vertotallabel'> TOTAL DA VENDA  R$ <span id="valorreal" name="qtdetotal"></span></label>
+							<label class='vertotallabel'> TOTAL DA VENDA  R$ <span id="valorreal" name="valorreal"><?php echo number_format($spvalor,2,',','.');?></span></label>
 							<br>
 							<div class="text-center">
 								<button type="button" class="btn btn-danger btn-block"> Fechar </button>
@@ -350,4 +340,7 @@ $pedidos = pedido::buscapedido($idvenda);
 				</div>
 			</div>		
 	</body>
+
+
+
 </html>

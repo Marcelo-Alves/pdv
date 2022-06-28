@@ -2,6 +2,9 @@
 if(session_start() == false):
 	session_start();
 endif;
+/*echo "<pre>";
+print_r($_POST);
+echo "</pre>";*/
 $telas = array('painel','caixa','venda');
 
 $URI = str_replace('/','',$_SERVER['REQUEST_URI']);
@@ -47,7 +50,7 @@ $pedidos = pedido::buscapedido($idvenda);
 	  #quant{width: 80px;}
 	  #nome_prod{width: 480px;}
 	  #principal{border:1px solid #000000;padding:5px;height: 100%;}
-	  .aexcluir{font-size: 40px; text-decoration: none;  color: #000000;  margin: 0;   padding: 0;}
+	  .aexcluir{font-size: 10px; text-decoration: none;  color: #000000;  margin: 0;   padding: 0;}
 	  #valorreal{font-weight: bold;}
 	  #qtdetotal{font-weight: bold;}
 
@@ -151,7 +154,7 @@ $pedidos = pedido::buscapedido($idvenda);
 					tdvunitario.innerHTML=itens.unitario.toLocaleString('pt-br', {minimumFractionDigits: 2});
 					tdvenda.innerHTML=itens.valor.toLocaleString('pt-br', {minimumFractionDigits: 2});
 					tdvendedor.innerHTML=itens.funcionario;
-					aexcluir.innerHTML='-';
+					aexcluir.innerHTML='EXCLUIR';
 					aexcluir.setAttribute('class','aexcluir');
 					aexcluir.setAttribute('onclick','excluiritem('+itens.id_venda+','+itens.venda+')')
 					tdexcluir.appendChild(aexcluir);
@@ -239,12 +242,14 @@ $pedidos = pedido::buscapedido($idvenda);
 						VENDA N° <?php echo $idvenda;?>
 					</div>
 						
-					<div class="row">
+					<div class="row" style="margin: 10px;">
 						<div class="col-4">
 							<div class="row">	
 								<input type='hidden' id='idpedido' name='idpedido' value='<?php echo $idvenda;?>'/>
-								<input type='text' id='buscapedido' name='buscapedido' style='width:200px;' class="form-control"   placeholder="Pedido"/>
-								<button type='button' style="width:70px;margin-left: 10px">Buscar</button>
+								<form action="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/venda/" method="POST"  class="row">
+									<input type='number' id='pedido' name='pedido' style='width:100px;margin-left:10px;' class="form-control"   placeholder="Pedido" autocomplete="off"/>
+									<button type='submit' style="width:70px;margin-left: 10px;">Buscar</button>
+								</form>
 							</div>
 						</div>
 						<div class="col-4">
@@ -309,7 +314,7 @@ $pedidos = pedido::buscapedido($idvenda);
 											<td scope="col"> <?php echo number_format($pedido->unitario,2,',','.'); ?></td>  
 											<td scope="col"> <?php echo  number_format($pedido->valor,2,',','.'); ?></td>  
 											<td scope="col"> <?php echo $pedido->funcionario; ?></td>
-											<td scope="col"> <a href="#" class='aexcluir' onclick="excluiritem(<?php echo $pedido->id_venda; ?>,<?php echo $pedido->venda; ?>)">-</td>
+											<td scope="col"> <a href="#" class='aexcluir' onclick="excluiritem(<?php echo $pedido->id_venda; ?>,<?php echo $pedido->venda; ?>)">EXCLUIR</td>
 										<tr>
 										<?php 
 										$i=$i+1;

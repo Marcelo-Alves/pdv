@@ -2,6 +2,9 @@
 if(session_start() == false):
 	session_start();
 endif;
+/*echo "<pre>";
+print_r($_POST);
+echo "</pre>";*/
 $telas = array('painel','caixa','venda');
 
 $URI = str_replace('/','',$_SERVER['REQUEST_URI']);
@@ -47,187 +50,15 @@ $pedidos = pedido::buscapedido($idvenda);
 	  #quant{width: 80px;}
 	  #nome_prod{width: 480px;}
 	  #principal{border:1px solid #000000;padding:5px;height: 100%;}
-	  .aexcluir{font-size: 40px; text-decoration: none;  color: #000000;  margin: 0;   padding: 0;}
+	  .aexcluir{font-size: 10px; text-decoration: none;  color: #000000;  margin: 0;   padding: 0;}
 	  #valorreal{font-weight: bold;}
 	  #qtdetotal{font-weight: bold;}
 
 	</style>
 	<script src='<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/js/fetchgenerico.js'></script>
+	<script src='<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/js/funcoes.js'></script>
 	
-	<script>
-		function autocompletar(){
-			const nome = document.getElementById('nome_prod').value;
-			if(nome != ""){
-				const dados = 'nome='+nome;
-				const dropdown = document.getElementsByClassName('dropdown');
-				const popup = document.getElementById('popup');
-				const ul = document.createElement('ul');
-				popup.innerHTML ='';
-				ul.setAttribute("class","list-group position-fixed");
-				fetchGenerico('../produto/buscaproduto',dados)
-				.then(response => response.json())
-				.then(response =>  response.map(produto => {	
-					if(nome.length <= 1 || produto.erro == "vazio" ){
-						popup.innerHTML ='';
-						return false;
-					}				
-					const li = document.createElement('li');
-					li.setAttribute("class","list-group-item list-group-item-action");
-					li.setAttribute("onclick","PegaTexto('"+produto.id_produto+"','"+produto.valor_venda+"','"+produto.nome+"')");
-					li.innerHTML = produto.id_produto + ' - ' + produto.nome;
-					ul.append(li)
-				}));
-				
-				popup.append(ul);
-				
-			}
-		}
-		function PegaTexto(id_prod,valor,texto){
-			document.getElementById('nome_prod').value = texto;
-			document.getElementById('id_produto').value = id_prod;
-			document.getElementById('valor_venda').value = valor.replace('.',',');
-			
-			document.getElementById('popup').innerHTML = '';
-			document.getElementById('quant').focus;
-		}
-
-
-
-		function inseririten(){
-			
-			const id_produto = document.getElementById('id_produto').value;
-			const id_funcionario = document.getElementById('id_funcionario').value;
-			const id_cliente = document.getElementById('id_cliente').value;
-			const id_venda = document.getElementById('id_venda').value;
-			const valor_venda = document.getElementById('valor_venda').value.replace(',','.');			
-			const qtde = document.getElementById('quant').value;
-
-			if(id_funcionario == ""){
-				alert('Selecione um Vendedor');
-				document.getElementById('id_funcionario').style.backgroundColor = "#FF0000";
-				return false;
-			}
-
-
-			const dados = new URLSearchParams({'id_produto': id_produto,'id_venda': id_venda,'valor_venda':valor_venda,
-				'id_funcionario': id_funcionario,'id_cliente': id_cliente,'qtde': qtde});
-
-			fetchGenerico('../pedido/inserir',dados)
-				.then(response => response.json())
-				.then(response => carregatabelaitens(response));
-
-			document.getElementById('nome_prod').value = "";
-			document.getElementById('quant').value = 1;
-		}
-
-		function carregatabelaitens(linhas){
-			let i=0;
-			let itenstotal = 0;
-			let valorreal = 0.00;
-			const tabela = document.getElementById('produto_corpo');
-			const spvalor = document.getElementById('valorreal');
-			const spitens = document.getElementById('qtdetotal');
-			spvalor.innerHTML='';
-			spitens.innerHTML='';
-			tabela.innerHTML='';
-			linhas.map(itens => {
-				
-				if(itens.erro != 'vazio'){
-					const tr = document.createElement('tr');
-					const tdproduto = document.createElement('td');
-					const tdquant = document.createElement('td');
-					const tdvunitario = document.createElement('td');
-					const tdvenda = document.createElement('td');
-					const tdvendedor = document.createElement('td');
-					const tdexcluir = document.createElement('td');
-					const aexcluir = document.createElement('a');
-
-					tdquant.setAttribute('onclick','alterarquantidade("idquant'+i+'","'+itens.id_venda+'","'+itens.quantidade+'","'+itens.venda+'")');
-
-					tdproduto.innerHTML=itens.produto;
-					tdquant.innerHTML=itens.quantidade;
-					tdquant.id = 'idquant'+i;
-					tdquant.name = 'idquant'+i;
-					tdvunitario.innerHTML=itens.unitario.toLocaleString('pt-br', {minimumFractionDigits: 2});
-					tdvenda.innerHTML=itens.valor.toLocaleString('pt-br', {minimumFractionDigits: 2});
-					tdvendedor.innerHTML=itens.funcionario;
-					aexcluir.innerHTML='-';
-					aexcluir.setAttribute('class','aexcluir');
-					aexcluir.setAttribute('onclick','excluiritem('+itens.id_venda+','+itens.venda+')')
-					tdexcluir.appendChild(aexcluir);
-					
-					tr.appendChild(tdproduto);
-					tr.appendChild(tdquant);
-					tr.appendChild(tdvunitario);
-					tr.appendChild(tdvenda);
-					tr.appendChild(tdvendedor);
-					tr.appendChild(tdexcluir);
-					tabela.append(tr);
-
-					itenstotal = parseInt(itenstotal) + parseInt(itens.quantidade);
-					valorreal = parseFloat(valorreal) + parseFloat(itens.valor);
-					i=i+1;
-				}
-			})
-			spitens.innerHTML = itenstotal;			
-			spvalor.innerHTML = valorreal.toLocaleString('pt-br', {minimumFractionDigits: 2});
-			
-		}
-
-		function alterarquantidade(id,id_venda,quantidade,venda){
-
-			const hiddenid_venda = document.createElement('input');
-			const hidden_venda = document.createElement('input');
-			const inputquantidade = document.createElement('input');
-			const button = document.createElement('button');
-			const trocaquantidade = document.getElementById(id);
-			trocaquantidade.innerHTML="";
-
-			hiddenid_venda.type='hidden';
-			hidden_venda.type='hidden';
-			inputquantidade.type='number';
-			hiddenid_venda.value = id_venda;
-			hidden_venda.value = venda;
-			inputquantidade.value = quantidade;
-			hiddenid_venda.id = "quantid_venda";
-			hidden_venda.id = "quant_venda";
-			hidden_venda.name = "quant_venda";
-			hiddenid_venda.name = "quantid_venda";
-			inputquantidade.id = "quantquantidade"+id_venda;
-			inputquantidade.name = "quantquantidade"+id_venda;
-			inputquantidade.setAttribute('style','width:50px');
-			button.innerHTML='Alterar';
-			button.setAttribute("onclick","gravaralterar("+id_venda+",quantquantidade"+id_venda+","+venda+")")
-
-			trocaquantidade.append(hiddenid_venda);
-			trocaquantidade.append(hidden_venda);
-			trocaquantidade.append(inputquantidade);
-			trocaquantidade.append(button);
-			document.getElementById(id).setAttribute("onclick","");
-			
-
-		}
-		
-		function gravaralterar(id_venda,quantidade,venda){
-			
-			const dados = new URLSearchParams({'id_venda': id_venda,'qtde': quantidade.value,'venda': venda});
-			
-			fetchGenerico('../pedido/alteraprodutopedido',dados)
-				.then(response => response.json())
-				.then(response => carregatabelaitens(response));
-		}
-
-		function excluiritem(id_venda,venda){
-			const dados = new URLSearchParams({'id_venda': id_venda,'venda': venda});
-			let excluir = confirm('Deseja excluir?');
-			
-			fetchGenerico('../pedido/excluiritem',dados)
-				.then(response => response.json())
-				.then(response => carregatabelaitens(response));
-		}
-
-
-	</script>
+	
 
   </head>
 	<body  class="pt-0">
@@ -236,15 +67,17 @@ $pedidos = pedido::buscapedido($idvenda);
 				<div id='principal' class="row">
 					
 					<div class="row h2">
-						VENDA N° <?php echo $idvenda;?>
+						PEDIDO N° <?php echo $idvenda;?>
 					</div>
 						
-					<div class="row">
+					<div class="row" style="margin: 10px;">
 						<div class="col-4">
 							<div class="row">	
 								<input type='hidden' id='idpedido' name='idpedido' value='<?php echo $idvenda;?>'/>
-								<input type='text' id='buscapedido' name='buscapedido' style='width:200px;' class="form-control"   placeholder="Pedido"/>
-								<button type='button' style="width:70px;margin-left: 10px">Buscar</button>
+								<form action="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/venda/" method="POST"  class="row">
+									<input type='number' id='pedido' name='pedido' style='width:100px;margin-left:10px;' class="form-control"   placeholder="Pedido" autocomplete="off"/>
+									<button type='submit' style="width:70px;margin-left: 10px;">Buscar</button>
+								</form>
 							</div>
 						</div>
 						<div class="col-4">
@@ -309,7 +142,7 @@ $pedidos = pedido::buscapedido($idvenda);
 											<td scope="col"> <?php echo number_format($pedido->unitario,2,',','.'); ?></td>  
 											<td scope="col"> <?php echo  number_format($pedido->valor,2,',','.'); ?></td>  
 											<td scope="col"> <?php echo $pedido->funcionario; ?></td>
-											<td scope="col"> <a href="#" class='aexcluir' onclick="excluiritem(<?php echo $pedido->id_venda; ?>,<?php echo $pedido->venda; ?>)">-</td>
+											<td scope="col"> <a href="#" class='aexcluir' onclick="excluiritem(<?php echo $pedido->id_venda; ?>,<?php echo $pedido->venda; ?>)">EXCLUIR</td>
 										<tr>
 										<?php 
 										$i=$i+1;

@@ -112,12 +112,14 @@ CREATE TABLE valor_venda (
 
 DROP TABLE IF EXISTS venda;
 CREATE TABLE venda (
-  id_venda INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  id_venda VARCHAR(80) NOT NULL UNIQUE,
   id_produto INT(11) NOT NULL,
   id_usuario INT(11),
   id_cliente INT(11),
   venda VARCHAR(40),
   valor_venda decimal(10,2) DEFAULT '0.00',
+  valor_total DECIMAL(12,2) NULL DEFAULT '0.00',
   quantidade INT(11) DEFAULT 0,
   data_venda TIMESTAMP NULL DEFAULT NULL
 ) ;

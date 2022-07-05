@@ -52,6 +52,7 @@ $pedidos = pedido::buscapedido($idvenda);
 	  #valorreal{font-weight: bold;}
 	  #qtdetotal{font-weight: bold;}
 	  #valortroco{font-weight: bold;}
+	  #dintotal{width: 200px;}
 
 	</style>
 	<script src='<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/js/fetchgenerico.js'></script>

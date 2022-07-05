@@ -111,8 +111,6 @@ class estoque{
 			'id_produto'   => $_POST['id_produto'],
 			'id_estoque'   => $_POST['id_estoque'],
 			'quantidade'   => $_POST['quantidade'],
-			'valor_compra' => $_POST['valor_compra'],
-			'valor_venda'  => $_POST['valor_venda'],
 			'validade'     => date_format($data, 'Y-m-d H:i:s'),
 			'lote'         => $_POST['lote'],
 			'data_atualizar'  => date('Y-m-d H:i:s')

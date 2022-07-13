@@ -129,8 +129,10 @@ function carregatabelaitens(linhas){
 	let valorreal = 0.00;
 	const tabela = document.getElementById('produto_corpo');
 	const spvalor = document.getElementById('valorreal');
+	const hdspvalor = document.getElementById('hdvalorreal');
 	const spitens = document.getElementById('qtdetotal');
 	spvalor.innerHTML='';
+	hdspvalor.value='';
 	spitens.innerHTML='';
 	tabela.innerHTML='';
 	linhas.map(itens => {
@@ -174,6 +176,7 @@ function carregatabelaitens(linhas){
 	})
 	spitens.innerHTML = itenstotal;			
 	spvalor.innerHTML = valorreal.toLocaleString('pt-br', {minimumFractionDigits: 2});
+	hdspvalor.value = valorreal;
 	
 }
 
@@ -229,15 +232,6 @@ function excluiritem(id_venda,venda){
 		.then(response => carregatabelaitens(response));
 }
 
-function Dinheiro(){ 		
-	if(document.getElementById('seltipo').value == 'dinheiro'){
-		document.getElementById('dintotal').disabled=false;
-		document.getElementById('dintotal').focus();
-		
-	}else{
-		document.getElementById('dintotal').disabled=true;
-	}
-}
 
 function mascaraMoeda(){
 

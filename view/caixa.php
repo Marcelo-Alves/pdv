@@ -27,7 +27,7 @@ include_once('./controller/pedido.php') ;
 include_once('./controller/funcionario.php') ;
 $clientes = cliente::lista();
 $funcionarios = funcionario::lista();
-$pedidos = pedido::buscapedido($idvenda);
+$pedidos = caixa::buscapedido($idvenda);
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -42,16 +42,13 @@ $pedidos = pedido::buscapedido($idvenda);
 
     <style>
       #pesquisa{border:1px solid #000000;padding:10px;}
-	  #itens,#total{border:1px solid #000000;padding:5px;}
-	  #vertotal{border:1px solid #000000;padding:5px;}
+	  #vertotal,#itens,#total{border:1px solid #000000;padding:5px;}	  
 	  .vertotallabel{padding-bottom:5px;}	  
 	  #quant{width: 80px;}
 	  #nome_prod{width: 480px;}
 	  #principal{border:1px solid #000000;padding:5px;height: 100%;}
 	  .aexcluir{font-size: 10px; text-decoration: none;  color: #000000;  margin: 0;   padding: 0;}
-	  #valorreal{font-weight: bold;}
-	  #qtdetotal{font-weight: bold;}
-	  #valortroco{font-weight: bold;}
+	  #valorreal,#qtdetotal,#valortroco,#valorfalta{font-weight: bold;}
 	  #dintotal{width: 200px;}
 
 	</style>
@@ -158,23 +155,26 @@ $pedidos = pedido::buscapedido($idvenda);
 							<label class='vertotallabel'> TOTAL DE ITENS  <span id="qtdetotal" name="qtdetotal"><?php echo $spitens;?> </span> </label>
 							<br>
 							<label class='vertotallabel'> TOTAL DA VENDA  R$ <span id="valorreal" name="valorreal"><?php echo number_format($spvalor,2,',','.');?></span></label>
-							<input type="hidden" name="hdvalorreal" id="hdvalorreal" value='<?php echo number_format($spvalor,2,',','.');?>'>
+							<input type="hidden" name="hdvalorreal" id="hdvalorreal" value='<?php echo $spvalor;?>'>
+							<br>
+							<label class='verfaltalabel'> FALTA  R$ <span id="valorfalta" name="valorfalta"><?php echo number_format($spvalor,2,',','.');?></span></label>
+							<input type="hidden" name="hdvalorfalta" id="hdvalorfalta" value='<?php echo $spvalor;?>'>
 							<br>
 							<label class='vertotallabel'> TROCO R$ <span id="valortroco" name="valortroco">0,00</span> </label>
 							<br>
 							<input type='hidden' id='total' name='total' />
 							
 							<label class='vertotallabel'>TIPO PAGAMENTO 
-								<select id="seltipo" name="seltipo" onchange='Dinheiro()'>
+								<select id="seltipo" name="seltipo">
 									<option > </option>
-									<option value='cartao'> CARTÃO </option>
+									<option value='cartao'> CREDITO </option>
 									<option value='debito'> DEBITO </option>
 									<option value='dinheiro'> DINHEIRO </option>
 								</select>
 							</label>
 							<br>
 							<label class='vertotallabel'>
-							<input  type="text" id='dintotal' name='dintotal' disabled onKeyUp="mascaraMoeda(),calcularvalor(this)" />
+							<input  type="text" id='dintotal' name='dintotal' onKeyUp="mascaraMoeda(),calcularvalor(this)" />
 							</label>
 							<br>
 							<div class="text-center">

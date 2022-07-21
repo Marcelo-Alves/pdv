@@ -20,6 +20,17 @@ class pedido{
 		echo json_encode($vendas);
     }
 	
+	public static function pedidoativo(){
+		$campo ='distinct venda';
+		$tabela = 'pedido_venda';
+		$ordem ='order by venda';
+
+		$vendaativa = busca::buscaWhere($campo,$tabela,"",$ordem);
+
+		return $vendaativa;
+
+	}
+
 	
 	 public static function buscapedido($pedido){
 

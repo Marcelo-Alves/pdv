@@ -132,7 +132,7 @@ function carregatabelaitens(linhas){
 	const hdspvalor = document.getElementById('hdvalorreal');
 	const spitens = document.getElementById('qtdetotal');
 	spvalor.innerHTML='';
-	hdspvalor.value='';
+	//hdspvalor.value='';
 	spitens.innerHTML='';
 	tabela.innerHTML='';
 	linhas.map(itens => {
@@ -153,8 +153,8 @@ function carregatabelaitens(linhas){
 			tdquant.innerHTML=itens.quantidade;
 			tdquant.id = 'idquant'+i;
 			tdquant.name = 'idquant'+i;
-			tdvunitario.innerHTML=itens.unitario.toLocaleString('pt-br', {minimumFractionDigits: 2});
-			tdvenda.innerHTML=itens.valor.toLocaleString('pt-br', {minimumFractionDigits: 2});
+			tdvunitario.innerHTML = itens.unitario.toLocaleString('pt-br', {minimumFractionDigits: 2});
+			tdvenda.innerHTML = itens.valor.toLocaleString('pt-br', {minimumFractionDigits: 2});
 			tdvendedor.innerHTML=itens.funcionario;
 			aexcluir.innerHTML='EXCLUIR';
 			aexcluir.setAttribute('class','aexcluir');
@@ -185,6 +185,7 @@ function alterarquantidade(id,id_venda,quantidade,venda){
 	const hiddenid_venda = document.createElement('input');
 	const hidden_venda = document.createElement('input');
 	const inputquantidade = document.createElement('input');
+	inputquantidade.setAttribute('step','0.01');
 	const button = document.createElement('button');
 	const trocaquantidade = document.getElementById(id);
 	trocaquantidade.innerHTML="";
@@ -201,7 +202,7 @@ function alterarquantidade(id,id_venda,quantidade,venda){
 	hiddenid_venda.name = "quantid_venda";
 	inputquantidade.id = "quantquantidade"+id_venda;
 	inputquantidade.name = "quantquantidade"+id_venda;
-	inputquantidade.setAttribute('style','width:50px');
+	inputquantidade.setAttribute('style','width:70px');
 	button.innerHTML='Alterar';
 	button.setAttribute("onclick","gravaralterar("+id_venda+",quantquantidade"+id_venda+","+venda+")")
 

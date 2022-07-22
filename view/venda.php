@@ -156,9 +156,14 @@ $pedidos = pedido::buscapedido($idvenda);
 					</div>
 					<div  class="col-3">
 						<div id='vertotal'  >
-							<label class='vertotallabel'> TOTAL DE ITENS  <span id="qtdetotal" name="qtdetotal"><?php echo $spitens;?> </span> </label>
+							<label class='vertotallabel'> 
+								TOTAL DE ITENS  <span id="qtdetotal" name="qtdetotal"><?php echo $spitens;?> </span> 
+							</label>
 							<br>
-							<label class='vertotallabel'> TOTAL DA VENDA  R$ <span id="valorreal" name="valorreal"><?php echo number_format($spvalor,2,',','.');?></span></label>
+							<label class='vertotallabel'> 
+								TOTAL DA VENDA  R$ <span id="valorreal" name="valorreal"><?php echo number_format($spvalor,2,',','.');?></span>
+								<input type="hidden" name="hdvalorreal" id="hdvalorreal" value='<?php echo $spvalor;?>'>
+							</label>
 							<br>
 							<div class="text-center">
 								<button type="button" class="btn btn-danger btn-block"> Fechar </button>

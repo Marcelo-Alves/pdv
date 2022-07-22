@@ -4,7 +4,6 @@ if(session_start() == false):
 endif;
 
 define('titulo', "Tela de Pedido");  
-$ativos[]=null;
 $pedidoativos = pedido::pedidoativo();
 
 foreach($pedidoativos as $pedidoativo):
@@ -44,7 +43,7 @@ endforeach;
 
 					<button 
 					<?php 
-						if(is_null($ativos)):	
+						if(isset($ativos)):	
 							if(count($ativos) > $m):
 								if($i == $ativos[$m]['venda']):
 									echo " class='ativo'";							

@@ -27,7 +27,7 @@ class pedido{
 
 		$vendaativa = busca::buscaWhere($campo,$tabela,"",$ordem);
 
-		return $vendaativa;
+		echo json_encode($vendaativa);
 
 	}
 

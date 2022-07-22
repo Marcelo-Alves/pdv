@@ -4,11 +4,7 @@ if(session_start() == false):
 endif;
 
 define('titulo', "Tela de Pedido");  
-$pedidoativos = pedido::pedidoativo();
 
-foreach($pedidoativos as $pedidoativo):
-	$ativos[] = (array)$pedidoativo; 
-endforeach;
 
 ?>
 <!DOCTYPE html>
@@ -20,39 +16,33 @@ endforeach;
 	<meta name="author" content="Marcelo Alves">   
 	<title><?php echo titulo; ?></title>
     <link href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/css/bootstrap.css" rel="stylesheet">   
-	<link href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/css/dashboard.css" rel="stylesheet">     
-    <style>
+	<link href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/css/dashboard.css" rel="stylesheet"> 
+	<style>
 		.col-xs-4 button{font-size: 50px;}
 		.col-xs-4{width: 80px; height: 80px;margin: 5px;}
 		body{padding-top: 0;}
-		.ativo{    color: #FF0000}
+		.ativo{color:red;}
 	</style>
+	<script src='<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/js/fetchgenerico.js'></script>
+	<script src='<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/js/funcoes.js'></script>   
+    <SCript>
+		window.setInterval("verificaPedido()",5000);
+	</SCript>
   </head>
-	<body>
+
+	<body onload="verificaPedido()">
 		<div class="container">
 			<div class="row d-flex justify-content-center">
 					<p class="text-center display-2"> TELA DE PEDIDO</p>
 			</div>
 			<div class="row justify-content-md-center">
 		<?php  
-		$m = 0;
 		for($i=1;$i <= QUANT_PEDIDO;$i++):  ?>
 			<div  class="col-xs-4">
 				<form action="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/venda/" method="POST">
 					<input type="hidden" value="<?php echo $i ?>" name="pedido" />
 
-					<button 
-					<?php 
-						if(isset($ativos)):	
-							if(count($ativos) > $m):
-								if($i == $ativos[$m]['venda']):
-									echo " class='ativo'";							
-									$m = $m+1;								
-								endif;
-							endif;
-						endif;
-					?>
-					><?php echo ($i<10?"0".$i:$i)?></button>
+					<button id="<?php echo $i; ?>"><?php echo ($i<10?"0".$i:$i); ?></button>
 				</form>
 			</div>
 		<?php  endfor; ?>

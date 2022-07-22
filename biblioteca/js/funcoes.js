@@ -266,3 +266,18 @@ function calcularvalor(valor){
 	labelvalor.innerHTML = resultado;
 
 }
+
+
+function verificaPedido(){
+	//document.querySelectorAll('button').style.color='black';
+	let quantbutton = document.querySelectorAll('BUTTON').length;
+	for(let i = 1; i <= quantbutton ; i++ ){		
+			document.getElementById(i).style.color='green';
+	}
+//*/
+	fetchGenericoTudo('../pedido/pedidoativo')
+		.then(response => response.json())
+		.then(response => response.map(itens => {
+			document.getElementById(itens.venda).style.color='red';
+		}));
+}

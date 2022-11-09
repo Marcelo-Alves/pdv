@@ -1,5 +1,5 @@
 <?php
-include_once '../model/mysql.php';
+include_once 'mysql.php';
 try{
    
     $sql = file_get_contents("../sql/sql.sql");

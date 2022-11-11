@@ -39,8 +39,8 @@ $pedidos = pedido::buscapedido($idvenda);
 	<meta name="description" content="Tela de Venda">
 	<meta name="author" content="Marcelo Alves">   
 	<title><?php echo titulo; ?></title>
-    <link href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/css/bootstrap.css" rel="stylesheet">   
-	<link href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/css/dashboard.css" rel="stylesheet">     
+    <link href="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/css/bootstrap.css" rel="stylesheet">   
+	<link href="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/css/dashboard.css" rel="stylesheet">     
 
     <style>
       #pesquisa{border:1px solid #000000;padding:10px;}
@@ -55,8 +55,8 @@ $pedidos = pedido::buscapedido($idvenda);
 	  #qtdetotal{font-weight: bold;}
 
 	</style>
-	<script src='<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/js/fetchgenerico.js'></script>
-	<script src='<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/js/funcoes.js'></script>
+	<script src='<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/js/fetchgenerico.js'></script>
+	<script src='<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/js/funcoes.js'></script>
 	
 	
 
@@ -74,7 +74,7 @@ $pedidos = pedido::buscapedido($idvenda);
 						<div class="col-4">
 							<div class="row">	
 								<input type='hidden' id='idpedido' name='idpedido' value='<?php echo $idvenda;?>'/>
-								<form action="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/venda/" method="POST"  class="row">
+								<form action="<?php echo$_SERVER['HTTP_REFERER']?>/venda/" method="POST"  class="row">
 									<input type='number' id='pedido' name='pedido' style='width:100px;margin-left:10px;' class="form-control"   placeholder="Pedido" autocomplete="off"/>
 									<button type='submit' style="width:70px;margin-left: 10px;">Buscar</button>
 								</form>
@@ -171,10 +171,10 @@ $pedidos = pedido::buscapedido($idvenda);
 						</div>					
 				</div>
 				<div class="col-3">
-					<a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/sair">Sair</a>
+					<a class="nav-link" href="<?php echo$_SERVER['HTTP_REFERER']?>/sair">Sair</a>
 				</div>
 				<div class="col-3">
-					<a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/pedido/limparpedido/<?php echo $idvenda; ?>">Limpar Pedido</a>
+					<a class="nav-link" href="<?php echo$_SERVER['HTTP_REFERER']?>/pedido/limparpedido/<?php echo $idvenda; ?>">Limpar Pedido</a>
 				</div>
 			</div>		
 	</body>

@@ -3,7 +3,7 @@ if(session_start() == false):
 	session_start();
 endif;
 $telas = array('painel','caixa','venda');
-$URI = $_SERVER['REQUEST_URI'];
+$URI = $_SERVER['HTTP_REFERER'];
 $URI = explode('/',$URI);
 $URI = $URI[1];
 
@@ -29,15 +29,15 @@ endif;
 		<meta name="description" content="Controle de estoque">
 		<meta name="author" content="Marcelo Alves">   
 		<title><?php echo titulo; ?></title>
-    <link href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/css/bootstrap.css" rel="stylesheet">   
-	<link href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/css/dashboard.css" rel="stylesheet">     
+    <link href="/biblioteca/css/bootstrap.css" rel="stylesheet">   
+	<link href="/biblioteca/css/dashboard.css" rel="stylesheet">     
 
     <style>
       .ck-editor__editable_inline {
           min-height: 400px;
       }
   </style>
-  <script src='<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/js/fetchgenerico.js'></script>
+  <script src='/biblioteca/js/fetchgenerico.js'></script>
   <script>
     function esconde(campo){
       var div = document.getElementById(campo);
@@ -48,12 +48,12 @@ endif;
   </head>
 
   <body cz-shortcut-listen="true">
-    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse" style="background-color: #000;color: #fff;">
+     <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse" style="background-color: #000;color: #fff;">
         <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 		<span class="navbar-brand"> Seja bem vindo, <?php echo $_SESSION['nome'];?></span>
-        <a class="navbar-brand" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/painel">Principal</a>
+        <a class="navbar-brand" href="/painel">Principal</a>
   
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           
@@ -69,66 +69,66 @@ endif;
             <li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('liproduto')" >Produtos</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="liproduto">
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/produto">Lista</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/produto/form">Novo</a></li>
+                <li class="nav-item"><a class="nav-link" href="/produto">Lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="/produto/form">Novo</a></li>
               </ul>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('liestoque')" >Estoque</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="liestoque">
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/estoque">Lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="/estoque">Lista</a></li>
               </ul>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('licategoria')" >Categoria</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="licategoria">
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/categoria">Lista</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/categoria/form">Novo</a></li>
+                <li class="nav-item"><a class="nav-link" href="/categoria">Lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="/categoria/form">Novo</a></li>
               </ul>
             </li>
 			      <li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('livendas')" >Venda</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="livendas">
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/relatorio">Relatórios</a></li>
+                <li class="nav-item"><a class="nav-link" href="/relatorio">Relatórios</a></li>
               </ul>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('livalor')" >Valor</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="livalor">
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/valor">Lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="/valor">Lista</a></li>
               </ul>
             </li>
 			
             <li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('licliente')" >Cliente</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="licliente">
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/cliente">Lista</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/cliente/form">Novo</a></li>
+                <li class="nav-item"><a class="nav-link" href="/cliente">Lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="/cliente/form">Novo</a></li>
               </ul>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('lifuncionario')" >Funcionário</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="lifuncionario">
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/funcionario">Lista</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/funcionario/form">Novo</a></li>
+                <li class="nav-item"><a class="nav-link" href="/funcionario">Lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="/funcionario/form">Novo</a></li>
               </ul>
             </li>
 			<li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('lifornecedor')" >Fornecedor</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="lifornecedor">
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/fornecedor">Lista</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/fornecedor/form">Novo</a></li>
+                <li class="nav-item"><a class="nav-link" href="/fornecedor">Lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="/fornecedor/form">Novo</a></li>
               </ul>
             </li>
 			<li class="nav-item">
               <a class="nav-link" href="#" onclick="esconde('linivel')" >Nível</a>
               <ul class="nav nav-pills flex-column ms-3" style="display: none;" id="linivel">
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/nivel">Lista</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/nivel/form">Novo</a></li>
+                <li class="nav-item"><a class="nav-link" href="/nivel">Lista</a></li>
+                <li class="nav-item"><a class="nav-link" href="/nivel/form">Novo</a></li>
               </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/sair">Sair</a>
+                <a class="nav-link" href="/sair">Sair</a>
               </li>  
           </ul>          
         </nav>

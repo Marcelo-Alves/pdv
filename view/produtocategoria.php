@@ -82,18 +82,18 @@ $fornecedores = produto::buscafornecedores();
 			<td scope="row"><?php echo $lista->id_produto ;?></th>
 			<td scope="row"><?php echo $lista->nome ;?></td>	
 			<td scope="row">
-				<a href="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/ean/<?php echo $lista->id_produto ;?>">
-					<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/ean.png" width='45px' > 
+				<a href="<?php echo$_SERVER['HTTP_REFERER']?>/ean/<?php echo $lista->id_produto ;?>">
+					<img src="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/img/ean.png" width='45px' > 
 				</a>
 			</td>
 			<td scope="row">
 				<a href="./produto/editar/<?php echo $lista->id_produto ;?>">
-					<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/editar.png" width='30px' > 
+					<img src="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/img/editar.png" width='30px' > 
 				</a>
 			</td>
 			<td scope="row">
 				<a href="./produto/deletar/<?php echo $lista->id_produto ;?>">
-					<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/lixeira.png" width='30px' >  
+					<img src="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/img/lixeira.png" width='30px' >  
 				</a>
 			</td>
 		</tbody>

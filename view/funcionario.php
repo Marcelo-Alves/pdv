@@ -31,12 +31,12 @@ echo "</pre>";*/
 		<td scope="row"><?php echo $lista->nivel ;?></td>
 		<td scope="row">
 			<a href="funcionario/editar/<?php echo $lista->id_funcionario ;?>">
-				<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/editar.png" width='30px' > 
+				<img src="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/img/editar.png" width='30px' > 
 			</a>
 		</td>
 		<td scope="row">
 			<a href="deletar/<?php echo $lista->io ;?>">
-				<img src="<?php echo 'http://'. $_SERVER['HTTP_HOST'];?>/biblioteca/img/lixeira.jpg" width='30px' >  
+				<img src="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/img/lixeira.jpg" width='30px' >  
 			</a>
 		</td>
 	</tbody>

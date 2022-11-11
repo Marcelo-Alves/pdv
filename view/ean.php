@@ -42,7 +42,7 @@ $produto_id = $listas[0]->id_produto;
             <td scope="row"><?php echo $lista->ean ;?></td>
             <td scope="row">
                 <a href="./deletar/<?php echo $lista->id_produto ."/". $lista->id_ean ;?>">
-                    <img src="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/img/lixeira.jpg" width='30px' >  
+                    <img src="/biblioteca/img/lixeira.jpg" width='30px' >  
                 </a>
             </td>
         <tr>

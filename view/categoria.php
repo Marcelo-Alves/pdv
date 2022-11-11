@@ -26,12 +26,12 @@ $listas = categoria::lista();
 		<td scope="row"><?php echo ($lista->ativo==0?"Não":"Sim");?></td>
 		<td scope="row">
 			<a href="./categoria/editar/<?php echo $lista->id_categoria ;?>">
-				<img src="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/img/editar.png" width='30px' > 
+				<img src="/biblioteca/img/editar.png" width='30px' > 
 			</a>
 		</td>
 		<td scope="row">
 			<a href="./categoria/deletar/<?php echo $lista->id_categoria ;?>">
-				<img src="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/img/lixeira.jpg" width='30px' >  
+				<img src="/biblioteca/img/lixeira.jpg" width='30px' >  
 			</a>
 		</td>
 	</tbody>

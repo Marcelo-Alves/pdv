@@ -39,8 +39,8 @@ $pedidos = pedido::buscapedido($idvenda);
 	<meta name="description" content="Tela de Venda">
 	<meta name="author" content="Marcelo Alves">   
 	<title><?php echo titulo; ?></title>
-    <link href="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/css/bootstrap.css" rel="stylesheet">   
-	<link href="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/css/dashboard.css" rel="stylesheet">     
+    <link href="/biblioteca/css/bootstrap.css" rel="stylesheet">   
+	<link href="/biblioteca/css/dashboard.css" rel="stylesheet">     
 
     <style>
       #pesquisa{border:1px solid #000000;padding:10px;}
@@ -55,8 +55,8 @@ $pedidos = pedido::buscapedido($idvenda);
 	  #qtdetotal{font-weight: bold;}
 
 	</style>
-	<script src='<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/js/fetchgenerico.js'></script>
-	<script src='<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/js/funcoes.js'></script>
+	<script src='/biblioteca/js/fetchgenerico.js'></script>
+	<script src='/biblioteca/js/funcoes.js'></script>
 	
 	
 
@@ -171,10 +171,10 @@ $pedidos = pedido::buscapedido($idvenda);
 						</div>					
 				</div>
 				<div class="col-3">
-					<a class="nav-link" href="<?php echo$_SERVER['HTTP_REFERER']?>/sair">Sair</a>
+					<a class="nav-link" href="/sair">Sair</a>
 				</div>
 				<div class="col-3">
-					<a class="nav-link" href="<?php echo$_SERVER['HTTP_REFERER']?>/pedido/limparpedido/<?php echo $idvenda; ?>">Limpar Pedido</a>
+					<a class="nav-link" href="/pedido/limparpedido/<?php echo $idvenda; ?>">Limpar Pedido</a>
 				</div>
 			</div>		
 	</body>

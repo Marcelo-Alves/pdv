@@ -3,7 +3,7 @@ if(session_start() == false):
 	session_start();
 endif;
 $telas = array('painel','caixa','venda');
-$URI = $_SERVER['HTTP_REFERER'];
+$URI = $_SERVER['REQUEST_URI'];
 $URI = explode('/',$URI);
 $URI = $URI[1];
 

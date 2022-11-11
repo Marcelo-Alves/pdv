@@ -43,12 +43,12 @@ echo "</pre>";*/
 		<td scope="row"><?php echo $lista->cpf ;?></td>
 		<td scope="row">
 			<a href="cliente/editar/<?php echo $lista->id_cliente ;?>">
-				<img src="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/img/editar.png" width='30px' > 
+				<img src="/biblioteca/img/editar.png" width='30px' > 
 			</a>
 		</td>
 		<td scope="row">
 			<a href="cliente/deletar/<?php echo $lista->id_cliente ;?>">
-				<img src="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/img/lixeira.jpg" width='30px' >  
+				<img src="/biblioteca/img/lixeira.jpg" width='30px' >  
 			</a>
 		</td>
 		</tr>	

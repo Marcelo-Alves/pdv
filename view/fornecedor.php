@@ -26,12 +26,12 @@ $listas = fornecedor::lista();
 		<td scope="row"><?php echo $lista->cnpj;?></td>
 		<td scope="row">
 			<a href="./fornecedor/editar/<?php echo $lista->id_fornecedor ;?>">
-				<img src="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/img/editar.png" width='30px' > 
+				<img src="/biblioteca/img/editar.png" width='30px' > 
 			</a>
 		</td>
 		<td scope="row">
 			<a href="./fornecedor/deletar/<?php echo $lista->id_fornecedor ;?>">
-				<img src="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/img/lixeira.jpg" width='30px' >  
+				<img src="/biblioteca/img/lixeira.jpg" width='30px' >  
 			</a>
 		</td>
 	</tbody>

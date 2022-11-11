@@ -37,8 +37,8 @@ $pedidos = caixa::buscapedido($idvenda);
 	<meta name="description" content="Tela do Caixa">
 	<meta name="author" content="Marcelo Alves">   
 	<title><?php echo titulo; ?></title>
-    <link href="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/css/bootstrap.css" rel="stylesheet">   
-	<link href="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/css/dashboard.css" rel="stylesheet">     
+    <link href="/biblioteca/css/bootstrap.css" rel="stylesheet">   
+	<link href="/biblioteca/css/dashboard.css" rel="stylesheet">     
 
     <style>
       #pesquisa{border:1px solid #000000;padding:10px;}
@@ -52,8 +52,8 @@ $pedidos = caixa::buscapedido($idvenda);
 	  #dintotal{width: 200px;}
 
 	</style>
-	<script src='<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/js/fetchgenerico.js'></script>
-	<script src='<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/js/funcoes.js'></script>
+	<script src='/biblioteca/js/fetchgenerico.js'></script>
+	<script src='/biblioteca/js/funcoes.js'></script>
 
   </head>
 	<body  class="pt-0">
@@ -70,7 +70,7 @@ $pedidos = caixa::buscapedido($idvenda);
 						<div class="col-4">
 							<div class="row">	
 								<input type='hidden' id='idpedido' name='idpedido' value='<?php echo $idvenda;?>'/>
-								<form action="<?php echo$_SERVER['HTTP_REFERER']?>/caixa/" method="POST"  class="row">
+								<form action="/caixa/" method="POST"  class="row">
 									<input type='number' id='pedido' name='pedido' style='width:100px;margin-left:10px;' class="form-control"   placeholder="Pedido" autocomplete="off"/>
 									<button type='submit' style="width:70px;margin-left: 10px;">Buscar</button>
 								</form>
@@ -183,10 +183,10 @@ $pedidos = caixa::buscapedido($idvenda);
 						</div>					
 				</div>
 				<div class="col-3">
-					<a class="nav-link" href="<?php echo$_SERVER['HTTP_REFERER']?>/sair">Sair</a>
+					<a class="nav-link" href="/sair">Sair</a>
 				</div>
 				<div class="col-3">
-					<a class="nav-link" href="<?php echo$_SERVER['HTTP_REFERER']?>/pedido/limparpedido/<?php echo $idvenda; ?>">Limpar Pedido</a>
+					<a class="nav-link" href="/pedido/limparpedido/<?php echo $idvenda; ?>">Limpar Pedido</a>
 				</div>
 			</div>		
 	</body>

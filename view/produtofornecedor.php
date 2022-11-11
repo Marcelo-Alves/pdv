@@ -91,17 +91,17 @@ $fornecedores = produto::buscafornecedores();
 				<td scope="row"><?php echo $lista->validade_dias ;?></td>
 				<td scope="row">
 					<a href="./ean/<?php echo $lista->id_produto ;?>">
-						<img src="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/img/ean.png" width='45px' > 
+						<img src="/biblioteca/img/ean.png" width='45px' > 
 					</a>
 				</td>
 				<td scope="row">
 					<a href="./produto/editar/<?php echo $lista->id_produto ;?>">
-						<img src="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/img/editar.png" width='30px' > 
+						<img src="/biblioteca/img/editar.png" width='30px' > 
 					</a>
 				</td>
 				<td scope="row">
 					<a href="./produto/deletar/<?php echo $lista->id_produto ;?>">
-						<img src="<?php echo$_SERVER['HTTP_REFERER']?>/biblioteca/img/lixeira.png" width='30px' >  
+						<img src="/biblioteca/img/lixeira.png" width='30px' >  
 					</a>
 				</td>
 			</tr>

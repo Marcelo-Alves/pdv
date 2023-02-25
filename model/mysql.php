@@ -2,7 +2,7 @@
 class mysql {
     public static function conexao(){
         try {
-            $conn = new PDO('mysql:host=172.17.0.2;dbname=pdv', USUARIO, SENHA);
+            $conn = new PDO('mysql:host='.LINK.';dbname='.BANCO, USUARIO, SENHA);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $conn;
         } catch (Exception $e) {

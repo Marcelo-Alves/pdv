@@ -6,7 +6,7 @@
     class valor{
         public static function lista(){
             $produto = busca::buscaWhere('*',
-            'pdv.produto p inner join pdv.valor_venda v on p.id_produto=v.id_produto',
+            'produto p inner join valor_venda v on p.id_produto=v.id_produto',
             ' and valor_atual=1',"order by p.id_produto");
             return $produto;
         }
